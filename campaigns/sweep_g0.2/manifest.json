@@ -1,0 +1,44 @@
+{
+  "design": "paired seeds across conditions; standardized hub-removal shock",
+  "conditions": [
+    "A",
+    "C",
+    "F:invert",
+    "F:crisis",
+    "F:utopia",
+    "N"
+  ],
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "steps": 4000,
+  "shock_step": 2000,
+  "distortion": "invert",
+  "feedback_gain": 0.2,
+  "shock_fraction": 0.4,
+  "primary_outcomes": [
+    "recovery_time_90 (population, post-shock)",
+    "fragmentation_post (mean, post-shock)",
+    "cooperation_rate (mean, post-transient)",
+    "self_model_convergence (drift toward broadcast)"
+  ]
+}
