@@ -51,6 +51,7 @@ class Config:
     # Observer / feedback
     observer_interval: int = 10          # steps between S(t) computations
     feedback_gain: float = 0.8           # how strongly global signal shifts action propensities
+    snapshot_interval: int = 50          # steps between stored network snapshots (0 disables)
 
     # Shock (disturbance experiment); step<=0 disables
     shock_step: int = 0

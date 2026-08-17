@@ -32,6 +32,7 @@ class Simulation:
         self.events: list[dict] = []           # full event log
         self.window_events: list[dict] = []    # events since last observer tick
         self.global_memory: list[dict] = []    # all S(t)
+        self.snapshots: list[dict] = []        # periodic network snapshots (for viz)
         self.current_broadcast: dict | None = None
 
         for _ in range(cfg.initial_population):
@@ -77,6 +78,9 @@ class Simulation:
             s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events)
             self.global_memory.append(s_t)
             self.window_events = []
+
+        if cfg.snapshot_interval > 0 and self.t % cfg.snapshot_interval == 0:
+            self._take_snapshot()
 
         if cfg.shock_step > 0 and self.t == cfg.shock_step:
             self._apply_shock()
@@ -212,6 +216,17 @@ class Simulation:
                           offspring=a.offspring_count)
         self._log("shock", removed=len(hubs))
 
+    def _take_snapshot(self) -> None:
+        """Record the live network for visualization. Consumes no randomness,
+        so snapshots never affect determinism."""
+        self.snapshots.append({
+            "t": self.t,
+            "nodes": [[aid, round(self.agents[aid].energy, 2),
+                       self.agents[aid].generation]
+                      for aid in sorted(self.live_ids)],
+            "edges": sorted(tuple(sorted(e)) for e in self.graph.edges()),
+        })
+
     # ---------------- bookkeeping ----------------
 
     def _new_id(self) -> int:
@@ -268,3 +283,6 @@ class Simulation:
         with open(os.path.join(outdir, "edges_final.jsonl"), "w") as f:
             for u, v in sorted(tuple(sorted(e)) for e in self.graph.edges()):
                 f.write(json.dumps({"source": u, "target": v}) + "\n")
+        with open(os.path.join(outdir, "snapshots.jsonl"), "w") as f:
+            for snap in self.snapshots:
+                f.write(json.dumps(snap) + "\n")

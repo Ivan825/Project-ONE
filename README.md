@@ -39,8 +39,12 @@ All other logged measurements (entropy, diversity, inequality, legacy, novelty, 
 pip install -r requirements.txt
 python run.py --condition C --steps 2000 --seed 42
 python run.py --condition F --steps 2000 --seed 42 --distortion invert
-python scripts/replay_check.py   # verifies exact seed-replay determinism
+python scripts/replay_check.py                     # exact seed-replay determinism
+python scripts/validate_metrics.py                 # observer metrics vs. known cases
+python scripts/dashboard.py runs/C_s42_n2000       # self-contained HTML dashboard
 ```
+
+The dashboard is a single HTML file: macrostate timelines (with shock markers), an animated force-layout network with a time scrubber, and a click-to-inspect agent panel showing traits, lineage and cause of death. Open it in any browser — no server needed.
 
 Every run is fully reproducible from its config and seed. Runs write four datasets — nodes, edges, events, global states — sufficient to reconstruct the entire history.
 
