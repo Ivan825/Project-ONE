@@ -25,7 +25,8 @@ class Simulation:
         self.rng = random.Random(seed)
         self.t = 0
         self.next_id = 0
-        self.agents: dict[int, Agent] = {}
+        self.agents: dict[int, Agent] = {}   # full ledger, dead included (lineage)
+        self.live_ids: set[int] = set()      # index of living agents
         self.graph = nx.Graph()
         self.resources = cfg.resource_capacity
         self.events: list[dict] = []           # full event log
@@ -51,12 +52,13 @@ class Simulation:
     def step(self) -> None:
         cfg = self.cfg
         self.t += 1
-        self.resources = min(cfg.resource_capacity, self.resources + cfg.resource_regen)
+        regen = (cfg.resource_base_regen
+                 + cfg.resource_regen_rate * self.resources
+                 * (1.0 - self.resources / cfg.resource_capacity))
+        self.resources = min(cfg.resource_capacity, self.resources + regen)
 
-        for aid in sorted(self.agents):
-            agent = self.agents[aid]
-            if agent.alive:
-                self._act(agent)
+        for aid in sorted(self.live_ids):
+            self._act(self.agents[aid])
 
         self._process_deaths()
 
@@ -66,10 +68,8 @@ class Simulation:
             self.current_broadcast = make_broadcast(
                 cfg.condition, s_t, self.rng, cfg.distortion)
             if self.current_broadcast is not None:
-                for aid in sorted(self.agents):
-                    a = self.agents[aid]
-                    if a.alive:
-                        a.received_global = self.current_broadcast
+                for aid in sorted(self.live_ids):
+                    self.agents[aid].received_global = self.current_broadcast
             self.window_events = []
         elif cfg.condition == "A" and self.t % cfg.observer_interval == 0:
             # Condition A still logs the macrostate for analysis (post-hoc only,
@@ -135,7 +135,7 @@ class Simulation:
         elif action == "reproduce":
             if (agent.energy >= cfg.reproduce_threshold
                     and agent.age >= cfg.min_reproduce_age
-                    and len(self.agents) < cfg.max_population):
+                    and len(self.live_ids) < cfg.max_population):
                 agent.energy -= cfg.reproduce_cost
                 child = spawn_child(self.rng, cfg, self._new_id(), agent, self.t)
                 self._add_agent(child)
@@ -182,10 +182,8 @@ class Simulation:
     # ---------------- lifecycle ----------------
 
     def _process_deaths(self) -> None:
-        for aid in sorted(self.agents):
+        for aid in sorted(self.live_ids):
             a = self.agents[aid]
-            if not a.alive:
-                continue
             cause = None
             if a.energy <= 0:
                 cause = "starvation"
@@ -194,6 +192,7 @@ class Simulation:
             if cause:
                 a.death_time = self.t
                 a.cause_of_death = cause
+                self.live_ids.discard(aid)
                 if self.graph.has_node(aid):
                     self.graph.remove_node(aid)
                 self._log("death", agent=aid, cause=cause, age=a.age,
@@ -207,6 +206,7 @@ class Simulation:
             if a.alive:
                 a.death_time = self.t
                 a.cause_of_death = "shock"
+                self.live_ids.discard(aid)
                 self.graph.remove_node(aid)
                 self._log("death", agent=aid, cause="shock", age=a.age,
                           offspring=a.offspring_count)
@@ -220,6 +220,7 @@ class Simulation:
 
     def _add_agent(self, agent: Agent) -> None:
         self.agents[agent.id] = agent
+        self.live_ids.add(agent.id)
         self.graph.add_node(agent.id)
 
     def _log(self, etype: str, **kw) -> None:
@@ -228,7 +229,7 @@ class Simulation:
         self.window_events.append(ev)
 
     def population(self) -> int:
-        return sum(1 for a in self.agents.values() if a.alive)
+        return len(self.live_ids)
 
     def state_hash(self) -> str:
         """Digest of the complete live state — used by the seed-replay check."""

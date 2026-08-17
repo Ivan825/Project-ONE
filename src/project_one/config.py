@@ -21,19 +21,22 @@ class Config:
     max_population: int = 1200
     initial_edges_per_agent: int = 3
 
-    # Environment
-    resource_capacity: float = 4000.0
-    resource_regen: float = 120.0        # per step
-    harvest_rate: float = 3.0            # max energy an agent can harvest per step
+    # Environment. Regeneration is density-dependent (logistic with a base trickle):
+    #   regen(R) = resource_base_regen + resource_regen_rate * R * (1 - R / resource_capacity)
+    # so a depleted pool recovers instead of trapping the population at subsistence.
+    resource_capacity: float = 6000.0
+    resource_base_regen: float = 60.0
+    resource_regen_rate: float = 0.12
+    harvest_rate: float = 2.5            # max energy an agent can harvest per step
 
     # Agent energetics
     initial_energy: float = 20.0
-    metabolism: float = 1.0              # energy lost per step just living
+    metabolism: float = 0.8              # energy lost per step just living
     action_cost: float = 0.25
     share_amount: float = 3.0
-    reproduce_threshold: float = 40.0
-    reproduce_cost: float = 22.0
-    min_reproduce_age: int = 20
+    reproduce_threshold: float = 30.0
+    reproduce_cost: float = 16.0
+    min_reproduce_age: int = 15
     max_lifespan_mean: float = 400.0
     max_lifespan_sd: float = 80.0
 

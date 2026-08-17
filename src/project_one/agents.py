@@ -38,10 +38,14 @@ def spawn_initial(rng, cfg, agent_id: int, t: int) -> Agent:
     traits = {
         k: _clamp(rng.gauss(cfg.trait_means[k], cfg.trait_sd)) for k in TRAITS
     }
+    lifespan = max(50, int(rng.gauss(cfg.max_lifespan_mean, cfg.max_lifespan_sd)))
+    # Stagger initial ages: a synchronized founding cohort otherwise dies in
+    # waves (mass old-age die-offs) that can extinguish the population.
+    age = rng.randint(0, lifespan // 2)
     return Agent(
         id=agent_id, generation=0, parent_id=None, birth_time=t,
-        traits=traits, energy=cfg.initial_energy,
-        max_lifespan=max(50, int(rng.gauss(cfg.max_lifespan_mean, cfg.max_lifespan_sd))),
+        traits=traits, energy=cfg.initial_energy * (0.5 + rng.random()),
+        max_lifespan=lifespan, age=age,
     )
 
 
