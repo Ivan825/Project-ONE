@@ -69,6 +69,16 @@ def compute_self_model(t: int, graph: nx.Graph, agents: dict, recent_events: lis
     deaths = sum(1 for e in recent_events if e["type"] == "death")
     s["turnover"] = min(1.0, (births + deaths) / n)
 
+    # Mean heritable traits of the living population (never broadcast; logged so
+    # campaigns can measure whether attention to the self-model is selected
+    # for or against — e.g. does false feedback breed distrust?).
+    traited = [a.traits for a in living if a.traits]
+    if traited:
+        for k in ("global_sensitivity", "cooperation", "sharing"):
+            vals = [t[k] for t in traited if k in t]
+            if vals:
+                s["mean_trait_" + k] = sum(vals) / len(vals)
+
     return s
 
 
