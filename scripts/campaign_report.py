@@ -100,8 +100,9 @@ td:first-child,th:first-child{text-align:left}
 <div class="card"><h3>Statistics — Mann-Whitney U vs. reference, Cliff's δ effect size</h3>
   <div id="stattbl"></div>
   <div class="note">B vs A shows δ = 0.000 on every outcome because condition B is trajectory-identical
-  to A under paired seeds: measurement without broadcast is causally inert. The convergence reference
-  is N (matched-bandwidth noise), not C, because C's broadcast equals the current state by definition.</div></div>
+  to A under paired seeds: measurement without broadcast is causally inert. Story pull counts macrostate movement toward the broadcast only where broadcast
+  and reality differ by more than 0.02; it is undefined for C, whose broadcast equals the current state by
+  construction, so the reference comparison is F vs N.</div></div>
 <div class="tip" id="tip"></div>
 <script>
 const DATA=/*__DATA__*/null;
@@ -116,11 +117,12 @@ document.getElementById('sub').textContent=
 
 // ---- stat tiles ----
 const S=DATA.stats;
+const SP=S.story_pull["F_vs_N"]||S.story_pull["F:invert_vs_N"];
 const tiles=[
- ["δ = "+S.self_model_convergence.F_vs_N.cliffs_delta.toFixed(2),
-  "false story vs noise: drift toward the broadcast (perfect separation)"],
- ["p ≈ "+S.self_model_convergence.F_vs_N.p_value.toExponential(1),
-  "Mann-Whitney U, F vs N convergence"],
+ ["δ = "+SP.cliffs_delta.toFixed(2),
+  "story pull, false broadcast vs noise (movement toward the story where it differs from reality)"],
+ ["p ≈ "+SP.p_value.toExponential(1),
+  "Mann-Whitney U, story pull F vs N"],
  [(S.cooperation_rate.C_vs_A.median[0]/S.cooperation_rate.C_vs_A.median[1]).toFixed(1)+"×",
   "cooperation under true feedback vs baseline (δ = "+S.cooperation_rate.C_vs_A.cliffs_delta.toFixed(2)+")"],
  ["δ = "+S.fragmentation_post.F_vs_A.cliffs_delta.toFixed(2),
@@ -132,7 +134,7 @@ document.getElementById('tiles').innerHTML=tiles.map(([v,l])=>
 
 // ---- distribution strip plots ----
 function hash(s){let h=2166136261;for(const c of String(s)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0)/4294967295;}
-const OUTS=[["self_model_convergence","Drift toward broadcast (+ = self-fulfilling)",["C","F","N"]],
+const OUTS=[["story_pull","Story pull: movement toward the broadcast (+ = self-fulfilling)",["F","N"]],
  ["cooperation_rate","Cooperation rate (post-transient mean)",COND],
  ["fragmentation_post","Post-shock fragmentation (mean)",COND],
  ["recovery_time_90","Recovery time after shock (steps)",COND]];

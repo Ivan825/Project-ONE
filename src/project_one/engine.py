@@ -167,12 +167,19 @@ class Simulation:
         bc = agent.received_global
         if bc is not None:
             g = tr["global_sensitivity"] * cfg.feedback_gain
-            # Documented response rules (the mechanism under test):
-            w["connect"] += g * max(0.0, bc["fragmentation"] - 0.3)        # reconnect when told world is fragmenting
-            w["share"] += g * max(0.0, 0.5 - bc["cooperation"])            # repair reported cooperation deficit
-            w["share"] += g * 0.5 * max(0.0, bc["inequality"] - 0.5)       # redistribute when told inequality is high
-            w["harvest"] += g * max(0.0, bc["turnover"] - 0.5)             # hoard when told times are unstable
-            w["prune"] += g * 0.3 * max(0.0, bc["centralization"] - 0.6)   # decentralize when told hubs dominate
+            if cfg.response_mode == "corrective":
+                # Repair reported deficits (the default mechanism under test):
+                w["connect"] += g * max(0.0, bc["fragmentation"] - 0.3)        # reconnect when told world is fragmenting
+                w["share"] += g * max(0.0, 0.5 - bc["cooperation"])            # repair reported cooperation deficit
+                w["share"] += g * 0.5 * max(0.0, bc["inequality"] - 0.5)       # redistribute when told inequality is high
+                w["harvest"] += g * max(0.0, bc["turnover"] - 0.5)             # hoard when told times are unstable
+                w["prune"] += g * 0.3 * max(0.0, bc["centralization"] - 0.6)   # decentralize when told hubs dominate
+            else:
+                # Conformist: imitate the reported norm rather than repair it.
+                w["share"] += g * bc["cooperation"]                # share as much as "everyone" reportedly does
+                w["prune"] += g * 0.5 * bc["fragmentation"]        # a fragmenting world licenses cutting ties
+                w["connect"] += g * max(0.0, 0.6 - bc["fragmentation"])  # a cohesive world licenses linking
+                w["harvest"] += g * bc["inequality"]               # an unequal world licenses accumulation
         return w
 
     def _weighted_choice(self, weights: dict) -> str:

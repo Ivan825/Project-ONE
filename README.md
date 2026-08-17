@@ -2,67 +2,64 @@
 
 **What happens to a population of agents when it is told its own collective state — and what happens when that description is false?**
 
-Project ONE is a controlled laboratory for *recursive self-model feedback* in evolving multi-agent networks. Temporary, locally-limited agents are born, interact, cooperate, compete, reproduce and die, collectively forming a changing network G(t). A global observer periodically compresses the network's macrostate into a self-model S(t) — population, fragmentation, centralization, cooperation, inequality — and, in the key experimental conditions, broadcasts that self-model back into the world it describes.
+![Sensitivity sweep](campaigns/sweep_summary.png)
 
-The system therefore closes a loop that most real systems (markets, organizations, online platforms, and now LLM-agent collectives) already live inside:
+Project ONE is a controlled, fully reproducible laboratory for *recursive self-model feedback* in evolving multi-agent networks. Temporary agents are born, cooperate, compete, reproduce and die, forming an adaptive network G(t). A global observer periodically compresses the macrostate — fragmentation, cooperation, centralization, inequality, turnover — into a self-model S(t) and, depending on the experimental condition, broadcasts it back to the agents **accurately, systematically falsified, or as matched-bandwidth noise**:
 
 ```
 local actions → global condition → measurement → self-model → broadcast → changed local actions
 ```
 
-The flagship experiment asks whether a distributed system can be causally altered by a *wrong* representation of itself — self-fulfilling collapse, self-defeating panic, manufactured coordination.
+## Headline findings (1,092 runs, pre-registered outcomes)
 
-## Experimental conditions
+**Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — Cliff's δ = 0.000 on every outcome, twice replicated. Only the *broadcast* has causal power.
 
-| Condition | Observer measures | Agents receive |
-|---|---|---|
-| **A** — Local Only | no | nothing |
-| **B** — Observed but Blind | yes | nothing |
-| **C** — True Feedback | yes | accurate S(t) |
-| **F** — False Feedback | yes | systematically distorted S(t) |
-| **N** — Noise Feedback | yes | matched-bandwidth random signal |
+**A false self-model pulls reality toward itself.** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (δ = 0.76–0.85, p ≈ 10⁻⁸–10⁻¹¹). A quiet, systematic lie out-steers loud noise ~7× at low gain.
 
-Condition N separates "any broadcast changes behaviour" from "*self*-information changes behaviour." Condition B separates the act of measurement from the act of feedback. All conditions run from matched parameter distributions with paired random seeds; comparisons are between outcome distributions, never single runs.
+**Which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10) and the flattering lie becomes benevolently self-fulfilling (highest cooperation observed).
 
-## Pre-registered primary outcomes
+**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; selection removes it in proportion to broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering.
 
-1. **Recovery half-life** after a standardized shock (targeted hub removal)
-2. **Fragmentation trajectory** (weakly connected community structure over time)
-3. **Cooperation rate** (costly-helping interactions per capita)
-4. **Self-model correspondence** — in Condition F: does reality converge toward the false description (self-fulfilling) or away from it (self-defeating)?
+![Evolution of distrust](campaigns/harsh_shock/fig8_trait_evolution.png)
 
-All other logged measurements (entropy, diversity, inequality, legacy, novelty, continuity…) are secondary and exploratory by design.
+**Truthful feedback doubles costly cooperation** (δ = 0.96, monotone in gain) — the loop acts as a distributed homeostat. And one honest null, twice replicated: post-shock recovery time is feedback-insensitive even at 40% hub removal.
 
-## Quickstart
+Full statistics: [`campaigns/FINDINGS.md`](campaigns/FINDINGS.md) · interactive explorer: `campaigns/flagship/report.html`
+
+## Reproduce everything
 
 ```bash
 pip install -r requirements.txt
-python run.py --condition C --steps 2000 --seed 42
-python run.py --condition F --steps 2000 --seed 42 --distortion invert
-python scripts/replay_check.py                     # exact seed-replay determinism
-python scripts/validate_metrics.py                 # observer metrics vs. known cases
-python scripts/dashboard.py runs/C_s42_n2000       # self-contained HTML dashboard
+python scripts/replay_check.py                   # exact seed-replay determinism (cross-platform)
+python scripts/validate_metrics.py               # observer metrics vs. known closed-form cases
+python run.py --condition F --distortion invert --steps 2000 --seed 7
+python scripts/dashboard.py runs/F_s7_n2000      # self-contained interactive dashboard
+python scripts/campaign.py --seeds 50 --shock-fraction 0.4 --out campaigns/replication
+python scripts/analyze_campaign.py campaigns/replication
+python scripts/demo.py                           # one-command live-demo kit
 ```
 
-The dashboard is a single HTML file: macrostate timelines (with shock markers), an animated force-layout network with a time scrubber, and a click-to-inspect agent panel showing traits, lineage and cause of death. Open it in any browser — no server needed.
+Every run is deterministic given (config, seed); state hashes verify replay across machines and operating systems. 13-test suite guards determinism, metric correctness, and population viability.
 
-Every run is fully reproducible from its config and seed. Runs write four datasets — nodes, edges, events, global states — sufficient to reconstruct the entire history.
+## Experimental design
 
-## Design principles
+| Condition | Observer | Agents receive |
+|---|---|---|
+| A — Local only | off | nothing |
+| B — Observed, blind | on | nothing (placebo) |
+| C — True feedback | on | accurate S(t) |
+| F — False feedback | on | distorted S(t): invert / crisis / utopia |
+| N — Noise feedback | on | matched-bandwidth random signal |
 
-- **Rule-based agents first.** Transparent trait vectors (cooperation, exploration, risk, sociability, sharing, global-sensitivity), not learned policies — so every behavioural change is inspectable. LLM agents are a later, separate experimental phase.
-- **Falsifiable by construction.** Null results are results. If self-information adds nothing beyond matched noise, that finding is published as such.
-- **Ablations over anecdotes.** No single visually-striking run is evidence; distributions across ≥50 seeds per condition are.
+Paired seeds across conditions; standardized hub-removal shocks; four pre-registered outcomes; Mann–Whitney U + Cliff's δ; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
-## Roadmap
+## Paper
 
-M0 deterministic engine → M1 stable ecology → M2 observer + metric validation → M3 flagship runs (A/B/C/F/N) → M4 preprint + this repo goes public → ALIFE submission → Paper 2 (continuity under total turnover) → Phase L (LLM agents).
-
-See [`docs/PLAN.md`](docs/PLAN.md) for the full research plan and [`docs/`](docs/) for the original proposal.
+*Steering a Network with Its Own Reflection: True, False, and Noise Self-Model Broadcasts in an Evolving Multi-Agent Network* — under submission to Complex Networks 2026. Draft and sources in [`paper/`](paper/). Research plan and the original proposal in [`docs/`](docs/).
 
 ## Status
 
-Early development (M0). Contributions, criticism and replication attempts are welcome — open an issue.
+Active research. Criticism, replication attempts, and issues welcome.
 
 ## License
 

@@ -51,6 +51,10 @@ class Config:
     # Observer / feedback
     observer_interval: int = 10          # steps between S(t) computations
     feedback_gain: float = 0.8           # how strongly global signal shifts action propensities
+    # How agents respond to the broadcast:
+    #   "corrective"  - repair reported deficits (default)
+    #   "conformist"  - imitate the reported norm
+    response_mode: str = "corrective"
     snapshot_interval: int = 50          # steps between stored network snapshots (0 disables)
 
     # Shock (disturbance experiment); step<=0 disables.
