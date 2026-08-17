@@ -33,6 +33,7 @@ class Simulation:
         self.window_events: list[dict] = []    # events since last observer tick
         self.global_memory: list[dict] = []    # all S(t)
         self.snapshots: list[dict] = []        # periodic network snapshots (for viz)
+        self.broadcast_memory: list[dict | None] = []  # what agents were told, per tick
         self.current_broadcast: dict | None = None
 
         for _ in range(cfg.initial_population):
@@ -68,6 +69,7 @@ class Simulation:
             self.global_memory.append(s_t)
             self.current_broadcast = make_broadcast(
                 cfg.condition, s_t, self.rng, cfg.distortion)
+            self.broadcast_memory.append(self.current_broadcast)
             if self.current_broadcast is not None:
                 for aid in sorted(self.live_ids):
                     self.agents[aid].received_global = self.current_broadcast
@@ -77,6 +79,7 @@ class Simulation:
             # computed identically) so all conditions share one analysis pipeline.
             s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events)
             self.global_memory.append(s_t)
+            self.broadcast_memory.append(None)
             self.window_events = []
 
         if cfg.snapshot_interval > 0 and self.t % cfg.snapshot_interval == 0:
@@ -286,3 +289,6 @@ class Simulation:
         with open(os.path.join(outdir, "snapshots.jsonl"), "w") as f:
             for snap in self.snapshots:
                 f.write(json.dumps(snap) + "\n")
+        with open(os.path.join(outdir, "broadcasts.jsonl"), "w") as f:
+            for b in self.broadcast_memory:
+                f.write(json.dumps(b) + "\n")

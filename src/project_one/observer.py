@@ -35,6 +35,28 @@ def compute_self_model(t: int, graph: nx.Graph, agents: dict, recent_events: lis
     else:
         s["centralization"] = 0.0
 
+    # Freeman degree centralization: sum of (max_deg - deg_i) over the maximum
+    # possible sum (n-1)(n-2); 1.0 for a star, 0.0 for any regular graph.
+    if n > 2 and degs:
+        dmax = max(degs)
+        s["freeman_centralization"] = sum(dmax - d for d in degs) / ((n - 1) * (n - 2))
+    else:
+        s["freeman_centralization"] = 0.0
+
+    # Betweenness concentration: share of total betweenness held by the
+    # top-5% nodes (exact computation; population sizes here keep it cheap).
+    if n > 2 and graph.number_of_edges() > 0:
+        bc = nx.betweenness_centrality(graph, normalized=False)
+        total = sum(bc.values())
+        if total > 0:
+            k = max(1, n // 20)
+            top_bc = sorted(bc.values(), reverse=True)[:k]
+            s["betweenness_concentration"] = sum(top_bc) / total
+        else:
+            s["betweenness_concentration"] = 0.0
+    else:
+        s["betweenness_concentration"] = 0.0
+
     # Cooperation rate: costly-helping events per living agent in the window
     shares = sum(1 for e in recent_events if e["type"] == "share")
     s["cooperation"] = min(1.0, shares / n)

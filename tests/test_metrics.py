@@ -70,3 +70,17 @@ def test_inequality_reflects_energy_distribution():
     agents[0].energy = 1000.0
     unequal = compute_self_model(1, g, agents, [])
     assert unequal["inequality"] > equal["inequality"] + 0.5
+
+
+def test_freeman_centralization_star_is_one_ring_is_zero():
+    s_star = compute_self_model(1, nx.star_graph(19), _mk_agents(20), [])
+    s_ring = compute_self_model(1, nx.cycle_graph(20), _mk_agents(20), [])
+    assert abs(s_star["freeman_centralization"] - 1.0) < 1e-9
+    assert s_ring["freeman_centralization"] < 1e-9
+
+
+def test_betweenness_concentration_star_dominant():
+    s_star = compute_self_model(1, nx.star_graph(19), _mk_agents(20), [])
+    s_comp = compute_self_model(1, nx.complete_graph(20), _mk_agents(20), [])
+    assert s_star["betweenness_concentration"] > 0.99   # hub holds all paths
+    assert s_comp["betweenness_concentration"] < 0.2    # no shortest paths via others
