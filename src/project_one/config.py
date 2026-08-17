@@ -53,9 +53,12 @@ class Config:
     feedback_gain: float = 0.8           # how strongly global signal shifts action propensities
     snapshot_interval: int = 50          # steps between stored network snapshots (0 disables)
 
-    # Shock (disturbance experiment); step<=0 disables
+    # Shock (disturbance experiment); step<=0 disables.
+    # If shock_fraction > 0, that fraction of the living population (highest-
+    # degree first) is removed; otherwise shock_hubs_removed fixed count.
     shock_step: int = 0
     shock_hubs_removed: int = 10
+    shock_fraction: float = 0.0
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), indent=2, sort_keys=True)

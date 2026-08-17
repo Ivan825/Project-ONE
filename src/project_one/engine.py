@@ -207,7 +207,11 @@ class Simulation:
 
     def _apply_shock(self) -> None:
         degs = sorted(self.graph.degree(), key=lambda kv: (-kv[1], kv[0]))
-        hubs = [n for n, _ in degs[: self.cfg.shock_hubs_removed]]
+        if self.cfg.shock_fraction > 0:
+            k = max(1, int(self.cfg.shock_fraction * len(self.live_ids)))
+        else:
+            k = self.cfg.shock_hubs_removed
+        hubs = [n for n, _ in degs[:k]]
         for aid in hubs:
             a = self.agents[aid]
             if a.alive:

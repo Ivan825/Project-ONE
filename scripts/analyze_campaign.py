@@ -30,12 +30,24 @@ from scipy.stats import mannwhitneyu
 
 BROADCAST_KEYS = ("fragmentation", "centralization", "cooperation",
                   "inequality", "turnover")
-COND_ORDER = ["A", "B", "C", "F", "N"]
+COND_ORDER = ["A", "B", "C", "F", "F:invert", "F:crisis", "F:utopia", "N"]
 COND_COLOR = {"A": "#2a78d6", "B": "#eb6834", "C": "#1baf7a",
               "F": "#eda100", "N": "#e87ba4"}
 COND_LABEL = {"A": "A local only", "B": "B observed blind", "C": "C true feedback",
               "F": "F false feedback", "N": "N noise feedback"}
 TRANSIENT = 500
+
+
+def token_of(run):
+    return run.get("token", run["condition"])
+
+
+def color_of(tok):
+    return COND_COLOR.get(tok, COND_COLOR[tok.split(":")[0]])
+
+
+def label_of(tok):
+    return COND_LABEL.get(tok, tok)
 
 
 def outcomes(run):
@@ -58,6 +70,7 @@ def outcomes(run):
     coop = [s["cooperation"] for s in g if s["t"] >= TRANSIENT]
 
     conv = None
+    pull = None
     bl = run.get("broadcasts") or []
     if any(b is not None for b in bl):
         deltas = []
@@ -70,13 +83,35 @@ def outcomes(run):
                 d_next = abs(g[i + 1][k] - b[k])
                 deltas.append(d_now - d_next)
         conv = sum(deltas) / len(deltas) if deltas else None
+        # Story pull: signed movement of the macrostate in the direction of the
+        # broadcast, counted only where the broadcast DIFFERS from reality
+        # (|b-a| > 0.02) — well-defined for F and N; degenerate for C, where
+        # the broadcast equals the current state by construction.
+        moves = []
+        for i in range(len(g) - 1):
+            b = bl[i] if i < len(bl) else None
+            if b is None:
+                continue
+            for k in BROADCAST_KEYS:
+                gap = b[k] - g[i][k]
+                if abs(gap) > 0.02:
+                    step = g[i + 1][k] - g[i][k]
+                    moves.append(step if gap > 0 else -step)
+        pull = sum(moves) / len(moves) if moves else None
+
+    gs0 = next((x.get("mean_trait_global_sensitivity") for x in g
+                if "mean_trait_global_sensitivity" in x), None)
+    gs1 = next((x.get("mean_trait_global_sensitivity") for x in reversed(g)
+                if "mean_trait_global_sensitivity" in x), None)
 
     return {
-        "condition": run["condition"], "seed": run["seed"],
+        "condition": token_of(run), "seed": run["seed"],
         "recovery_time_90": rec, "recovery_censored": censored,
         "fragmentation_post": sum(frag_post) / len(frag_post) if frag_post else None,
         "cooperation_rate": sum(coop) / len(coop) if coop else None,
         "self_model_convergence": conv,
+        "story_pull": pull,
+        "trait_gs_delta": (gs1 - gs0) if gs0 is not None and gs1 is not None else None,
         "final_population": run["final_population"],
     }
 
@@ -116,10 +151,10 @@ def boxfig(path, groups, title, ylabel):
                     medianprops=dict(color="#0b0b0b", linewidth=1.6),
                     flierprops=dict(marker="o", markersize=3, alpha=0.5))
     for patch, c in zip(bp["boxes"], conds):
-        patch.set_facecolor(COND_COLOR[c])
+        patch.set_facecolor(color_of(c))
         patch.set_alpha(0.75)
         patch.set_edgecolor("#52514e")
-    ax.set_xticklabels([COND_LABEL[c] for c in conds], fontsize=8.5)
+    ax.set_xticklabels([label_of(c) for c in conds], fontsize=8.5)
     ax.set_title(title, fontsize=11, loc="left")
     ax.set_ylabel(ylabel, fontsize=9.5)
     ax.grid(axis="y", color="#e4e2dc", linewidth=0.7)
@@ -141,8 +176,8 @@ def trajfig(path, runs_by_cond, key, title, ylabel, shock):
         n = min(len(r["globals"]) for r in runs)
         mean = [sum(r["globals"][i][key] for r in runs) / len(runs)
                 for i in range(n)]
-        ax.plot(ts[:n], mean, color=COND_COLOR[cond], linewidth=1.8,
-                label=COND_LABEL[cond])
+        ax.plot(ts[:n], mean, color=color_of(cond), linewidth=1.8,
+                label=label_of(cond))
     ax.axvline(shock, color="#52514e", linestyle="--", linewidth=1, alpha=0.7)
     ax.text(shock, ax.get_ylim()[1], " shock", fontsize=8, color="#52514e",
             va="top")
@@ -172,7 +207,7 @@ def main():
     rows = [outcomes(r) for r in runs]
     runs_by_cond = {}
     for r in runs:
-        runs_by_cond.setdefault(r["condition"], []).append(r)
+        runs_by_cond.setdefault(token_of(r), []).append(r)
 
     def grp(key, conds=None):
         g = {}
@@ -195,6 +230,15 @@ def main():
             "medians": {c: _med(v) for c, v in
                         grp("self_model_convergence").items()},
         },
+        "story_pull": {
+            **compare("pull", {c: v for c, v in grp("story_pull").items()
+                               if c != "C"}, ref="N"),
+            "medians": {c: _med(v) for c, v in grp("story_pull").items()},
+        },
+        "trait_gs_delta": {
+            **compare("gs", grp("trait_gs_delta")),
+            "medians": {c: _med(v) for c, v in grp("trait_gs_delta").items()},
+        },
         "final_population_medians": {c: _med(v) for c, v in
                                      grp("final_population").items()},
     }
@@ -208,6 +252,16 @@ def main():
            "Post-shock fragmentation (mean)", "fragmentation")
     boxfig(os.path.join(d, "fig3_cooperation.png"), grp("cooperation_rate"),
            "Cooperation rate (post-transient mean)", "costly helping per capita")
+    pull_groups = {c: v for c, v in grp("story_pull").items() if c != "C"}
+    if pull_groups:
+        boxfig(os.path.join(d, "fig7_story_pull.png"), pull_groups,
+               "Story pull: macrostate movement toward the broadcast "
+               "(where it differs from reality)", "signed movement per tick")
+    gs_groups = grp("trait_gs_delta")
+    if any(gs_groups.values()):
+        boxfig(os.path.join(d, "fig8_trait_evolution.png"), gs_groups,
+               "Evolution of global-sensitivity (mean trait, end − start)",
+               "Δ mean global_sensitivity")
     boxfig(os.path.join(d, "fig4_convergence.png"),
            grp("self_model_convergence", conds={"C", "F", "N"}),
            "Drift toward the broadcast self-model (+ = self-fulfilling)",

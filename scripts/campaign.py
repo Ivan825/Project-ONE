@@ -23,14 +23,20 @@ CONDITIONS = ["A", "B", "C", "F", "N"]
 
 
 def one_run(args):
-    cond, seed, steps, shock_step, distortion, outdir = args
+    token, seed, steps, shock_step, distortion, gain, shock_frac, outdir = args
+    # A condition token may carry its own distortion mode, e.g. "F:crisis".
+    cond, _, tok_dist = token.partition(":")
+    if tok_dist:
+        distortion = tok_dist
     from project_one import Config, Simulation
     cfg = Config(condition=cond, distortion=distortion, steps=steps,
-                 shock_step=shock_step, snapshot_interval=0)
+                 shock_step=shock_step, shock_fraction=shock_frac,
+                 feedback_gain=gain, snapshot_interval=0)
     sim = Simulation(cfg, seed=seed)
     sim.run()
     summary = {
-        "condition": cond, "seed": seed, "steps": steps,
+        "condition": cond, "token": token, "seed": seed, "steps": steps,
+        "feedback_gain": gain, "shock_fraction": shock_frac,
         "shock_step": shock_step, "distortion": distortion if cond == "F" else None,
         "observer_interval": cfg.observer_interval,
         "final_population": sim.population(),
@@ -38,10 +44,10 @@ def one_run(args):
         "globals": sim.global_memory,
         "broadcasts": sim.broadcast_memory,
     }
-    path = os.path.join(outdir, "runs", f"{cond}_s{seed}.json")
+    path = os.path.join(outdir, "runs", f"{token.replace(':', '-')}_s{seed}.json")
     with open(path, "w") as f:
         json.dump(summary, f)
-    return cond, seed, sim.population()
+    return token, seed, sim.population()
 
 
 def main():
@@ -51,7 +57,10 @@ def main():
     ap.add_argument("--shock-step", type=int, default=2000)
     ap.add_argument("--distortion", default="invert",
                     choices=["invert", "crisis", "utopia"])
-    ap.add_argument("--conditions", default=",".join(CONDITIONS))
+    ap.add_argument("--conditions", default=",".join(CONDITIONS),
+                    help='comma list; F may carry a mode, e.g. "A,C,F:crisis,N"')
+    ap.add_argument("--gain", type=float, default=0.8)
+    ap.add_argument("--shock-fraction", type=float, default=0.0)
     ap.add_argument("--out", default="campaigns/flagship")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 1))
     args = ap.parse_args()
@@ -62,7 +71,8 @@ def main():
         "design": "paired seeds across conditions; standardized hub-removal shock",
         "conditions": conditions, "seeds": list(range(1, args.seeds + 1)),
         "steps": args.steps, "shock_step": args.shock_step,
-        "distortion": args.distortion,
+        "distortion": args.distortion, "feedback_gain": args.gain,
+        "shock_fraction": args.shock_fraction,
         "primary_outcomes": [
             "recovery_time_90 (population, post-shock)",
             "fragmentation_post (mean, post-shock)",
@@ -73,11 +83,13 @@ def main():
     with open(os.path.join(args.out, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2)
 
-    jobs = [(c, s, args.steps, args.shock_step, args.distortion, args.out)
+    jobs = [(c, s, args.steps, args.shock_step, args.distortion,
+             args.gain, args.shock_fraction, args.out)
             for c in conditions for s in range(1, args.seeds + 1)]
     # Skip already-completed runs so the campaign is resumable.
     jobs = [j for j in jobs if not os.path.exists(
-        os.path.join(args.out, "runs", f"{j[0]}_s{j[1]}.json"))]
+        os.path.join(args.out, "runs",
+                     f"{j[0].replace(':', '-')}_s{j[1]}.json"))]
     print(f"{len(jobs)} runs to execute on {args.workers} workers")
 
     t0, done = time.time(), 0
