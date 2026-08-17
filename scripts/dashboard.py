@@ -84,7 +84,7 @@ h1{font-size:19px;letter-spacing:.2px}
 #net{width:100%;height:520px;display:block;border-radius:6px}
 .controls{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:12px;color:var(--text-secondary)}
 .controls input[type=range]{flex:1;accent-color:var(--series-1)}
-button{background:var(--surface-2);color:var(--text-primary);border:1px solid var(--grid);
+button,select{background:var(--surface-2);color:var(--text-primary);border:1px solid var(--grid);
        border-radius:6px;padding:4px 12px;font-size:12.5px;cursor:pointer}
 button:hover{border-color:var(--text-muted)}
 #inspector{font-size:12.5px}
@@ -115,6 +115,11 @@ summary{cursor:pointer;color:var(--text-secondary);font-size:13px}
     <canvas id="net"></canvas>
     <div class="controls">
       <button id="play">▶ Play</button>
+      <select id="speed">
+        <option value="900">slow</option>
+        <option value="450" selected>normal</option>
+        <option value="180">fast</option>
+      </select>
       <input type="range" id="scrub" min="0" value="0">
       <span id="tlabel"></span>
     </div>
@@ -253,7 +258,7 @@ document.getElementById('play').addEventListener('click',function(){
   if(playing){const step=()=>{if(!playing)return;
     cur=(cur+1)%SN.length;scrub.value=cur;
     if(cur===SN.length-1)playing=false,this.textContent='▶ Play';
-    else setTimeout(step,120);};step();}
+    else setTimeout(step,+document.getElementById('speed').value);};step();}
 });
 net.addEventListener('click',e=>{
   const r=net.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
