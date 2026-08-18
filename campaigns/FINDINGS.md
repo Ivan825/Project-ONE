@@ -46,7 +46,7 @@ Supporting facts: F keeps 4/5 corrective rules active ≥90% of ticks while R is
 mostly quiescent (mean |b−s|: 0.64 F / 0.36 N / 0.10 R) yet shows the largest
 raw pull; excluding the shock transition changes medians <2%.
 
-## Finding 3 — Populations fed lies evolve to stop listening (dose-ordered)
+## Finding 3 — Attention declines under consequential broadcasts (dose-ordered)
 Global-sensitivity (heritable attention to the broadcast) declines across
 generations. Δ mean trait, end−start (harsh shock, g=0.8): no feedback −0.03
 (neutral drift) · truth −0.10 (r=−0.59, p=0.004) · noise −0.34 (r=−0.94,
@@ -120,8 +120,8 @@ reality toward the story. Apparent self-fulfilling steering vanishes against
 a passive counterfactual (Finding 2, a caution for empirical performativity
 claims). What broadcasts really change is behavior and structure, with the
 lie–response pair deciding which lies come true (Findings 4–6). Long run:
-heritable attention declines across generations, tracking broadcast-implied
-corrective-drive intensity (Finding 3; individual-level pathway open, and
+heritable attention declines across generations under consequential
+broadcasts, tracking broadcast-implied corrective-drive intensity (Finding 3; individual-level pathway open, and
 the intensity relationship descriptive). Together: self-model feedback is
 a real causal channel whose credibility is itself an evolving property of
 the system.
