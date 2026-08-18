@@ -14,15 +14,15 @@ local actions → global condition → measurement → self-model → broadcast 
 
 **Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — Cliff's δ = 0.000 on every outcome, twice replicated. Only the *broadcast* has causal power.
 
-**A false self-model pulls reality toward itself.** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (paired rank-biserial r = 0.84–0.88, p ≈ 10⁻⁶–10⁻⁸), and a replayed *genuine* self-model from another run — a plausible false description — steers hardest of all: steering power is graded by plausibility. A quiet, systematic lie out-steers loud noise ~7× at low gain.
+**A false self-model pulls reality toward itself (under corrective responses).** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (paired rank-biserial r = 0.84–0.88, p ≈ 10⁻⁶–10⁻⁸, robust to the ε threshold), and a replayed *genuine* self-model from another run — a realistically structured false description — steers hardest of all: steering power is graded by the realism of the description's structure, not by how often response rules fire. A quiet, systematic lie out-steers loud noise ~7× at low gain.
 
 **Which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10) and the flattering lie becomes benevolently self-fulfilling (highest cooperation observed).
 
-**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; selection removes it in proportion to broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering.
+**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; its population mean declines across generations in proportion to broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering, and the pathway is not a simple fecundity gradient (see FINDINGS).
 
 ![Evolution of distrust](campaigns/harsh_shock/fig8_trait_evolution.png)
 
-**Truthful feedback doubles costly cooperation** (δ = 0.96, monotone in gain) — the loop acts as a distributed homeostat. And one honest null, twice replicated: post-shock recovery time is feedback-insensitive even at 40% hub removal.
+**Truthful feedback doubles costly cooperation** (δ = 0.96, monotone in gain) — the loop implements distributed corrective feedback. And one pre-specified null, twice replicated: we detected no evidence of a feedback effect on post-shock recovery time, even at 40% hub removal.
 
 Full statistics: [`campaigns/FINDINGS.md`](campaigns/FINDINGS.md) · interactive explorer: `campaigns/flagship/report.html`
 
