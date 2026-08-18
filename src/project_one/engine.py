@@ -1,7 +1,10 @@
 """Core simulation engine (M0/M1).
 
-Deterministic given (Config, seed): a single random.Random drives every choice,
-agents are iterated in sorted-id order, and all neighbor sampling sorts first.
+Deterministic given (Config, seed): one behavioral random.Random drives every
+agent choice, and a separate dedicated stream (signal_rng) generates
+stochastic broadcast signals, so constructing the noise signal never advances
+the behavioral PRNG. Agents are iterated in sorted-id order, and all neighbor
+sampling sorts first.
 """
 from __future__ import annotations
 

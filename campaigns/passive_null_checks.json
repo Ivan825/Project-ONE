@@ -111,5 +111,24 @@
    "median_full": 0.001396740839503248,
    "median_excl_shock_transition": 0.0012555868594202359
   }
+ },
+ "flagship": {
+  "P_F_median": 0.006749758687923358,
+  "P_passive_invert_median": 0.011301508239848107,
+  "P_N_median": 0.0010433942737091866,
+  "P_passive_noise_median": 0.00619465519395643,
+  "delta_F_median": -0.005335827895549493,
+  "delta_N_median": -0.004562131214655308,
+  "diff_in_diff_F_vs_N": {
+   "n": 50,
+   "median_diff": 0.0003748594905690428,
+   "mean_diff": 0.00020981538627888523,
+   "wilcoxon_p": 0.6253677971440439,
+   "rank_biserial": 0.08078431372549019,
+   "boot_ci_median": [
+    -0.001610294523819483,
+    0.0022008806112488026
+   ]
+  }
  }
 }

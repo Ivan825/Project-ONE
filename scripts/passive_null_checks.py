@@ -192,6 +192,34 @@ def main():
                       "median_excl_shock_transition": float(np.median(cut))}
     out["shock_transition_exclusion"] = excl
 
+    # ---- 4. flagship replication (mild shock, 50 pairs)
+    fl = os.path.join(ROOT, "campaigns", "flagship", "runs")
+    if os.path.exists(f"{fl}/N_s1.json"):
+        seeds_fl = list(range(1, 51))
+        fF, fP, fN, fNp = [], [], [], []
+        for s in seeds_fl:
+            F = load(f"{fl}/F_s{s}.json")
+            A = load(f"{fl}/A_s{s}.json")
+            N = load(f"{fl}/N_s{s}.json")
+            fF.append(actual_pull(F))
+            fP.append(pull_series(
+                A["globals"], lambda i, st: {k: 1.0 - st[k] for k in KEYS}))
+            bl = N["broadcasts"]
+            fN.append(actual_pull(N))
+            fNp.append(pull_series(
+                A["globals"], lambda i, st, bl=bl: bl[i] if i < len(bl) else None))
+        dF_fl = [a - b for a, b in zip(fF, fP)]
+        dN_fl = [a - b for a, b in zip(fN, fNp)]
+        out["flagship"] = {
+            "P_F_median": float(np.median(fF)),
+            "P_passive_invert_median": float(np.median(fP)),
+            "P_N_median": float(np.median(fN)),
+            "P_passive_noise_median": float(np.median(fNp)),
+            "delta_F_median": float(np.median(dF_fl)),
+            "delta_N_median": float(np.median(dN_fl)),
+            "diff_in_diff_F_vs_N": paired(dF_fl, dN_fl),
+        }
+
     dest = os.path.join(ROOT, "campaigns", "passive_null_checks.json")
     with open(dest, "w") as f:
         json.dump(out, f, indent=1)
