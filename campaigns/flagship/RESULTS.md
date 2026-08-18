@@ -1,4 +1,10 @@
-# Flagship campaign — first results (pre-registered analysis)
+# Flagship campaign — HISTORICAL first-pass analysis (superseded)
+
+> **Note:** this file records the first-pass analysis (distance-based
+> convergence metric, unpaired Mann-Whitney statistics) and is kept for
+> transparency. It is superseded by the final paired analysis in
+> `results.json` / `FINDINGS.md` and by the passive-counterfactual analysis
+> in `passive_null_checks.json`.
 
 **Design.** 5 conditions × 50 paired seeds, 4000 steps, hub-removal shock at t=2000.
 Distortion mode for F: `invert`. Analysis exactly as pre-registered in `docs/PLAN.md`;

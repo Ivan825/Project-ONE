@@ -10,13 +10,13 @@ Project ONE is a controlled, fully reproducible laboratory for *recursive self-m
 local actions → global condition → measurement → self-model → broadcast → changed local actions
 ```
 
-## Headline findings (927 runs, pre-specified outcomes)
+## Headline findings (927 runs, pre-specified outcome families)
 
 **Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — Cliff's δ = 0.000 on every outcome, twice replicated. Only the *broadcast* has causal power.
 
-**A false self-model pulls reality toward itself (under corrective responses).** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (paired rank-biserial r = 0.84–0.88, p ≈ 10⁻⁶–10⁻⁸, robust to the ε threshold), and a replayed *genuine* self-model from another run — a realistically structured false description — steers hardest of all: steering power is graded by the realism of the description's structure, not by how often response rules fire. A quiet, systematic lie out-steers loud noise ~7× at low gain.
+**Apparent "story pull" is an artifact — and that is a finding.** A natural self-fulfilling-prophecy statistic registers strong, replicated apparent attraction of the macrostate toward false and replayed self-models (raw hierarchy replay > inverted lie > noise, r up to 1.00). But a passive counterfactual — scoring untreated paired-seed trajectories against the same reference signals — fully accounts for it: untreated worlds "move toward" the references MORE than treated worlds do (passive medians 0.012/0.030/0.007 vs actual 0.008/0.024/0.001), and adjusted between-condition contrasts are null in both campaigns. There is no evidence of content-specific attraction toward broadcast content. This is a direct caution for empirical performativity claims (`scripts/passive_null_checks.py`).
 
-**Which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10) and the flattering lie becomes benevolently self-fulfilling (highest cooperation observed).
+**What broadcasts DO change is behavior and structure — and which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert; broadcasts densify and decentralize the network. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation.
 
 **Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; its population mean declines across generations, more strongly with increasing broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering, and the pathway is not a simple fecundity gradient (see FINDINGS).
 
@@ -52,11 +52,11 @@ Every run is deterministic given (config, seed); state hashes verify replay acro
 | N — Noise feedback | on | matched-range random signal |
 | R — Replayed self-model | on | genuine S(t) trajectory of another run |
 
-Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcomes; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
+Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcome families; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); passive-counterfactual nulls for the story-pull statistic; a dedicated signal-RNG stream so conditions differ only in signal content; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
 ## Paper
 
-*Steering a Network with Its Own Reflection: True, False, and Noise Self-Model Broadcasts in an Evolving Multi-Agent Network* — under submission to Complex Networks 2026. Draft and sources in [`paper/`](paper/). Research plan and the original proposal in [`docs/`](docs/).
+*A Network and Its Reflection: What True, False, and Noise Self-Model Broadcasts Do and Do Not Change in an Evolving Multi-Agent Network* — under submission to Complex Networks 2026. Draft and sources in [`paper/`](paper/). Research plan and the original proposal in [`docs/`](docs/).
 
 ## Status
 

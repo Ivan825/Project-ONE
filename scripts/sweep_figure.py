@@ -38,15 +38,15 @@ def main():
         for r in res["outcomes_per_run"]:
             rows.setdefault(r["condition"], []).append(r)
         for tok, rs in rows.items():
-            for key in ("story_pull", "trait_gs_delta", "cooperation_rate"):
+            for key in ("fragmentation_post", "trait_gs_delta", "cooperation_rate"):
                 vals = [r[key] for r in rs if r[key] is not None]
                 if vals:
                     data.setdefault(tok, {}).setdefault(gain, {})[key] = med(vals)
 
     panels = [("trait_gs_delta", "Evolved attention change",
                "Δ mean global sensitivity"),
-              ("story_pull", "Story pull toward the broadcast",
-               "signed movement per tick"),
+              ("fragmentation_post", "Post-shock fragmentation",
+               "mean fragmentation after shock"),
               ("cooperation_rate", "Cooperation rate", "costly helping per capita")]
     fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.8), dpi=200)
     for ax, (key, title, ylab) in zip(axes, panels):

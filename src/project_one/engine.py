@@ -23,6 +23,13 @@ class Simulation:
         self.cfg = cfg
         self.seed = seed
         self.rng = random.Random(seed)
+        # Dedicated stream for broadcast-signal generation (condition N).
+        # Keeping signal generation off the behavioral stream guarantees that
+        # constructing the noise signal never perturbs subsequent behavioral
+        # draws, so N differs from other conditions only in signal CONTENT.
+        # Conditions that draw nothing from this stream are bit-identical to
+        # the single-stream implementation.
+        self.signal_rng = random.Random(1_000_003 * seed + 12345)
         self.t = 0
         self.next_id = 0
         self.agents: dict[int, Agent] = {}   # full ledger, dead included (lineage)
@@ -73,7 +80,7 @@ class Simulation:
                 self.current_broadcast = cfg.replay_trajectory[idx]
             else:
                 self.current_broadcast = make_broadcast(
-                    cfg.condition, s_t, self.rng, cfg.distortion)
+                    cfg.condition, s_t, self.signal_rng, cfg.distortion)
             self.broadcast_memory.append(self.current_broadcast)
             if self.current_broadcast is not None:
                 for aid in sorted(self.live_ids):

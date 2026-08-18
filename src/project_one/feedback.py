@@ -5,7 +5,9 @@ Conditions:
   B - observer runs, agents receive nothing
   C - agents receive the accurate self-model
   F - agents receive a systematically distorted self-model
-  N - agents receive a matched-bandwidth random signal (same keys, same ranges)
+  N - agents receive a matched-range random signal (same keys, same ranges),
+      drawn from a dedicated signal RNG stream so that constructing the noise
+      never perturbs the behavioral random stream
 """
 from __future__ import annotations
 
@@ -21,7 +23,8 @@ def make_broadcast(condition: str, s_t: dict, rng, distortion: str) -> dict | No
     if condition == "F":
         return _distort(s_t, distortion)
     if condition == "N":
-        # Matched bandwidth: same message shape, values drawn uniformly.
+        # Matched range: same message shape, values drawn uniformly from a
+        # dedicated signal stream (never the behavioral stream).
         return {k: rng.random() for k in BROADCAST_KEYS}
     raise ValueError(f"Unknown condition: {condition}")
 

@@ -1,0 +1,5 @@
+# exact versions used for the reported campaigns (python 3.11)
+matplotlib==3.10.9
+networkx==3.6.1
+numpy==2.4.4
+scipy==1.17.1

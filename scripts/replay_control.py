@@ -5,9 +5,10 @@ realistic marginals and temporal coherence while breaking self-reference.
 
     python scripts/replay_control.py --out campaigns/replay_control
 
-Comparison hierarchy this completes:
-  true self-model (C) > false self-model (F) > replayed real self-model (R)
-  > uniform noise (N) > nothing (A).
+NOTE (final analysis): raw story pull under R exceeds F and N, but the
+passive-counterfactual analysis (scripts/passive_null_checks.py) shows the
+raw hierarchy is explained by intrinsic dynamics, not causal steering. See
+campaigns/FINDINGS.md Finding 2.
 """
 import argparse
 import json

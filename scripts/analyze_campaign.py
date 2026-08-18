@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Pre-registered analysis of a flagship campaign.
+"""Campaign analysis.
 
     python scripts/analyze_campaign.py campaigns/flagship
 
-Primary outcomes (frozen in docs/PLAN.md before the campaign):
+Primary outcome FAMILIES were frozen in docs/PLAN.md before the first
+campaign (recovery, fragmentation, cooperation, self-model correspondence).
+story_pull is a later directional refinement of the pre-specified
+correspondence outcome, introduced because the distance-based
+self_model_convergence statistic is degenerate under truthful feedback;
+both give the same F-vs-N ordering. Outcomes computed here:
   1. recovery_time_90     - steps after the shock until living population first
                             returns to 90% of its pre-shock mean (censored at
                             horizon if it never does).
@@ -27,7 +32,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import mannwhitneyu, wilcoxon
+from scipy.stats import mannwhitneyu, rankdata, wilcoxon
 
 BROADCAST_KEYS = ("fragmentation", "centralization", "cooperation",
                   "inequality", "turnover")
@@ -149,7 +154,7 @@ def paired_compare(rows, key, ref="A", conds=None, n_boot=10000):
             _, p = wilcoxon(nz, alternative="two-sided", mode="auto")
         except ValueError:
             p = 1.0
-        ranks = np.argsort(np.argsort(np.abs(nz))) + 1.0
+        ranks = rankdata(np.abs(nz), method="average")
         rb = (ranks[nz > 0].sum() - ranks[nz < 0].sum()) / ranks.sum()
         boots = np.median(rng.choice(d, size=(n_boot, len(d)), replace=True), axis=1)
         out[f"{cond}_vs_{ref}"] = {
