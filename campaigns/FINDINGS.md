@@ -2,7 +2,9 @@
 
 **Evidence base: 927 runs** (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
-3 feedback gains, harsh shock). All runs 4000 steps, deterministic, seed-replayable.
+3 feedback gains, harsh shock). Runs are 3000–4000 steps (the 2× scale
+campaign uses 3000 steps with shock at t=1500; all others shock at t=2000),
+deterministic, seed-replayable.
 Statistics: PAIRED Wilcoxon signed-rank on per-seed differences (primary) with
 matched-pairs rank-biserial r and bootstrap CIs; Mann-Whitney U / Cliff's δ
 retained as robustness checks. Raw runs regenerable via `scripts/campaign.py`.

@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-bandwidth noise. Across 927 deterministic runs with paired seeds and pre-specified outcomes: measurement without broadcast is causally inert; under corrective responses false self-models pull the macrostate toward themselves far more strongly than matched noise (paired rank-biserial $r=0.84$--$0.88$), and realistically structured descriptions steer strongest --- a replayed genuine self-model from another run out-steers both; which lies come true depends on the response regime, an alarmist lie flipping from self-defeating under corrective responses to strongly self-fulfilling under conformist ones; and heritable attention to the broadcast declines fastest under unreliable, high-impact feedback: populations fed false self-models evolve to ignore their observer.
+Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-range noise. Across 927 deterministic runs with paired seeds and pre-specified outcomes: measurement without broadcast is causally inert; under corrective responses false self-models pull the macrostate toward themselves far more strongly than matched noise (paired rank-biserial $r=0.84$--$0.88$), and realistically structured descriptions steer strongest --- a replayed genuine self-model from another run out-steers both; which lies come true depends on the response regime, an alarmist lie flipping from self-defeating under corrective responses to strongly self-fulfilling under conformist ones; and heritable attention to the broadcast declines fastest under unreliable, high-impact feedback: populations fed false self-models evolve to ignore their observer.
 \keywords{adaptive networks, agent-based modeling, reflexivity, self-fulfilling dynamics, evolution of trust, network resilience}
 \end{abstract}
 
@@ -53,7 +53,7 @@ coupling an evolving agent ecology, an adaptive interaction network, a global
 observer, and a controllable broadcast channel; (2) a six-condition causal
 design that separates the effect of \emph{being measured} from the effect of
 \emph{being told}, the effect of \emph{self-information} from that of
-\emph{stimulation} (via a matched-bandwidth noise control), and the effect of
+\emph{stimulation} (via a matched-range random-noise control), and the effect of
 \emph{realistic structure} from that of self-reference (via a replayed-self-model
 control); (3) evidence, robust across feedback gains and two shock severities,
 that under corrective response rules false self-models steer the macrostate
@@ -82,7 +82,8 @@ Figure~\ref{fig:loop} summarizes the design.
 \end{tikzpicture}
 \caption{The reflexive loop and its corruption points. Local actions generate
 the network; the observer compresses it into a self-model; the broadcast
-channel returns it truthfully, distorted, as noise, or not at all. Responses
+channel returns it truthfully, distorted, replayed from another run, as
+noise, or not at all. Responses
 are scaled by heritable sensitivity $\gamma_i$ and global gain $g$.}
 \label{fig:loop}
 \end{figure}
@@ -108,10 +109,9 @@ ablatable.
 \textbf{Signaling and the evolution of trust.} In sender--receiver games,
 receivers can evolve to ignore unreliable signals \cite{skyrms2010signals}.
 Our distrust result is consonant with that theory but arises in an open
-ecological population where the signal is \emph{self-referential} ---
-a compressed description of the receiving population itself --- and where
-attention to it is a continuous heritable trait under selection from an
-energy economy, not a payoff matrix.
+ecological population where the signal is \emph{self-referential} and
+attention to it is a continuous heritable trait in an energy economy, not a
+payoff matrix.
 \textbf{Agent-based modeling.} Agent-based studies of collective opinion and
 cooperation are a mainstay of this community
 \cite{castellano2009statistical,perc2017statistical}; our methodology
@@ -146,11 +146,12 @@ betweenness-concentration, Freeman centralization \cite{freeman1978centrality},
 per-capita costly-helping rate, energy Gini, and turnover, plus mean trait
 values (logged, never broadcast). The broadcast $b(t)$ carries five of these
 components, each normalized to $[0,1]$: \emph{fragmentation},
-\emph{centralization} (top-5\% degree share), \emph{cooperation},
+\emph{degree concentration} (top-5\% degree share; distinct from Freeman
+centralization), \emph{cooperation},
 \emph{inequality}, and \emph{turnover}. Six conditions define what agents
 receive (Table~\ref{tab:conditions}). Distorted broadcasts come in three
 modes: \emph{invert} ($b_k = 1-s_k$ componentwise), \emph{crisis} (fixed
-alarming values: fragmentation $0.9$, centralization $0.9$, cooperation
+alarming values: fragmentation $0.9$, degree concentration $0.9$, cooperation
 $0.1$, inequality $0.9$, turnover $0.9$), and \emph{utopia} (fixed
 reassuring values: $0.05$, $0.2$, $0.9$, $0.1$, $0.2$).
 
@@ -174,7 +175,7 @@ $f_{\mathrm{prune}} = 0.5\, b_{\mathrm{frag}}$,
 $f_{\mathrm{connect}} = \max(0,\, 0.6-b_{\mathrm{frag}})$, and
 $f_{\mathrm{harvest}} = b_{\mathrm{ineq}}$. Two further mechanisms act on
 \emph{target selection} rather than action choice, in both regimes: while
-reported centralization exceeds $0.6$, a pruning agent cuts its
+reported degree concentration exceeds $0.6$, a pruning agent cuts its
 highest-degree neighbor (ties by id) with probability $\gamma_i$, else a
 uniform neighbor; and new links attach to a neighbor-of-a-neighbor with
 probability $0.7$ when available (else a uniform non-neighbor) --- an
@@ -197,7 +198,7 @@ base regeneration & 60/step & min.\ reproduction age & 15 steps\\
 regeneration rate $r$ & 0.12 & lifespan (mean $\pm$ s.d.) & $400 \pm 80$ steps\\
 harvest cap & 2.5/step & action cost / share amount & 0.25 / 3.0\\
 metabolism & 0.8/step & run length & 3000--4000 steps\\
-shock time $t_{\mathrm{shock}}$ & 2000 & & \\
+shock time $t_{\mathrm{shock}}$ & \multicolumn{3}{l}{2000 (1500 in the $2\times$ scale check)}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -246,7 +247,8 @@ code, configurations, and analysis scripts are public.
 
 \section{Experimental Design}
 The standardized shock removes, in a single step at $t_{\mathrm{shock}}=2000$
-(all campaigns), the
+(except in the $2\times$ scale check: $t_{\mathrm{shock}}=1500$ in a
+3{,}000-step run), the
 highest-degree living agents (ties broken by agent id): a fixed 10 hubs in
 the mild variant, the top $\max(1, \lfloor 0.4\,|V_{\mathrm{live}}|\rfloor)$ in the
 harsh variant. Four outcomes were fixed before the first campaign: (1)

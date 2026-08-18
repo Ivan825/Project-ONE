@@ -4,7 +4,7 @@
 
 ![Sensitivity sweep](campaigns/sweep_summary.png)
 
-Project ONE is a controlled, fully reproducible laboratory for *recursive self-model feedback* in evolving multi-agent networks. Temporary agents are born, cooperate, compete, reproduce and die, forming an adaptive network G(t). A global observer periodically compresses the macrostate — fragmentation, cooperation, centralization, inequality, turnover — into a self-model S(t) and, depending on the experimental condition, broadcasts it back to the agents **accurately, systematically falsified, or as matched-bandwidth noise**:
+Project ONE is a controlled, fully reproducible laboratory for *recursive self-model feedback* in evolving multi-agent networks. Temporary agents are born, cooperate, compete, reproduce and die, forming an adaptive network G(t). A global observer periodically compresses the macrostate — fragmentation, cooperation, centralization, inequality, turnover — into a self-model S(t) and, depending on the experimental condition, broadcasts it back to the agents **accurately, systematically falsified, or as matched-range random noise**:
 
 ```
 local actions → global condition → measurement → self-model → broadcast → changed local actions
@@ -49,7 +49,7 @@ Every run is deterministic given (config, seed); state hashes verify replay acro
 | B — Observed, blind | on | nothing (placebo) |
 | C — True feedback | on | accurate S(t) |
 | F — False feedback | on | distorted S(t): invert / crisis / utopia |
-| N — Noise feedback | on | matched-bandwidth random signal |
+| N — Noise feedback | on | matched-range random signal |
 | R — Replayed self-model | on | genuine S(t) trajectory of another run |
 
 Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcomes; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
