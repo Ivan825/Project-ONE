@@ -3,15 +3,23 @@
 
 For every broadcast-condition run in the gain sweep, compute:
   E = mean broadcast-state discrepancy <|b_k - s_k|>  (credibility)
-  I = g * mean total corrective drive <sum_a f_a(b)>  (realized intensity)
+  I = g * mean total corrective drive <sum_a f_a(b)>
+      (BROADCAST-IMPLIED corrective-drive intensity)
 and relate them to the evolved change in mean global sensitivity (dgamma).
 
-Result (15 sweep cells): dgamma tracks I almost perfectly
-(cell-level Spearman rho ~ -0.99), which parsimoniously explains the
-categorical ordering: utopia (I=0) shows no decline, truth (E=0, I>0)
-declines at high gain, and unreliable high-drive broadcasts decline most.
-Attention appears to be selected on the behavioral perturbation it causes,
-not on veracity per se.
+Note on interpretation: I is computed from the broadcast alone and
+deliberately OMITS the per-agent factor gamma_i, which is the very quantity
+under selection; it is therefore the drive a broadcast implies, not the
+realized per-agent behavioral perturbation. I is also computed from realized
+(already feedback-affected) trajectories rather than independently
+randomized. The relationship below is descriptive, not a causal mediation
+result.
+
+Result (15 sweep cells): dgamma tracks I almost perfectly (cell-level
+Spearman rho ~ -0.99; run-level ~ -0.83, n=300), which parsimoniously
+organizes the categorical ordering: utopia (I=0) shows no decline, truth
+(E=0, small I) declines only at high gain, and unreliable high-drive
+broadcasts decline most.
 
 Writes campaigns/attention_cost.json.
 

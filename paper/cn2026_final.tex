@@ -63,9 +63,9 @@ or pacify depending on the lie--response pairing (reversing under conformist
 responses), and broadcasts densify and decentralize the network; and (4) we
 demonstrate, in an ecological agent-based setting, that \emph{attention to a
 collective self-model is itself a heritable, evolvable trait} whose
-population mean declines in proportion to the behavioral perturbation the
-broadcast causes --- trust in the observer is not updated by any rule, it
-evolves. Figure~\ref{fig:loop} summarizes the design.
+population mean strongly tracks the broadcast-implied corrective-drive
+intensity across the gain sweep --- trust in the observer is not updated by
+any rule, it evolves. Figure~\ref{fig:loop} summarizes the design.
 
 
 \begin{figure}[t]
@@ -147,11 +147,11 @@ $\theta_i=(\mathrm{coop},\mathrm{expl},\mathrm{risk},\mathrm{soc},
 \emph{global sensitivity} --- how strongly broadcasts modulate its behavior.
 Agents hold energy; each step they pay metabolism and choose one action ---
 harvest, share (costly transfer to a neighbor), connect, prune, reproduce, or
-idle --- sampled with probabilities proportional to trait- and state-dependent
+idle --- with probabilities proportional to trait- and state-dependent
 propensities. The resource pool regenerates logistically, giving
-density-dependent competition. Reproduction requires an energy threshold and
-copies traits with Gaussian mutation ($\sigma=0.05$); energy exhaustion or age
-causes death. Founding ages are staggered to avoid cohort artifacts.
+density-dependent competition; reproduction requires an energy threshold and
+copies traits with Gaussian mutation ($\sigma=0.05$); energy exhaustion or
+age causes death. Founding ages are staggered to avoid cohort artifacts.
 
 \subsection{Observer and broadcast conditions}
 Every $\Delta t=10$ steps the observer computes the macrostate $S(t)$:
@@ -162,12 +162,12 @@ traits (logged, never broadcast). The broadcast $b(t)$ carries five of these
 components, each normalized to $[0,1]$: \emph{fragmentation},
 \emph{degree concentration} (top-5\% degree share; distinct from Freeman
 centralization), \emph{cooperation},
-\emph{inequality}, and \emph{turnover}. Six conditions define what agents
-receive (Table~\ref{tab:conditions}). Distorted broadcasts come in three
-modes: \emph{invert} ($b_k = 1-s_k$ componentwise), \emph{crisis} (fixed
-alarming values: fragmentation $0.9$, degree concentration $0.9$, cooperation
-$0.1$, inequality $0.9$, turnover $0.9$), and \emph{utopia} (fixed
-reassuring values: $0.05$, $0.2$, $0.9$, $0.1$, $0.2$).
+\emph{inequality}, and \emph{turnover}. Six conditions define what agents receive
+(Table~\ref{tab:conditions}). Distorted broadcasts come in three modes:
+\emph{invert} ($b_k = 1-s_k$ componentwise), \emph{crisis} (fixed alarming
+values: fragmentation $0.9$, degree concentration $0.9$, cooperation $0.1$,
+inequality $0.9$, turnover $0.9$), and \emph{utopia} (reassuring: $0.05$,
+$0.2$, $0.9$, $0.1$, $0.2$).
 
 \subsection{Response model}
 Each step, agent $i$ selects one action $a$ with probability proportional to
@@ -250,11 +250,11 @@ a homogeneous mixing population.
 
 \subsection{Reproducibility}
 The simulation is deterministic given (configuration, seed): one PRNG drives
-all behavioral choices, and a separate dedicated stream generates stochastic
+all behavioral choices and a separate dedicated stream generates stochastic
 broadcast signals, so constructing the noise signal never advances the
-behavioral PRNG; agents act in sorted order, and a state hash certifies replay;
-identical hashes were verified across operating systems and machines. All
-code, configurations, and analysis scripts are public.
+behavioral PRNG; agents act in sorted order and a state hash certifies
+replay (identical hashes verified across machines and operating systems).
+All code, configurations, and analysis scripts are public.
 
 \section{Experimental Design}
 The standardized shock removes, in a single step at $t_{\mathrm{shock}}=2000$
@@ -332,14 +332,13 @@ Table~\ref{tab:stats} summarizes the main paired comparisons; the following subs
 
 \subsection{Measurement alone is causally inert}
 Under paired seeds, condition B is trajectory-identical to A: every per-seed
-difference is exactly zero, on every outcome, in both the flagship and
-harsh-shock campaigns. The
+difference is exactly zero, on every outcome, in both campaigns. The
 instrument acquires causal power only when it broadcasts.
 
 \subsection{Apparent story pull is explained by a passive counterfactual}
 \label{sec:pull}
-Except where stated otherwise, all results concern the primary corrective
-regime; Sect.~\ref{sec:regime} shows how they change under conformity.
+Except where stated, results concern the primary corrective regime;
+Sect.~\ref{sec:regime} shows how they change under conformity.
 
 Evaluated naively, the story-pull statistic appears to show strong
 self-fulfilling steering. Raw $P$ (harsh shock; medians, bootstrap 95\% CIs)
@@ -354,7 +353,7 @@ per source, $n=15$, $r=1.00$, and to a source-clustered bootstrap).
 A short observation shows why raw $P$ can mislead. Under the inverted
 reference $b_t=1-s_t$, $\mathrm{sign}(b_t-s_t)=\mathrm{sign}(\tfrac12-s_t)$;
 if an untreated component simply mean-reverts toward mid-range,
-$s_{t+1}-s_t=-\kappa(s_t-\tfrac12)+\eta_t$ with
+$s_{t+1}-s_t=-\kappa(s_t-\tfrac12)+\eta_t$ with $\kappa>0$ and
 $\mathbb{E}[\eta_t\,|\,s_t]=0$, then
 $\mathbb{E}[\mathrm{sign}(b_t-s_t)(s_{t+1}-s_t)\,|\,s_t]
 =\kappa\,|s_t-\tfrac12|>0$: ordinary mean reversion masquerades as
@@ -400,7 +399,7 @@ the silent one.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{sweep_summary.png}
+\includegraphics[width=0.94\textwidth]{sweep_summary.png}
 \caption{Sensitivity sweep (40\% hub-removal shock; 20 seeds per cell;
 medians). Left: evolved change in mean global sensitivity $\gamma$ ---
 attention to the self-model declines more strongly with increasing broadcast
@@ -435,13 +434,11 @@ costly-helping rates observed under correction ($0.35$--$0.45$ across
 gains). The \emph{utopia} self-model is behaviorally inert: because
 responses fire only on reported deficits, a flattering broadcast triggers
 nothing and is indistinguishable from disconnecting the channel, at every
-gain. Under purely corrective response rules, flattery equals silence. We
-note the caveat here rather than in the discussion: the first-order
-\emph{directions} of these responses follow from the corrective rules
-(Eq.~\ref{eq:response}) by construction and are not claimed as discoveries;
-what is not built in is the magnitude asymmetry between distortion types,
-the spillovers to non-targeted structure, and the evolutionary consequences
-below.
+gain: under purely corrective rules, flattery equals silence. Caveat: these
+first-order response \emph{directions} follow from the rules
+(Eq.~\ref{eq:response}) by construction; not built in are the magnitude
+asymmetry across distortion types, the structural spillovers, and the
+evolutionary consequences below.
 
 \subsection{The response regime decides which lies come true}
 \label{sec:regime}
@@ -488,14 +485,17 @@ $[-0.456,-0.281]$, $r=-1.00$, $p\!\approx\!1.9\times10^{-9}$). The sweep is
 dose-ordered: the decline under the false broadcast deepens from $-0.12$
 ($g=0.2$) to $-0.45$ ($g=1.6$) --- and at the highest gain even \emph{accurate}
 feedback shows a marked decline ($-0.24$). The categorical ordering
-compresses into one continuous relationship: with realized intervention
-intensity $I = g\,\langle\textstyle\sum_a f_a(b(t))\rangle$ (computable from
-the broadcast alone), the evolved decline tracks $I$ across the 15 sweep
-cells with Spearman $\rho=-0.99$ ($p\!\approx\!2\times10^{-13}$; run-level
-$\rho=-0.83$, $n=300$). Utopia ($I=0$) is untouched; truth is spared only
-because its corrective drive is small at equilibrium; unreliable high-drive
-broadcasts pay most. Attention is selected on the behavioral perturbation a
-broadcast causes, not on veracity per se.
+compresses into one continuous relationship: with broadcast-implied
+corrective-drive intensity $I = g\,\langle\textstyle\sum_a f_a(b(t))\rangle$
+(computable from the broadcast alone), evolved attention tracks $I$ across
+the 15 sweep cells almost perfectly (Spearman $\rho=-0.99$; also strong at
+run level, $\rho=-0.83$, $n=300$). Utopia ($I=0$) is untouched; truth
+exhibits less decline where its corrective drive is smaller at equilibrium;
+unreliable high-drive broadcasts pay most. The association is consistent with corrective-drive intensity, rather than
+veracity alone, organizing the evolutionary response. Since $I$ omits the
+per-agent factor $\gamma_i$ (the quantity under selection) and is computed
+from realized rather than independently randomized trajectories, we treat it
+as descriptive, not as causal mediation.
 
 The claim is stated at the level the data support: a systematic,
 dose-dependent heritable trait-frequency shift whose individual-level
@@ -576,9 +576,10 @@ strong, replicated, largest for realistic signals --- vanishes against a
 passive counterfactual, a caution for empirical performativity claims;
 (iii) which lies come true, in the outcome sense, is set by the
 lie--response pair, not the lie alone; and (iv) heritable attention to the
-collective self-model declines across generations with the behavioral
-perturbation the broadcast causes, making a population's trust in its own
-self-model an evolving quantity that unreliable observers spend down.
+collective self-model declines across generations, tracking the
+broadcast-implied corrective-drive intensity, making a population's trust in
+its own self-model an evolving quantity that unreliable observers spend
+down.
 Future work: learned response policies and language-model agents.
 
 \smallskip
@@ -590,20 +591,19 @@ stored run records and replay trajectories ship as release assets there.
 
 \begingroup\small
 \begin{thebibliography}{19}
+\setlength{\itemsep}{0pt plus 0.2pt}
 
 \bibitem{gross2008adaptive} Gross, T., Blasius, B.: Adaptive coevolutionary
-networks: a review. J. R. Soc. Interface 5(20), 259--271 (2008)
+networks: a review. J. R. Soc. Interface 5, 259--271 (2008)
 \bibitem{holme2012temporal} Holme, P., Saram\"aki, J.: Temporal networks.
-Phys. Rep. 519(3), 97--125 (2012)
+Phys. Rep. 519, 97--125 (2012)
 \bibitem{soros2013fallibility} Soros, G.: Fallibility, reflexivity, and the
-human uncertainty principle. J. Econ. Methodol. 20(4), 309--329 (2013)
+human uncertainty principle. J. Econ. Methodol. 20, 309--329 (2013)
 \bibitem{espeland2007rankings} Espeland, W.N., Sauder, M.: Rankings and
-reactivity: how public measures recreate social worlds. Am. J. Sociol.
-113(1), 1--40 (2007)
-\bibitem{merton1948self} Merton, R.K.: The self-fulfilling prophecy. Antioch
-Rev. 8(2), 193--210 (1948)
+reactivity: how public measures recreate social worlds. Am. J. Sociol. 113, 1--40 (2007)
+\bibitem{merton1948self} Merton, R.K.: The self-fulfilling prophecy. Antioch Rev. 8, 193--210 (1948)
 \bibitem{strathern1997improving} Strathern, M.: `Improving ratings': audit in
-the British university system. Eur. Rev. 5(3), 305--321 (1997)
+the British university system. Eur. Rev. 5, 305--321 (1997)
 \bibitem{albert2000error} Albert, R., Jeong, H., Barab\'asi, A.-L.: Error and
 attack tolerance of complex networks. Nature 406, 378--382 (2000)
 \bibitem{kuramoto1984chemical} Kuramoto, Y.: Chemical Oscillations, Waves,
@@ -627,7 +627,7 @@ human behavior. In: UIST (2023)
 Boccaletti, S., Szolnoki, A.: Statistical physics of human cooperation. Phys.
 Rep. 687, 1--51 (2017)
 \bibitem{freeman1978centrality} Freeman, L.C.: Centrality in social networks:
-conceptual clarification. Soc. Netw. 1(3), 215--239 (1978)
+conceptual clarification. Soc. Netw. 1, 215--239 (1978)
 \bibitem{perdomo2020performative} Perdomo, J.C., Zrnic, T.,
 Mendler-D\"unner, C., Hardt, M.: Performative prediction. In: ICML. PMLR 119 (2020)
 \bibitem{wang2023network} Wang, X., Yau, C.-Y., Wai, H.-T.: Network effects in performative prediction games. In: ICML. PMLR 202 (2023)
@@ -635,7 +635,7 @@ Mendler-D\"unner, C., Hardt, M.: Performative prediction. In: ICML. PMLR 119 (20
 Gidel, G., Lacoste-Julien, S.: Performative prediction on games and
 mechanism design. In: AISTATS. PMLR 258, 1855--1863 (2025)
 \bibitem{hardt2025performative} Hardt, M., Mendler-D\"unner, C.:
-Performative prediction: past and future. Stat. Sci. 40(3) (2025)
+Performative prediction: past and future. Stat. Sci. 40, 417--436 (2025)
 \bibitem{iwase2017self} Iwase, T., Tadokoro, Y., Fukuda, D.: Self-fulfilling
 signal of an endogenous state in network congestion games. Netw. Spat. Econ. 17, 889--909 (2017)
 \end{thebibliography}
