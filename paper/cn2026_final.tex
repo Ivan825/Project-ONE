@@ -11,16 +11,16 @@
 \mainmatter
 \title{Steering a Network with Its Own Reflection: True, False, and Noise Self-Model Broadcasts in an Evolving Multi-Agent Network}
 \titlerunning{Steering a Network with Its Own Reflection}
-\author{Ivan Bhargava}
-\authorrunning{I. Bhargava}
-\institute{Independent Researcher\\
-\email{ivan.bhargava@example.com}\\ WWW home page:
+\author{Ivan Bhargava \and Harsh Modi}
+\authorrunning{I. Bhargava, H. Modi}
+\institute{IIIT-Bangalore\\
+\email{ivan.bhargava@iiitb.ac.in, harsh.modi@iiitb.ac.in}\\ WWW home page:
 \texttt{https://github.com/Ivan825/Project-ONE}}
 
 \maketitle
 
 \begin{abstract}
-Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-bandwidth noise. Across 927 deterministic runs with paired seeds and pre-specified outcomes: measurement without broadcast is causally inert; under corrective responses false self-models pull the macrostate toward themselves far more strongly than matched noise (paired rank-biserial $r=0.84$--$0.88$), and realistically structured descriptions steer strongest --- a replayed genuine self-model from another run out-steers both; which lies come true depends on the response regime, an alarmist lie flipping from self-defeating under corrective responses to strongly self-fulfilling under conformist ones; and heritable attention to the broadcast declines across generations with its unreliability: populations fed false self-models evolve to ignore their observer.
+Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-bandwidth noise. Across 927 deterministic runs with paired seeds and pre-specified outcomes: measurement without broadcast is causally inert; under corrective responses false self-models pull the macrostate toward themselves far more strongly than matched noise (paired rank-biserial $r=0.84$--$0.88$), and realistically structured descriptions steer strongest --- a replayed genuine self-model from another run out-steers both; which lies come true depends on the response regime, an alarmist lie flipping from self-defeating under corrective responses to strongly self-fulfilling under conformist ones; and heritable attention to the broadcast declines fastest under unreliable, high-impact feedback: populations fed false self-models evolve to ignore their observer.
 \keywords{adaptive networks, agent-based modeling, reflexivity, self-fulfilling dynamics, evolution of trust, network resilience}
 \end{abstract}
 
@@ -63,7 +63,7 @@ under conformist responses --- with the steering direction set jointly by
 distortion type and response regime; and (4) we demonstrate, in an
 ecological agent-based setting, that \emph{attention to a collective
 self-model is itself a heritable, evolvable trait} whose population mean
-declines with the self-model's unreliability.
+declines most strongly under unreliable, high-impact self-models.
 Figure~\ref{fig:loop} summarizes the design.
 
 
@@ -74,7 +74,7 @@ Figure~\ref{fig:loop} summarizes the design.
 \node[box] (agents) {agents\\[-1pt]{\tiny act, share, link, reproduce, die}};
 \node[box, right=1.5cm of agents] (net) {adaptive network $G(t)$};
 \node[box, right=1.5cm of net] (obs) {observer\\[-1pt]{\tiny computes macrostate $S(t)$}};
-\node[box, below=0.75cm of net] (chan) {broadcast channel\\[-1pt]{\tiny \textbf{true} $\;\vert\;$ \textbf{false} (invert/crisis/utopia) $\;\vert\;$ \textbf{noise} $\;\vert\;$ \textbf{off}}};
+\node[box, below=0.75cm of net] (chan) {broadcast channel\\[-1pt]{\tiny \textbf{true} $\;\vert\;$ \textbf{false} (invert/crisis/utopia) $\;\vert\;$ \textbf{replay} $\;\vert\;$ \textbf{noise} $\;\vert\;$ \textbf{off}}};
 \draw[-{Stealth}, thick] (agents) -- node[above]{\tiny form} (net);
 \draw[-{Stealth}, thick] (net) -- node[above]{\tiny measured} (obs);
 \draw[-{Stealth}, thick] (obs) |- (chan);
@@ -308,7 +308,7 @@ recovery time (FL, HS) & C, F, N vs A & $\Delta$median $= 0$ & $|r|<0.5$ & $>0.2
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:stats} summarizes the pre-specified comparisons; the following subsections unpack them.
+Table~\ref{tab:stats} summarizes the main paired comparisons; the following subsections unpack them.
 
 \subsection{Measurement alone is causally inert}
 Under paired seeds, condition B is trajectory-identical to A: every per-seed
@@ -324,8 +324,9 @@ the noise control at every gain tested (paired: flagship $\Delta$median
 $+0.0055$, $r=0.84$, $p\!\approx\!1.1\times10^{-8}$; harsh shock
 $+0.0065$, $r=0.88$, $p\!\approx\!3.2\times10^{-6}$). Tested directly
 against zero (harsh shock; median $P$ with bootstrap 95\% CI of the median;
-one-sample Wilcoxon signed-rank), the pull is positive in every broadcast
-condition: F median $0.0078$ $[0.0066, 0.0100]$; R (below) $0.0241$
+one-sample Wilcoxon signed-rank), the pull is positive in all three
+non-truth signal conditions evaluated here (it is undefined for C, whose
+broadcast equals the state): F median $0.0078$ $[0.0066, 0.0100]$; R (below) $0.0241$
 $[0.0197, 0.0265]$ (both $p\!\approx\!1.9\times10^{-9}$); N $0.0021$
 $[0.0009, 0.0038]$ ($p\!\approx\!10^{-3}$). Decomposed by
 component, the aggregate pull is carried chiefly by the turnover
@@ -378,7 +379,7 @@ less hub-dominated than the silent one.
 \includegraphics[width=\textwidth]{sweep_summary.png}
 \caption{Sensitivity sweep (40\% hub-removal shock; 20 seeds per cell;
 medians). Left: evolved change in mean global sensitivity $\gamma$ ---
-attention to the self-model declines in proportion to broadcast
+attention to the self-model declines more strongly with increasing broadcast
 unreliability and gain; the flattering (utopia) lie tracks the no-feedback
 baseline exactly. Middle: story pull toward the broadcast. Right: cooperation
 rate.}
@@ -560,8 +561,8 @@ than noise --- with realistically structured descriptions steering strongest
 --- while under conformist responses noise steers as strongly as an inverted
 lie; (iii) which lies come true is set by the lie--response pair, not the lie
 alone; and (iv) heritable attention to the collective self-model declines
-across generations in proportion to the self-model's unreliability and
-impact, making a population's trust in its own self-model an evolving
+across generations, more strongly with increasing self-model unreliability
+and impact, making a population's trust in its own self-model an evolving
 quantity --- one that unreliable observers spend down. Future work:
 continuity under total population turnover, learned response policies, and
 language-model agents.

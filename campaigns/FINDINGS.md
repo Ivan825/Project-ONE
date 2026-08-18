@@ -3,7 +3,9 @@
 **Evidence base: 927 runs** (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
 3 feedback gains, harsh shock). All runs 4000 steps, deterministic, seed-replayable.
-Statistics: Mann-Whitney U, Cliff's δ. Raw runs regenerable via `scripts/campaign.py`.
+Statistics: PAIRED Wilcoxon signed-rank on per-seed differences (primary) with
+matched-pairs rank-biserial r and bootstrap CIs; Mann-Whitney U / Cliff's δ
+retained as robustness checks. Raw runs regenerable via `scripts/campaign.py`.
 
 ## Finding 1 — Measurement alone is causally inert (twice replicated)
 Condition B (observed but blind) is trajectory-identical to A under paired seeds:
@@ -20,7 +22,8 @@ noise by ~7×; at high gain noise itself starts to steer.
 
 ## Finding 3 — Populations fed lies evolve to stop listening (dose-response)
 Global-sensitivity (heritable attention to the broadcast) declines across
-generations in proportion to how misleading and how loud the broadcast is. Δ mean trait, end−start
+generations, more strongly the more misleading and the louder the broadcast
+is. Δ mean trait, end−start
 (harsh shock, g=0.8): no feedback −0.03 (neutral drift) · truth −0.10 ·
 noise −0.30 · lie −0.42 (δ = −0.94, p ≈ 4e-10 vs baseline). The sweep shows a
 clean dose-response: distrust of the lie deepens from −0.11 (g=0.2) to −0.45
@@ -62,7 +65,9 @@ regrowth) rather than informational. Reported as observed.
 ## Paper-ready headline
 Short run: a false self-model steers the collective (Finding 2), with the
 direction and force depending on the *kind* of lie (Finding 4). Long run:
-selection removes attention to unreliable self-models (Finding 3). Together:
+heritable attention to unreliable self-models declines across generations
+(Finding 3; the individual-level pathway is open — see the mechanism note).
+Together:
 self-model feedback is a real causal channel whose credibility is itself an
 evolving property of the system.
 

@@ -18,7 +18,7 @@ local actions → global condition → measurement → self-model → broadcast 
 
 **Which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10) and the flattering lie becomes benevolently self-fulfilling (highest cooperation observed).
 
-**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; its population mean declines across generations in proportion to broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering, and the pathway is not a simple fecundity gradient (see FINDINGS).
+**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; its population mean declines across generations, more strongly with increasing broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering, and the pathway is not a simple fecundity gradient (see FINDINGS).
 
 ![Evolution of distrust](campaigns/harsh_shock/fig8_trait_evolution.png)
 
