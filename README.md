@@ -18,7 +18,7 @@ local actions → global condition → measurement → self-model → broadcast 
 
 **What broadcasts DO change is behavior and structure — and which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert; broadcasts densify and decentralize the network. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation.
 
-**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait; its population mean declines across generations, more strongly with increasing broadcast unreliability and volume — false (δ = −0.94) > noise > truth > silence — with a clean dose-response in feedback gain. Nobody programmed that ordering, and the pathway is not a simple fecundity gradient (see FINDINGS).
+**Populations fed lies evolve to stop listening.** Attention to the broadcast is a heritable trait, and its population mean declines across generations — false (δ = −0.94) > noise > truth > silence, with a clean dose-response in feedback gain. The categorical ordering compresses into one continuous relationship: evolved attention strongly tracks the *broadcast-implied corrective-drive intensity* across the gain sweep (Spearman ρ = −0.99 over 15 cells; −0.83 at run level, n = 300). Nobody programmed that ordering; trust in the observer is not updated by any rule, it evolves. The individual-level pathway is not a simple fecundity gradient, and the intensity relationship is descriptive rather than causal mediation (see FINDINGS).
 
 ![Evolution of distrust](campaigns/harsh_shock/fig8_trait_evolution.png)
 
@@ -52,7 +52,7 @@ Every run is deterministic given (config, seed); state hashes verify replay acro
 | N — Noise feedback | on | matched-range random signal |
 | R — Replayed self-model | on | genuine S(t) trajectory of another run |
 
-Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcome families; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); passive-counterfactual nulls for the story-pull statistic; a dedicated signal-RNG stream so conditions differ only in signal content; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
+Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcome families; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); passive-counterfactual nulls for the story-pull statistic; a dedicated signal-RNG stream, so constructing the noise signal never advances the behavioral PRNG; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
 ## Paper
 

@@ -11,8 +11,10 @@ CIs; Mann-Whitney U / Cliff's δ retained as robustness checks. Raw runs
 regenerable via `scripts/campaign.py`.
 
 **RNG note (Aug 2026 revision):** broadcast-signal generation now uses a
-dedicated RNG stream (`signal_rng`), so conditions differ only in signal
-CONTENT and never in behavioral-RNG consumption. Non-noise conditions are
+dedicated RNG stream (`signal_rng`), so constructing the noise signal never
+advances the behavioral PRNG. (Once treatments alter agent actions, different
+action branches naturally consume different subsequent behavioral draws —
+that is the treatment effect, not a confound.) Non-noise conditions are
 bit-identical to the single-stream implementation (verified by state hash);
 all N cells were regenerated under the two-stream scheme.
 
@@ -44,15 +46,34 @@ Supporting facts: F keeps 4/5 corrective rules active ≥90% of ticks while R is
 mostly quiescent (mean |b−s|: 0.64 F / 0.36 N / 0.10 R) yet shows the largest
 raw pull; excluding the shock transition changes medians <2%.
 
-## Finding 3 — Populations fed lies evolve to stop listening (dose-response)
+## Finding 3 — Populations fed lies evolve to stop listening (dose-ordered)
 Global-sensitivity (heritable attention to the broadcast) declines across
-generations, more strongly the more misleading and the louder the broadcast
-is. Δ mean trait, end−start (harsh shock, g=0.8): no feedback −0.03 (neutral
-drift) · truth −0.10 (r=−0.59, p=0.004) · noise −0.34 (r=−0.94, p≈2e-7) ·
-lie −0.42 (r=−1.00, p≈2e-9). The sweep shows a clean dose-response: the
+generations. Δ mean trait, end−start (harsh shock, g=0.8): no feedback −0.03
+(neutral drift) · truth −0.10 (r=−0.59, p=0.004) · noise −0.34 (r=−0.94,
+p≈2e-7) · lie −0.42 (r=−1.00, p≈2e-9). The sweep is dose-ordered: the
 decline under the lie deepens from −0.12 (g=0.2) to −0.45 (g=1.6), and even
 TRUE feedback shows a marked decline at high gain (−0.24 at g=1.6). None of
-this ordering was programmed; it emerged from the evolutionary dynamics.
+this ordering was programmed; it emerged from the evolutionary dynamics —
+and unlike models where agents update trust from observed accuracy, here
+attention is inherited and mutated with no rule referencing reliability:
+trust is not updated, it evolves.
+
+**Intensity relationship (`scripts/attention_cost.py`,
+`campaigns/attention_cost.json`).** Veracity alone does not organize the
+response — the utopia lie is false yet produces no decline, while truthful
+feedback declines substantially at high gain. Defining the
+*broadcast-implied corrective-drive intensity* I = g·⟨Σ_a f_a(b(t))⟩
+(computable from the broadcast alone), evolved attention tracks I almost
+perfectly across the 15 sweep cells: Spearman ρ = −0.99 (run level −0.83,
+n=300; ρ = −0.99 with the zero-intensity utopia cells excluded, n=12). Utopia
+(I=0) is untouched; truth declines less where its corrective drive is
+smaller at equilibrium; unreliable high-drive broadcasts pay most.
+CAVEAT: I deliberately omits the per-agent factor γ_i — the very quantity
+under selection — and is computed from realized (already feedback-affected)
+trajectories rather than independently randomized ones. This relationship is
+therefore DESCRIPTIVE, not a causal mediation result; the paper states it
+at that level.
+
 Mechanism note: the individual-level pathway is NOT a simple fecundity
 gradient — within-run ρ(γ_i, offspring count) ≈ +0.05 under F, the decline
 persists without the shock (−0.40 no-shock vs −0.39 with), and shock victims'
@@ -99,8 +120,9 @@ reality toward the story. Apparent self-fulfilling steering vanishes against
 a passive counterfactual (Finding 2, a caution for empirical performativity
 claims). What broadcasts really change is behavior and structure, with the
 lie–response pair deciding which lies come true (Findings 4–6). Long run:
-heritable attention to unreliable self-models declines across generations
-(Finding 3; individual-level pathway open). Together: self-model feedback is
+heritable attention declines across generations, tracking broadcast-implied
+corrective-drive intensity (Finding 3; individual-level pathway open, and
+the intensity relationship descriptive). Together: self-model feedback is
 a real causal channel whose credibility is itself an evolving property of
 the system.
 
