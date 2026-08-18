@@ -55,6 +55,10 @@ class Config:
     #   "corrective"  - repair reported deficits (default)
     #   "conformist"  - imitate the reported norm
     response_mode: str = "corrective"
+    # Condition R: broadcast a replayed self-model trajectory (recorded from a
+    # different seed's observed-but-blind run) — realistic structure, no
+    # self-reference. List of per-tick broadcast dicts.
+    replay_trajectory: list | None = None
     snapshot_interval: int = 50          # steps between stored network snapshots (0 disables)
 
     # Shock (disturbance experiment); step<=0 disables.

@@ -67,8 +67,13 @@ class Simulation:
         if cfg.condition != "A" and self.t % cfg.observer_interval == 0:
             s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events)
             self.global_memory.append(s_t)
-            self.current_broadcast = make_broadcast(
-                cfg.condition, s_t, self.rng, cfg.distortion)
+            if cfg.condition == "R":
+                idx = min(len(self.broadcast_memory),
+                          len(cfg.replay_trajectory) - 1)
+                self.current_broadcast = cfg.replay_trajectory[idx]
+            else:
+                self.current_broadcast = make_broadcast(
+                    cfg.condition, s_t, self.rng, cfg.distortion)
             self.broadcast_memory.append(self.current_broadcast)
             if self.current_broadcast is not None:
                 for aid in sorted(self.live_ids):

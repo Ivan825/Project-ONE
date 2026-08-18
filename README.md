@@ -10,11 +10,11 @@ Project ONE is a controlled, fully reproducible laboratory for *recursive self-m
 local actions → global condition → measurement → self-model → broadcast → changed local actions
 ```
 
-## Headline findings (1,092 runs, pre-registered outcomes)
+## Headline findings (927 runs, pre-specified outcomes)
 
 **Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — Cliff's δ = 0.000 on every outcome, twice replicated. Only the *broadcast* has causal power.
 
-**A false self-model pulls reality toward itself.** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (δ = 0.76–0.85, p ≈ 10⁻⁸–10⁻¹¹). A quiet, systematic lie out-steers loud noise ~7× at low gain.
+**A false self-model pulls reality toward itself.** Macrostate movement toward the broadcast ("story pull") exceeds the matched-noise control at every feedback gain tested (paired rank-biserial r = 0.84–0.88, p ≈ 10⁻⁶–10⁻⁸), and a replayed *genuine* self-model from another run — a plausible false description — steers hardest of all: steering power is graded by plausibility. A quiet, systematic lie out-steers loud noise ~7× at low gain.
 
 **Which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10) and the flattering lie becomes benevolently self-fulfilling (highest cooperation observed).
 
@@ -50,8 +50,9 @@ Every run is deterministic given (config, seed); state hashes verify replay acro
 | C — True feedback | on | accurate S(t) |
 | F — False feedback | on | distorted S(t): invert / crisis / utopia |
 | N — Noise feedback | on | matched-bandwidth random signal |
+| R — Replayed self-model | on | genuine S(t) trajectory of another run |
 
-Paired seeds across conditions; standardized hub-removal shocks; four pre-registered outcomes; Mann–Whitney U + Cliff's δ; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
+Paired seeds across conditions; standardized hub-removal shocks; four pre-specified outcomes; paired Wilcoxon signed-rank primary analysis (Mann–Whitney U + Cliff's δ as robustness); robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
 ## Paper
 

@@ -1,6 +1,6 @@
 # Project ONE — Consolidated findings across all campaigns (Aug 17, 2026)
 
-**Evidence base: 970 runs.** Flagship (5 conditions × 50 paired seeds, mild shock),
+**Evidence base: 927 runs** (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
 3 feedback gains, harsh shock). All runs 4000 steps, deterministic, seed-replayable.
 Statistics: Mann-Whitney U, Cliff's δ. Raw runs regenerable via `scripts/campaign.py`.
@@ -57,3 +57,20 @@ direction and force depending on the *kind* of lie (Finding 4). Long run:
 selection removes attention to unreliable self-models (Finding 3). Together:
 self-model feedback is a real causal channel whose credibility is itself an
 evolving property of the system.
+
+## Finding 7 — Plausibility grades the steering channel (replay control)
+Broadcasting a replayed GENUINE self-model from a different seed's blind run
+(condition R: realistic structure, no self-reference) steers hardest of all:
+story pull R=0.024 > F=0.008 > N=0.002, with perfect paired separation on both
+comparisons (|r|=1.00, p~2e-9). R is also a false description — a plausible
+one. Steering power is graded by plausibility of the description, and even the
+adversarial inverted lie far out-steers unstructured noise.
+
+## Statistics note (Aug 18 revision)
+Primary analysis switched to PAIRED Wilcoxon signed-rank on per-seed
+differences (the design is paired by seed) with matched-pairs rank-biserial r
+and bootstrap CIs; Mann-Whitney/Cliff's delta retained as robustness check.
+All headline effects strengthened under pairing (cooperation C vs A r=1.00;
+distrust F vs A r=-1.00; B vs A: every per-seed difference exactly zero).
+One honest weakening: the harsh-shock fragmentation spillover (F vs A) is
+directionally consistent but not significant under pairing (p=0.28).

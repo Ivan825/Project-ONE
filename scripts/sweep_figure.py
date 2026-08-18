@@ -48,7 +48,7 @@ def main():
               ("story_pull", "Pull of the macrostate toward the broadcast",
                "signed movement per tick"),
               ("cooperation_rate", "Cooperation rate", "costly helping per capita")]
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4.0), dpi=150)
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.6), dpi=150)
     for ax, (key, title, ylab) in zip(axes, panels):
         for tok in ("A", "C", "F:invert", "F:crisis", "F:utopia", "N"):
             if tok not in data:
@@ -60,16 +60,18 @@ def main():
             ax.plot(xs, ys, marker="o", markersize=5, linewidth=1.8,
                     color=COLOR[tok], label=LABEL[tok])
         ax.axhline(0, color="#8a8880", linewidth=0.8, linestyle=":")
-        ax.set_title(title, fontsize=10, loc="left")
-        ax.set_xlabel("feedback gain", fontsize=9)
-        ax.set_ylabel(ylab, fontsize=9)
+        ax.set_title(title, fontsize=12, loc="left")
+        ax.set_xlabel("feedback gain", fontsize=11)
+        ax.set_ylabel(ylab, fontsize=11)
         ax.grid(color="#e4e2dc", linewidth=0.6)
         ax.set_axisbelow(True)
         for sp in ("top", "right"):
             ax.spines[sp].set_visible(False)
-    axes[0].legend(fontsize=7.5, frameon=False)
+    axes[0].legend(fontsize=9.5, frameon=False)
+    for ax in axes:
+        ax.tick_params(labelsize=10)
     fig.suptitle("Sensitivity sweep: 40% hub-removal shock, 20 seeds per cell",
-                 fontsize=10, x=0.01, ha="left", color="#52514e")
+                 fontsize=11, x=0.01, ha="left", color="#52514e")
     fig.tight_layout()
     fig.savefig(args.out)
     print(f"wrote {args.out}")

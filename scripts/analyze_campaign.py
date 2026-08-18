@@ -26,15 +26,17 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from scipy.stats import mannwhitneyu
+import numpy as np
+from scipy.stats import mannwhitneyu, wilcoxon
 
 BROADCAST_KEYS = ("fragmentation", "centralization", "cooperation",
                   "inequality", "turnover")
-COND_ORDER = ["A", "B", "C", "F", "F:invert", "F:crisis", "F:utopia", "N"]
+COND_ORDER = ["A", "B", "C", "F", "F:invert", "F:crisis", "F:utopia", "N", "R"]
 COND_COLOR = {"A": "#2a78d6", "B": "#eb6834", "C": "#1baf7a",
-              "F": "#eda100", "N": "#e87ba4"}
+              "F": "#eda100", "N": "#e87ba4", "R": "#4a3aa7"}
 COND_LABEL = {"A": "A local only", "B": "B observed blind", "C": "C true feedback",
-              "F": "F false feedback", "N": "N noise feedback"}
+              "F": "F false feedback", "N": "N noise feedback",
+              "R": "R replayed self-model"}
 TRANSIENT = 500
 
 
@@ -114,6 +116,77 @@ def outcomes(run):
         "trait_gs_delta": (gs1 - gs0) if gs0 is not None and gs1 is not None else None,
         "final_population": run["final_population"],
     }
+
+
+def paired_compare(rows, key, ref="A", conds=None, n_boot=10000):
+    """Primary analysis: Wilcoxon signed-rank on per-seed differences (the
+    design is paired by seed), with matched-pairs rank-biserial correlation
+    and a bootstrap 95% CI on the median difference. Mann-Whitney/Cliff's
+    delta are retained separately as an unpaired robustness check."""
+    by = {}
+    for r in rows:
+        if r[key] is None:
+            continue
+        by.setdefault(r["condition"], {})[r["seed"]] = r[key]
+    out = {}
+    base = by.get(ref, {})
+    rng = np.random.RandomState(0)
+    for cond, vals in by.items():
+        if cond == ref or (conds and cond not in conds):
+            continue
+        seeds = sorted(set(vals) & set(base))
+        if len(seeds) < 5:
+            continue
+        d = np.array([vals[s] - base[s] for s in seeds])
+        if np.allclose(d, 0):
+            out[f"{cond}_vs_{ref}"] = {
+                "n_pairs": len(seeds), "median_diff": 0.0,
+                "ci95": [0.0, 0.0], "wilcoxon_p": 1.0, "rank_biserial": 0.0,
+                "note": "all per-seed differences exactly zero"}
+            continue
+        nz = d[d != 0]
+        try:
+            _, p = wilcoxon(nz, alternative="two-sided", mode="auto")
+        except ValueError:
+            p = 1.0
+        ranks = np.argsort(np.argsort(np.abs(nz))) + 1.0
+        rb = (ranks[nz > 0].sum() - ranks[nz < 0].sum()) / ranks.sum()
+        boots = np.median(rng.choice(d, size=(n_boot, len(d)), replace=True), axis=1)
+        out[f"{cond}_vs_{ref}"] = {
+            "n_pairs": len(seeds),
+            "median_diff": float(np.median(d)),
+            "ci95": [float(np.percentile(boots, 2.5)),
+                     float(np.percentile(boots, 97.5))],
+            "wilcoxon_p": float(p),
+            "rank_biserial": float(rb),
+        }
+    return out
+
+
+def story_pull_components(runs):
+    """Median per-component story pull across runs, per condition token."""
+    comp = {}
+    for run in runs:
+        bl = run.get("broadcasts") or []
+        if not any(b is not None for b in bl):
+            continue
+        g = run["globals"]
+        per_key = {}
+        for i in range(len(g) - 1):
+            b = bl[i] if i < len(bl) else None
+            if b is None:
+                continue
+            for k in BROADCAST_KEYS:
+                gap = b[k] - g[i][k]
+                if abs(gap) > 0.02:
+                    step = g[i + 1][k] - g[i][k]
+                    per_key.setdefault(k, []).append(step if gap > 0 else -step)
+        tok = token_of(run)
+        for k, moves in per_key.items():
+            comp.setdefault(tok, {}).setdefault(k, []).append(
+                sum(moves) / len(moves))
+    return {tok: {k: _med(v) for k, v in keys.items()}
+            for tok, keys in comp.items()}
 
 
 def cliffs_delta(a, b):
@@ -222,6 +295,14 @@ def main():
     shock = runs[0]["shock_step"]
     results = {
         "n_runs": len(runs),
+        "paired_primary": {
+            "recovery_time_90": paired_compare(rows, "recovery_time_90"),
+            "fragmentation_post": paired_compare(rows, "fragmentation_post"),
+            "cooperation_rate": paired_compare(rows, "cooperation_rate"),
+            "story_pull": paired_compare(rows, "story_pull", ref="N"),
+            "trait_gs_delta": paired_compare(rows, "trait_gs_delta"),
+        },
+        "story_pull_components": story_pull_components(runs),
         "recovery_time_90": compare("recovery", grp("recovery_time_90")),
         "fragmentation_post": compare("frag", grp("fragmentation_post")),
         "cooperation_rate": compare("coop", grp("cooperation_rate")),
