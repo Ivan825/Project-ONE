@@ -279,20 +279,27 @@ averaged over all qualifying (tick, component) pairs across the five
 broadcast components; $P>0$ means the macrostate moves toward the reference
 where the two differ. The threshold
 $\varepsilon$ makes $P$ well defined under false and noise broadcasts (and
-undefined for C, whose broadcast equals the current state). Eq.~\ref{eq:pull} is a directional refinement, introduced after the first
-campaign, of the pre-specified correspondence outcome, whose original
-distance-based form is degenerate under truthful feedback; both give the
-same raw F-vs-N ordering. Crucially, $P$ can also be evaluated on
+undefined for C, whose broadcast equals the current state).
+
+\paragraph{Outcome pre-specification.} The four families above were frozen
+before the first campaign. Eq.~\ref{eq:pull} is a \emph{post hoc}
+directional refinement of the fourth (self-model correspondence), adopted
+because the original distance-based form is degenerate under truthful
+feedback; both yield the same raw F-vs-N ordering. No pre-specified outcome
+was dropped, and all other reported measures --- including the evolved trait
+change --- are exploratory.
+
+\paragraph{Passive counterfactual.} Crucially, $P$ can also be evaluated on
 trajectories that never received the reference: for each treated run we
 compute $P$ on the paired-seed \emph{untreated} trajectory (A/B) scored
 against a matched reference of the same type, defining the \emph{counterfactual performativity gap}
 $\Delta P = P_{\mathrm{actual}} - P_{\mathrm{passive}}$
 (Sect.~\ref{sec:pull}). Campaigns: a \emph{flagship} run (conditions
 A/B/C/F$_{\mathrm{invert}}$/N $\times$ 50 paired seeds, mild shock), a
-\emph{harsh-shock} replication (removal of 40\% of hubs, $\times$30 seeds), and
+\emph{harsh-shock} replication (40\% hub removal, $\times$30 seeds),
 a \emph{sensitivity sweep} (feedback gain $g\in\{0.2,0.8,1.6\}$ $\times$
 \{A, C, F$_{\mathrm{invert}}$, F$_{\mathrm{crisis}}$, F$_{\mathrm{utopia}}$,
-N\} $\times$ 20 seeds), a $2\times$ \emph{scale check} (doubled population and resources), a conformist \emph{response-regime campaign} (15 seeds per cell), and a \emph{replay control} (30 receiving runs paired with the harsh-shock seed list, plus 15 auxiliary source runs that generate the replayed trajectories): the core campaigns comprise $250+150+360+90+32+30+15 = 927$ runs of 3{,}000--4{,}000 steps; the reproduction-neutral control (Sect.~5.5) adds 300, for 1{,}227 in total. Because conditions share seed lists the design is paired; the primary
+N\} $\times$ 20 seeds), a $2\times$ \emph{scale check} (doubled population and resources), a conformist \emph{response-regime campaign} (15 seeds per cell), and a \emph{replay control} (30 receiving runs on the harsh-shock seed list plus 15 auxiliary source runs): the core campaigns comprise $250+150+360+90+32+30+15 = 927$ runs of 3{,}000--4{,}000 steps; the reproduction-neutral control (Sect.~5.5) adds 300, for 1{,}227 in total. Because conditions share seed lists the design is paired; the primary
 analysis is a Wilcoxon signed-rank test on per-seed differences with
 matched-pairs rank-biserial $r$ and a bootstrap 95\% CI on the median
 difference. Unpaired Mann--Whitney $U$ with Cliff's $\delta$ is a secondary

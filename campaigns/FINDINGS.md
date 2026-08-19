@@ -148,7 +148,7 @@ the intensity relationship descriptive). Together: self-model feedback is
 a real causal channel whose credibility is itself an evolving property of
 the system.
 
-## Pre-specification disclosure
+## Pre-specification disclosure (also stated as a labelled paragraph in the paper's Methods)
 Four outcome FAMILIES were frozen in docs/PLAN.md before the first campaign
 (recovery, fragmentation, cooperation, self-model correspondence). The
 story-pull statistic is a later directional refinement of the correspondence
