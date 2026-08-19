@@ -113,7 +113,10 @@ utopia +0.006 unchanged; the intensity correlation STRENGTHENS
 (ρ = −0.993 → −1.000, 15 cells). One of fifteen cells shows a significant
 paired shift (N@g0.8, p = 0.033) — at α = 0.05 across 15 cells this is what
 chance produces, and it is a partial ATTENUATION of a decline that still
-retains 77% of its magnitude, not a reversal. Conclusion: the γ-in-pruning
+retains 77% of its magnitude, not a reversal. The paper discloses this cell
+explicitly rather than summarising the controls as "neither changes the
+result"; the intensity ordering tightens under the control (ρ vs I:
+−0.993 → −1.000), so the disclosed cell does not disturb it. Conclusion: the γ-in-pruning
 asymmetry does not manufacture the evolutionary result either. Cells where
 γ never enters pruning (C and F:utopia, whose broadcasts never report
 centralization > 0.6) are bit-identical by construction, as expected.
