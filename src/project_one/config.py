@@ -65,6 +65,13 @@ class Config:
     # feedback effect on the other actions. Isolates ecological selection on
     # global_sensitivity from the direct reproductive-opportunity cost.
     reproduction_neutral: bool = False
+    # Second robustness control for the evolutionary result. Hub-targeted
+    # pruning normally fires with probability gamma_i (NOT gamma_i * g), giving
+    # receiver sensitivity a second, differently-scaled behavioral channel.
+    # With pruning_gamma_free=True that probability is fixed at 0.5 for every
+    # agent, removing gamma's influence on target selection while preserving
+    # the mechanism itself and consuming the identical RNG draw.
+    pruning_gamma_free: bool = False
     # Condition R: broadcast a replayed self-model trajectory (recorded from a
     # different seed's observed-but-blind run) — realistic structure, no
     # self-reference. List of per-tick broadcast dicts.

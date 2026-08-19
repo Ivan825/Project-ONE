@@ -24,7 +24,7 @@ CONDITIONS = ["A", "B", "C", "F", "N"]
 
 def one_run(args):
     (token, seed, steps, shock_step, distortion, gain, shock_frac, rmode,
-     repro_neutral, outdir) = args
+     repro_neutral, prune_free, outdir) = args
     # A condition token may carry its own distortion mode, e.g. "F:crisis".
     cond, _, tok_dist = token.partition(":")
     if tok_dist:
@@ -33,13 +33,15 @@ def one_run(args):
     cfg = Config(condition=cond, distortion=distortion, steps=steps,
                  shock_step=shock_step, shock_fraction=shock_frac,
                  feedback_gain=gain, response_mode=rmode,
-                 reproduction_neutral=repro_neutral, snapshot_interval=0)
+                 reproduction_neutral=repro_neutral,
+                 pruning_gamma_free=prune_free, snapshot_interval=0)
     sim = Simulation(cfg, seed=seed)
     sim.run()
     summary = {
         "condition": cond, "token": token, "seed": seed, "steps": steps,
         "feedback_gain": gain, "shock_fraction": shock_frac,
         "response_mode": rmode, "reproduction_neutral": repro_neutral,
+        "pruning_gamma_free": prune_free,
         "shock_step": shock_step, "distortion": distortion if cond == "F" else None,
         "observer_interval": cfg.observer_interval,
         "final_population": sim.population(),
@@ -68,6 +70,8 @@ def main():
                     choices=["corrective", "conformist"])
     ap.add_argument("--reproduction-neutral", action="store_true",
                     help="hold P(reproduce) invariant to feedback (robustness control)")
+    ap.add_argument("--pruning-gamma-free", action="store_true",
+                    help="fix hub-pruning probability at 0.5 (robustness control)")
     ap.add_argument("--out", default="campaigns/flagship")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 1))
     args = ap.parse_args()
@@ -81,6 +85,7 @@ def main():
         "distortion": args.distortion, "feedback_gain": args.gain,
         "shock_fraction": args.shock_fraction, "response_mode": args.response_mode,
         "reproduction_neutral": args.reproduction_neutral,
+        "pruning_gamma_free": args.pruning_gamma_free,
         "primary_outcomes": [
             "recovery_time_90 (population, post-shock)",
             "fragmentation_post (mean, post-shock)",
@@ -93,7 +98,7 @@ def main():
 
     jobs = [(c, s, args.steps, args.shock_step, args.distortion,
              args.gain, args.shock_fraction, args.response_mode,
-             args.reproduction_neutral, args.out)
+             args.reproduction_neutral, args.pruning_gamma_free, args.out)
             for c in conditions for s in range(1, args.seeds + 1)]
     # Skip already-completed runs so the campaign is resumable.
     jobs = [j for j in jobs if not os.path.exists(

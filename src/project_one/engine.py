@@ -147,8 +147,10 @@ class Simulation:
             if nbrs:
                 # Under high reported centralization, preferentially drop hub ties.
                 bc = agent.received_global
-                if bc and bc.get("centralization", 0) > 0.6 and self.rng.random() < \
-                        agent.traits["global_sensitivity"]:
+                p_hub = (0.5 if cfg.pruning_gamma_free
+                         else agent.traits["global_sensitivity"])
+                if bc and bc.get("centralization", 0) > 0.6 and \
+                        self.rng.random() < p_hub:
                     target = max(nbrs, key=lambda n: (self.graph.degree(n), n))
                 else:
                     target = self.rng.choice(nbrs)

@@ -1,6 +1,6 @@
 # Project ONE — Consolidated findings across all campaigns (Aug 2026)
 
-**Evidence base: 927 core runs + 300 reproduction-neutral control runs = 1,227 total.** Core campaigns: (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
+**Evidence base: 927 core runs + 300 reproduction-neutral + 300 γ-free-pruning control runs = 1,527 total.** Core campaigns: (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
 3 feedback gains, harsh shock). Runs are 3000–4000 steps (the 2× scale
 campaign uses 3000 steps with shock at t=1500; all others shock at t=2000),
@@ -36,7 +36,7 @@ source-clustered bootstrap). BUT scoring untreated paired-seed trajectories
 (A/B) against the same reference types post hoc yields LARGER values: passive
 medians 0.012 (invert), 0.030 (replay), 0.007 (noise). Per-condition causal
 effects ΔP = P_actual − P_passive are uniformly negative (−0.004 to −0.006,
-each p ≤ 1e-5) and between-condition contrasts of ΔP are null in BOTH
+each p < 2e-5) and between-condition contrasts of ΔP are null in BOTH
 campaigns (F vs N: harsh p=0.084, flagship p=0.63; R vs N p=0.95).
 Conclusion: no evidence of content-specific attraction of the macrostate
 toward broadcast content; raw P is dominated by intrinsic dynamics (post-shock
@@ -46,7 +46,8 @@ beats noise" steering findings are superseded by this analysis
 (`scripts/passive_null_checks.py`, `campaigns/passive_null_checks.json`).
 Supporting facts: F keeps 4/5 corrective rules active ≥90% of ticks while R is
 mostly quiescent (mean |b−s|: 0.64 F / 0.36 N / 0.10 R) yet shows the largest
-raw pull; excluding the shock transition changes medians <2%.
+raw pull; excluding the shock transition shifts every median by <0.0004 absolute
+(relative: −1.5% R, −2.6% F, −10% N) and changes no conclusion.
 
 ## Finding 3 — Attention declines under consequential broadcasts (dose-ordered)
 Global-sensitivity (heritable attention to the broadcast) declines across
@@ -96,12 +97,48 @@ artifact. Conclusion: selection on γ is ecological, not a direct
 reproductive-opportunity cost. (With the flag off the engine reproduces all
 stored campaign state hashes bit-for-bit.)
 
-Mechanism note: the remaining individual-level pathway is not explained by a
-simple NEGATIVE MARGINAL fecundity gradient — within-run ρ(γ_i, offspring count) ≈ +0.05 under F, the decline
-persists without the shock (−0.40 no-shock vs −0.39 with), and shock victims'
-mean γ is only +0.03 above the population mean. The pathway plausibly runs
-through lineage survival / energy budgets downstream of reproduction;
-identifying it precisely is an open item (reported honestly in the paper).
+**γ-free pruning control (`PO_VARIANT=pgf scripts/reproduction_neutral_check.py`,
+`campaigns/pruning_gamma_free_check.json`, campaigns/pgf_g*).** A second
+architectural asymmetry: hub-targeted pruning fires with probability γ_i, NOT
+γ_i·g — so receiver sensitivity has a second behavioral channel on a
+different scale from every other feedback response, and one that acts
+directly on network structure. Controlled by fixing that probability at 0.5
+for every agent (config flag `pruning_gamma_free=True`), which removes γ's
+influence on pruning-target selection while preserving the mechanism and
+consuming the identical RNG draw. Rerunning the full sweep (300 runs): median
+retention **100%** across all twelve cells with a negative baseline Δγ̄ (100%
+across the ten with Δγ̄ < −0.05); at g=0.8 invert −0.410→−0.374,
+crisis −0.449→−0.443, noise −0.348→−0.270, truth −0.087 unchanged,
+utopia +0.006 unchanged; the intensity correlation STRENGTHENS
+(ρ = −0.993 → −1.000, 15 cells). One of fifteen cells shows a significant
+paired shift (N@g0.8, p = 0.033) — at α = 0.05 across 15 cells this is what
+chance produces, and it is a partial ATTENUATION of a decline that still
+retains 77% of its magnitude, not a reversal. Conclusion: the γ-in-pruning
+asymmetry does not manufacture the evolutionary result either. Cells where
+γ never enters pruning (C and F:utopia, whose broadcasts never report
+centralization > 0.6) are bit-identical by construction, as expected.
+
+**Mechanism note (`scripts/selection_mechanism.py`,
+`campaigns/selection_mechanism.json`; 5 seeds, harsh shock, g=0.8, medians
+over seeds).** The remaining individual-level pathway is not explained by
+either simple candidate:
+
+- NOT a negative marginal fecundity gradient. Within-run
+  ρ(γ_i, lifetime offspring) over all agents reaching reproductive age is
+  **+0.093 under F:invert** — the very condition where γ falls fastest —
+  against −0.052 under A (no broadcast) and +0.014 under C. If anything,
+  high-γ agents out-reproduce inside a run; the decline is not a fecundity
+  penalty.
+- NOT shock mortality. Shock victims' mean γ exceeds the mean of the
+  population alive at the shock by only +0.027, and disabling the shock
+  entirely leaves the decline intact (−0.404 no-shock vs −0.391 with).
+
+Lineage depth: max generation reached is 21–22 and mean generation among
+survivors ≈ 16–17, which is the basis for the paper's "~20 generations"
+(NOT ~40 — an earlier draft conflated population replacements with lineage
+depth). The pathway plausibly runs through lineage survival / energy budgets
+downstream of reproduction; identifying it precisely is an open item
+(reported as open in the paper).
 
 ## Finding 4 — Not all lies are equal (outcome space, corrective regime)
 - **Inverted lie**: keeps 4/5 corrective rules persistently active; mobilizes
@@ -131,10 +168,20 @@ flatten the network (mean degree +1.1 truth / +3.8 lie / +2.8 noise; Freeman
 centralization and betweenness concentration fall under lie and noise).
 
 ## Finding 7 — Pre-specified null: no detected feedback effect on recovery time
-Even removing 40% of hubs, median population recovery is ~40 steps in every
-condition (all p > 0.12): we detected no evidence of a feedback effect on
-recovery time. Within the regimes tested, resilience appears demographic
-(fast regrowth) rather than informational. Reported as observed.
+In BOTH main campaigns, every paired Δmedian is exactly 0 and every p > 0.22:
+flagship medians 10 steps (15 under F), harsh-shock medians 40 steps in every
+condition even with 40% of hubs removed. Within the regimes tested, resilience
+appears demographic (fast regrowth) rather than informational.
+
+ONE CONTRARY LEAD, reported rather than buried: in the 2× scale campaign
+F:invert vs A gives Δmedian +10 steps with all five non-tied pairs moving the
+same way (tie-corrected r = +1.00, p = 0.0625). With n = 8 pairs, 0.0625 is
+the SMALLEST p a two-sided Wilcoxon signed-rank can return, so this cannot
+reach α = 0.05 by construction — it is neither significant nor dismissible.
+It does not replicate at base scale (flagship F p = 0.32, harsh-shock F
+p = 0.46). Treat as a lead for a larger-n scale campaign, not a result. The
+paper states it in these terms rather than claiming the null holds "in any
+condition or campaign" (an earlier draft did, and that was too strong).
 
 ## Paper-ready headline
 Being measured changes nothing; being told changes much — but not by pulling

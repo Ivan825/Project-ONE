@@ -1,0 +1,220 @@
+{
+ "config": {
+  "steps": 4000,
+  "shock_step": 2000,
+  "shock_fraction": 0.4,
+  "feedback_gain": 0.8,
+  "snapshot_interval": 0
+ },
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "conditions": {
+  "A": {
+   "per_seed": [
+    {
+     "max_generation": 20,
+     "mean_generation_alive": 17.6984126984127,
+     "n_agents_ever": 4731,
+     "n_fertile": 4353,
+     "rho_gamma_offspring": -0.05212643253703821,
+     "p_rho": 0.0005806169495632946,
+     "shock_selectivity_gamma": -0.023956090938798913,
+     "n_shock_victims": 22,
+     "dgamma": 0.11560850418930269
+    },
+    {
+     "max_generation": 21,
+     "mean_generation_alive": 16.89830508474576,
+     "n_agents_ever": 4456,
+     "n_fertile": 4155,
+     "rho_gamma_offspring": -0.089780910672236,
+     "p_rho": 6.743830787185016e-09,
+     "shock_selectivity_gamma": -0.008186398958263008,
+     "n_shock_victims": 24,
+     "dgamma": 0.21552246685569593
+    },
+    {
+     "max_generation": 19,
+     "mean_generation_alive": 16.22222222222222,
+     "n_agents_ever": 4971,
+     "n_fertile": 4424,
+     "rho_gamma_offspring": -0.1000408492058327,
+     "p_rho": 2.5774980367741615e-11,
+     "shock_selectivity_gamma": -0.0049260908796847636,
+     "n_shock_victims": 23,
+     "dgamma": 0.27703011752475165
+    },
+    {
+     "max_generation": 19,
+     "mean_generation_alive": 16.887096774193548,
+     "n_agents_ever": 5018,
+     "n_fertile": 4373,
+     "rho_gamma_offspring": -0.025859700061093047,
+     "p_rho": 0.08729094780523103,
+     "shock_selectivity_gamma": 0.028677533229281238,
+     "n_shock_victims": 23,
+     "dgamma": 0.0361217626014908
+    },
+    {
+     "max_generation": 20,
+     "mean_generation_alive": 16.82456140350877,
+     "n_agents_ever": 5008,
+     "n_fertile": 4478,
+     "rho_gamma_offspring": 0.10355716552861098,
+     "p_rho": 3.7426867734514386e-12,
+     "shock_selectivity_gamma": 0.012541302847468738,
+     "n_shock_victims": 22,
+     "dgamma": -0.3484248534898574
+    }
+   ],
+   "max_generation": 21,
+   "median_mean_generation_alive": 16.887096774193548,
+   "median_rho_gamma_offspring": -0.05212643253703821,
+   "median_shock_selectivity": -0.0049260908796847636,
+   "median_dgamma": 0.11560850418930269
+  },
+  "C": {
+   "per_seed": [
+    {
+     "max_generation": 18,
+     "mean_generation_alive": 15.724137931034482,
+     "n_agents_ever": 4346,
+     "n_fertile": 3670,
+     "rho_gamma_offspring": 0.014363127913657417,
+     "p_rho": 0.38436910976398536,
+     "shock_selectivity_gamma": 0.01989527879109676,
+     "n_shock_victims": 24,
+     "dgamma": -0.07523975634942226
+    },
+    {
+     "max_generation": 17,
+     "mean_generation_alive": 13.622641509433961,
+     "n_agents_ever": 4145,
+     "n_fertile": 3563,
+     "rho_gamma_offspring": 0.00788054685314293,
+     "p_rho": 0.6381843117013049,
+     "shock_selectivity_gamma": -0.01904389611572166,
+     "n_shock_victims": 24,
+     "dgamma": 0.018522620095570874
+    },
+    {
+     "max_generation": 17,
+     "mean_generation_alive": 14.557377049180328,
+     "n_agents_ever": 4265,
+     "n_fertile": 3610,
+     "rho_gamma_offspring": 0.013573637800888855,
+     "p_rho": 0.41489846881082165,
+     "shock_selectivity_gamma": -0.009291826678590909,
+     "n_shock_victims": 24,
+     "dgamma": -0.0435358888603366
+    },
+    {
+     "max_generation": 21,
+     "mean_generation_alive": 17.833333333333332,
+     "n_agents_ever": 4701,
+     "n_fertile": 4020,
+     "rho_gamma_offspring": -0.03432614437129538,
+     "p_rho": 0.02952826620739039,
+     "shock_selectivity_gamma": -0.005071750078416204,
+     "n_shock_victims": 24,
+     "dgamma": 0.1241118846135616
+    },
+    {
+     "max_generation": 22,
+     "mean_generation_alive": 18.33823529411765,
+     "n_agents_ever": 4363,
+     "n_fertile": 3750,
+     "rho_gamma_offspring": 0.13174462278463353,
+     "p_rho": 5.481621181220015e-16,
+     "shock_selectivity_gamma": 0.03163873499132849,
+     "n_shock_victims": 22,
+     "dgamma": -0.3470404482689603
+    }
+   ],
+   "max_generation": 22,
+   "median_mean_generation_alive": 15.724137931034482,
+   "median_rho_gamma_offspring": 0.013573637800888855,
+   "median_shock_selectivity": -0.005071750078416204,
+   "median_dgamma": -0.0435358888603366
+  },
+  "F:invert": {
+   "per_seed": [
+    {
+     "max_generation": 19,
+     "mean_generation_alive": 14.733333333333333,
+     "n_agents_ever": 3754,
+     "n_fertile": 3486,
+     "rho_gamma_offspring": 0.07059414908793808,
+     "p_rho": 3.02261997876362e-05,
+     "shock_selectivity_gamma": 0.022489074647430718,
+     "n_shock_victims": 23,
+     "dgamma": -0.24169625789209284
+    },
+    {
+     "max_generation": 19,
+     "mean_generation_alive": 16.984375,
+     "n_agents_ever": 3888,
+     "n_fertile": 3505,
+     "rho_gamma_offspring": 0.10224751267451491,
+     "p_rho": 1.3023181265698568e-09,
+     "shock_selectivity_gamma": -0.008252121121146927,
+     "n_shock_victims": 23,
+     "dgamma": -0.40850163492947655
+    },
+    {
+     "max_generation": 16,
+     "mean_generation_alive": 14.05,
+     "n_agents_ever": 4024,
+     "n_fertile": 3592,
+     "rho_gamma_offspring": 0.09320643920314198,
+     "p_rho": 2.1883494868636013e-08,
+     "shock_selectivity_gamma": 0.06606344206514747,
+     "n_shock_victims": 23,
+     "dgamma": -0.3906490331726873
+    },
+    {
+     "max_generation": 20,
+     "mean_generation_alive": 17.0,
+     "n_agents_ever": 4005,
+     "n_fertile": 3387,
+     "rho_gamma_offspring": 0.09982116025434526,
+     "p_rho": 5.822188511514717e-09,
+     "shock_selectivity_gamma": 0.037128573605571535,
+     "n_shock_victims": 21,
+     "dgamma": -0.24294919019816466
+    },
+    {
+     "max_generation": 21,
+     "mean_generation_alive": 18.666666666666668,
+     "n_agents_ever": 4458,
+     "n_fertile": 4036,
+     "rho_gamma_offspring": 0.07828573930765854,
+     "p_rho": 6.37295613630402e-07,
+     "shock_selectivity_gamma": 0.02741707252431322,
+     "n_shock_victims": 22,
+     "dgamma": -0.4437527720376935
+    }
+   ],
+   "max_generation": 21,
+   "median_mean_generation_alive": 16.984375,
+   "median_rho_gamma_offspring": 0.09320643920314198,
+   "median_shock_selectivity": 0.02741707252431322,
+   "median_dgamma": -0.3906490331726873
+  }
+ },
+ "no_shock": {
+  "F_median_dgamma": -0.40404817369237156,
+  "per_seed": [
+   -0.3138296983750636,
+   -0.40404817369237156,
+   -0.43546960127025186,
+   -0.2754540151306436,
+   -0.43660723850433875
+  ]
+ }
+}
