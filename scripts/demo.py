@@ -127,19 +127,20 @@ __COMPARISON__
 ## 4. Evidence at scale (5 min)
 Open `campaign_report.html`.
 Walk: (a) B vs A tiles -- measurement alone is causally inert, delta = 0.000;
-(b) story-pull distributions -- every dot is one of 250 runs;
+(b) story-pull distributions -- note these are the RAW statistic, whose
+apparent steering is explained away by the passive counterfactual;
 (c) trajectories -- toggle conditions in the legend.
 Then open `fig_trait_evolution.png`:
-> "Attention to the broadcast is a heritable trait. Populations fed lies
-> evolved to stop listening. Nobody programmed that ordering -- selection
-> found it."
+> "Attention to the broadcast is a heritable trait, and under consequential
+> broadcasts its population mean declines. Nobody programmed that ordering,
+> and it survives a control holding reproductive opportunity invariant."
 
 ## 5. Robustness and the honest null (3 min)
 Open `fig_sweep_summary.png`: dose-response across feedback gains; the three
 lie types (exploitative / mobilizing / inert). Mention the null: recovery
 time is feedback-insensitive even at 40% hub removal -- reported as such.
 Close:
-> "1,002 runs, pre-registered outcomes, one repo, two commands to reproduce
+> "927 runs, pre-specified outcome families, one repo, two commands to reproduce
 > any figure. What I want from you is criticism: what's the weakest part?"
 
 Then stop talking and let him drive.

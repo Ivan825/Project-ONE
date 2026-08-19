@@ -97,7 +97,7 @@ td:first-child,th:first-child{text-align:left}
 <div class="row" id="dists"></div>
 <div class="card" style="margin-bottom:14px"><h3>Mean trajectories by condition (click legend to toggle)</h3>
   <div id="trajcharts"></div><div class="legend" id="tlegend"></div></div>
-<div class="card"><h3>Statistics — Mann-Whitney U vs. reference, Cliff's δ effect size</h3>
+<div class="card"><h3>Statistics — unpaired robustness view (Mann-Whitney U, Cliff's δ). Primary analysis is paired Wilcoxon; see campaigns/FINDINGS.md</h3>
   <div id="stattbl"></div>
   <div class="note">B vs A shows δ = 0.000 on every outcome because condition B is trajectory-identical
   to A under paired seeds: measurement without broadcast is causally inert. Story pull counts macrostate movement toward the broadcast only where broadcast
@@ -122,7 +122,7 @@ const tiles=[
  ["δ = "+SP.cliffs_delta.toFixed(2),
   "story pull, false broadcast vs noise (movement toward the story where it differs from reality)"],
  ["p ≈ "+SP.p_value.toExponential(1),
-  "Mann-Whitney U, story pull F vs N"],
+  "Mann-Whitney U, RAW story pull F vs N — see passive_null_checks.json: the apparent steering is explained by intrinsic dynamics"],
  [(S.cooperation_rate.C_vs_A.median[0]/S.cooperation_rate.C_vs_A.median[1]).toFixed(1)+"×",
   "cooperation under true feedback vs baseline (δ = "+S.cooperation_rate.C_vs_A.cliffs_delta.toFixed(2)+")"],
  ["δ = "+S.fragmentation_post.F_vs_A.cliffs_delta.toFixed(2),
@@ -134,7 +134,7 @@ document.getElementById('tiles').innerHTML=tiles.map(([v,l])=>
 
 // ---- distribution strip plots ----
 function hash(s){let h=2166136261;for(const c of String(s)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0)/4294967295;}
-const OUTS=[["story_pull","Story pull: movement toward the broadcast (+ = self-fulfilling)",["F","N"]],
+const OUTS=[["story_pull","RAW story pull: movement toward the broadcast. NOT causal — the passive counterfactual accounts for it entirely",["F","N"]],
  ["cooperation_rate","Cooperation rate (post-transient mean)",COND],
  ["fragmentation_post","Post-shock fragmentation (mean)",COND],
  ["recovery_time_90","Recovery time after shock (steps)",COND]];

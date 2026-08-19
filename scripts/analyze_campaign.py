@@ -15,13 +15,16 @@ both give the same F-vs-N ordering. Outcomes computed here:
   2. fragmentation_post   - mean fragmentation over the post-shock window.
   3. cooperation_rate     - mean cooperation over the post-transient window.
   4. self_model_convergence - mean per-tick reduction in |actual - broadcast|
-                            across broadcast keys; positive = the world drifts
-                            TOWARD the story it is told (self-fulfilling),
-                            negative = away (self-defeating). Defined only for
-                            broadcasting conditions (C, F, N).
+                            (the original distance-based correspondence
+                            statistic; degenerate under truthful feedback and
+                            superseded by story_pull). NOTE: neither raw
+                            statistic supports a causal steering claim -- see
+                            scripts/passive_null_checks.py, which shows the
+                            apparent pull is explained by intrinsic dynamics.
 
-Statistics: Mann-Whitney U vs. baseline A (and F vs C for convergence),
-Cliff's delta effect sizes. Figures follow the repo's palette.
+Statistics: PAIRED Wilcoxon signed-rank on per-seed differences (primary),
+with tie-corrected matched-pairs rank-biserial r and bootstrap CIs;
+Mann-Whitney U / Cliff's delta retained as an unpaired robustness check.
 """
 import argparse
 import glob

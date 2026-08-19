@@ -20,7 +20,7 @@ import os
 import sys
 
 import numpy as np
-from scipy.stats import wilcoxon
+from scipy.stats import rankdata, wilcoxon
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -74,9 +74,13 @@ def paired(a, b):
     d = np.asarray(a) - np.asarray(b)
     if np.all(d == 0):
         return {"n": len(d), "note": "all per-seed differences exactly zero"}
-    stat, p = wilcoxon(d)
+    nz = d[d != 0]
+    stat, p = wilcoxon(nz)
     n = len(d)
-    r = 1 - 4 * stat / (n * (n + 1))  # matched-pairs rank-biserial
+    # signed, tie-corrected matched-pairs rank-biserial (same form as
+    # scripts/analyze_campaign.py); the 1-4W/n(n+1) shortcut loses the sign.
+    ranks = rankdata(np.abs(nz), method="average")
+    r = float((ranks[nz > 0].sum() - ranks[nz < 0].sum()) / ranks.sum())
     boots = [np.mean(d[RS.randint(0, n, n)]) for _ in range(N_BOOT)]
     lo, hi = np.percentile(boots, [2.5, 97.5])
     return {"n": n, "median_diff": float(np.median(d)), "mean_diff": float(np.mean(d)),

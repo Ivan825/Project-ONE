@@ -74,6 +74,25 @@ trajectories rather than independently randomized ones. This relationship is
 therefore DESCRIPTIVE, not a causal mediation result; the paper states it
 at that level.
 
+**Reproduction-neutral control (`scripts/reproduction_neutral_check.py`,
+`campaigns/reproduction_neutral_check.json`, campaigns/rn_g*).** Feedback adds
+weight only to non-reproductive actions, so after normalization
+P(reproduce | γ_i, b) = w_r / (W_0 + γ_i·g·D(b)) is DECREASING in γ_i whenever
+the drive D(b) > 0 — and I is exactly the quantity governing that penalty, so
+the correlation above could in principle be architectural rather than
+ecological. Controlled by rescaling the reproduce weight by (1 + γ_i·g·D/N_0),
+which holds P(reproduce) exactly at its no-broadcast value (verified: spread
+0.00000 across γ ∈ [0,1], vs 0.209→0.134 uncontrolled) while leaving every
+other feedback response untouched. Rerunning the full sweep (300 runs, config
+flag `reproduction_neutral=True`): median retention across declining cells
+99%; at g=0.8 invert −0.410→−0.407, crisis −0.449→−0.439, noise −0.348→−0.305,
+utopia +0.006 unchanged; no cell shows a significant paired shift; the
+intensity correlation persists (ρ = −0.99 → −0.98). Truth in fact declines
+MORE under the control (−0.087→−0.218 at g=0.8), the opposite of a dilution
+artifact. Conclusion: selection on γ is ecological, not a direct
+reproductive-opportunity cost. (With the flag off the engine reproduces all
+stored campaign state hashes bit-for-bit.)
+
 Mechanism note: the individual-level pathway is NOT a simple fecundity
 gradient — within-run ρ(γ_i, offspring count) ≈ +0.05 under F, the decline
 persists without the shock (−0.40 no-shock vs −0.39 with), and shock victims'

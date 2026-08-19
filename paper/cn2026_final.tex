@@ -21,7 +21,7 @@
 \maketitle
 
 \begin{abstract}
-Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-range noise. Across 927 deterministic paired-seed runs: measurement without broadcast is causally inert. A natural self-fulfilling-prophecy statistic registers strong apparent attraction toward false and replayed self-models --- but a passive counterfactual, scoring untreated twin trajectories against the same reference signals, fully accounts for it: a caution for empirical claims of performativity. What broadcasts demonstrably change is behavior and structure, and which lies come true is set jointly by the lie and the response regime. Finally, heritable attention to the broadcast declines across generations, most strongly under high-drive false and noisy feedback: populations evolve to ignore consequential misleading observers.
+Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-range noise. Across 927 deterministic runs with paired-seed comparisons: measurement without broadcast is causally inert. A natural self-fulfilling-prophecy statistic registers strong apparent attraction toward false and replayed self-models --- but a passive counterfactual, scoring untreated twins against matched references, fully accounts for it: a caution for empirical claims of performativity. What broadcasts demonstrably change is behavior and structure, and which lies come true is set jointly by the lie and the response regime. Finally, heritable attention to the broadcast declines across generations, most strongly under high-drive false and noisy feedback: populations evolve to ignore consequential misleading observers.
 \keywords{adaptive networks, agent-based modeling, reflexivity, self-fulfilling dynamics, performative prediction, evolution of trust}
 \end{abstract}
 
@@ -60,12 +60,13 @@ account for --- a direct caution for empirical tests of performative
 prediction; (3) evidence for what broadcasts \emph{do} change:
 truthful feedback doubles costly cooperation, distorted broadcasts mobilize
 or pacify depending on the lie--response pairing (reversing under conformist
-responses), and broadcasts densify and decentralize the network; and (4) we
-demonstrate, in an ecological agent-based setting, that \emph{attention to a
-collective self-model is itself a heritable, evolvable trait} whose
-population mean strongly tracks the broadcast-implied corrective-drive
-intensity across the gain sweep --- trust in the observer is not updated by
-any rule, it evolves. Figure~\ref{fig:loop} summarizes the design.
+responses), and broadcasts densify the network while false and noise
+feedback reduce hub concentration; and (4) we
+model receiver sensitivity as a continuous heritable trait and show that
+\emph{its population distribution shifts systematically under feedback},
+strongly tracking the broadcast-implied corrective-drive intensity and
+surviving a control that holds reproductive opportunity invariant --- trust
+in the observer is not updated by any rule, it evolves. Figure~\ref{fig:loop} summarizes the design.
 
 
 \begin{figure}[t]
@@ -97,10 +98,9 @@ this family (births, deaths, rewiring by agent decisions).
 Robustness of networks to random and targeted node removal is classical
 \cite{albert2000error}; we use targeted hub removal as a standardized
 perturbation.
-\textbf{Global coupling in physics.} Globally coupled oscillators and maps
-show that a mean field fed back to units reshapes collective dynamics
-\cite{kuramoto1984chemical}; here the ``mean field'' is a multidimensional,
-potentially \emph{false} description, and units are born, die, and evolve.
+\textbf{Global coupling.} A mean field fed back to units reshapes collective
+dynamics \cite{kuramoto1984chemical}; here that field is multidimensional,
+potentially \emph{false}, and units are born, die, and evolve.
 \textbf{Reflexivity and reactive measurement.} Self-fulfilling prophecy
 \cite{merton1948self}, reflexivity in markets \cite{soros2013fallibility}, and
 the reactivity of rankings and metrics
@@ -115,22 +115,21 @@ decide whether to trust predictions of collective outcomes
 accuracy, whereas here attention is inherited and mutated with no rule
 referencing reliability: trust is not updated, it evolves;
 self-fulfilling signals of an endogenous network state arise in congestion
-games \cite{iwase2017self}. Our contribution to this line is a testbed in
-which apparent performativity can be checked against passive counterfactuals
---- a check our own headline metric initially failed (Sect.~\ref{sec:pull})
---- plus population turnover and a heritable receiver-sensitivity trait
-absent from these models.
-\textbf{Signaling and the evolution of trust.} In sender--receiver games,
-receivers can evolve to ignore unreliable signals \cite{skyrms2010signals}.
-Our distrust result is consonant with that theory but arises in an open
-ecological population where the signal is \emph{self-referential} and
-attention to it is a continuous heritable trait in an energy economy, not a
-payoff matrix.
-\textbf{Agent-based modeling.} Agent-based studies of collective opinion and
-cooperation are a mainstay of this community
-\cite{castellano2009statistical,perc2017statistical}; our methodology
-follows the generative ABM tradition
-\cite{epstein1996growing,bonabeau2002agent}, and the engine uses ideas from
+games \cite{iwase2017self}. Causal identification of performative effects
+without randomization is itself an active problem \cite{cheng2024causal};
+our contribution is narrower and complementary --- we exhibit a concrete
+false-positive failure mode of directional-alignment metrics and diagnose it
+with paired passive twins in an evolving network (Sect.~\ref{sec:pull}) ---
+plus population turnover and a heritable receiver-sensitivity trait absent
+from these models.
+\textbf{Signaling and the evolution of trust.} In sender--receiver games
+receivers can evolve to ignore unreliable signals \cite{skyrms2010signals};
+here the signal is \emph{self-referential} and attention to it is a
+continuous heritable trait in an energy economy, not a payoff matrix.
+\textbf{Agent-based modeling.} Studies of collective opinion and cooperation
+are a mainstay here \cite{castellano2009statistical,perc2017statistical};
+our methodology follows the generative ABM tradition
+\cite{epstein1996growing,bonabeau2002agent} and the engine uses ideas from
 Mesa \cite{kazil2020mesa} and NetworkX \cite{hagberg2008exploring}.
 Multi-agent reinforcement learning treats global state as an
 \emph{architectural} aid \cite{foerster2016learning}; we treat it as an
@@ -210,7 +209,7 @@ initial energy & 20 & initial traits & mean 0.5, s.d. 0.15\\
 resource capacity $K$ & 6000 & reproduction threshold / cost & 30 / 16\\
 base regeneration & 60/step & min.\ reproduction age & 15 steps\\
 regeneration rate $r$ & 0.12 & lifespan (mean $\pm$ s.d.) & $400 \pm 80$ steps\\
-harvest cap & 2.5/step & action cost / share amount & 0.25 / 3.0\\
+harvest cap & 2.5/step & connect cost / share amount & 0.25 / 3.0\\
 metabolism & 0.8/step & run length & 3000--4000 steps\\
 shock time $t_{\mathrm{shock}}$ & \multicolumn{3}{l}{2000 (1500 in the $2\times$ scale check)}\\
 \bottomrule
@@ -266,7 +265,8 @@ harsh variant. Four outcome \emph{families} were fixed before the first
 campaign: (1) post-shock recovery time --- the first $t > t_{\mathrm{shock}}$
 at which the living population regains $90\%$ of its pre-shock baseline,
 defined as its mean over $[t_{\mathrm{shock}}{-}500,\, t_{\mathrm{shock}})$;
-(2) mean post-shock fragmentation; (3) per-capita costly-helping rate; (4)
+(2) mean post-shock fragmentation; (3) per-capita costly-helping rate,
+averaged after a 500-step burn-in; (4)
 self-model correspondence, operationalized as \emph{story pull}: with
 $s_k(t)$ the value of macrostate component $k$ at observer tick $t$,
 $b_k(t)$ the broadcast value, and $\varepsilon=0.02$,
@@ -348,7 +348,7 @@ replayed genuine self-model of a sibling world (condition R; 30 receivers on
 the harsh-shock seed list, one of 15 source trajectories each): $0.0241$
 $[0.0197, 0.0265]$. The raw hierarchy R $>$ F $>$ N is highly reliable
 (F vs N $r=0.89$, $p\!\approx\!1.7\times10^{-6}$; robust to one receiver
-per source, $n=15$, $r=1.00$, and to a source-clustered bootstrap).
+per source, $n=15$, $r\geq0.98$, and to a source-clustered bootstrap).
 
 A short observation shows why raw $P$ can mislead. Under the inverted
 reference $b_t=1-s_t$, $\mathrm{sign}(b_t-s_t)=\mathrm{sign}(\tfrac12-s_t)$;
@@ -386,8 +386,8 @@ and entirely artifactual ``steering'' unless checked against passive twins.
 
 \paragraph{Structural spillovers, by contrast, are real.} Direct outcome
 contrasts are unambiguous: agents persistently told the network is
-fragmenting over-connect it (Fig.~\ref{fig:netpair}), reducing post-shock
-fragmentation (flagship paired $\Delta$median $-0.017$, $r=-0.53$,
+fragmenting over-connect it (mean degree $22.4$ vs $11.2$ in matched runs at
+$t=2000$), reducing post-shock fragmentation (flagship paired $\Delta$median $-0.017$, $r=-0.53$,
 $p\!\approx\!10^{-3}$; directionally consistent, ns, under harsh shock).
 Broadcasts densify and flatten the network: relative to A (paired, harsh
 shock, post-transient medians), mean degree rises $+1.1$ under truth
@@ -409,16 +409,6 @@ cooperation rate --- deficit signals mobilize costly helping.}
 \label{fig:sweep}
 \end{figure}
 
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.52\textwidth]{network_pair.png}
-\caption{The same world under two mirrors: identical seed at $t=2000$
-without feedback (left) and under the inverted broadcast (right), whose
-persistent fragmentation reports drive over-connection (mean degree $22.4$
-vs $11.2$). Node size: energy; color: generation.}
-\label{fig:netpair}
-\end{figure}
 
 \subsection{The type of lie sets what changes}
 The three distortion modes produce qualitatively different \emph{outcome}
@@ -481,7 +471,7 @@ generations as an emergent, unprogrammed function of broadcast quality
 (neutral drift), truth $-0.10$, noise $-0.34$ ($r=-0.94$,
 $p\!\approx\!2\times10^{-7}$), false $-0.42$ ($\Delta$median $-0.336$
 $[-0.456,-0.281]$, $r=-1.00$, $p\!\approx\!1.9\times10^{-9}$). The sweep is
-dose-ordered: the decline under the false broadcast deepens from $-0.12$
+dose-ordered: the decline under the inverted broadcast deepens from $-0.12$
 ($g=0.2$) to $-0.45$ ($g=1.6$) --- and at the highest gain even \emph{accurate}
 feedback shows a marked decline ($-0.24$). The categorical ordering
 compresses into one continuous relationship: with broadcast-implied
@@ -496,19 +486,28 @@ per-agent factor $\gamma_i$ (the quantity under selection) and is computed
 from realized rather than independently randomized trajectories, we treat it
 as descriptive, not as causal mediation.
 
-The claim is stated at the level the data support: a systematic,
-dose-dependent heritable trait-frequency shift whose individual-level
-pathway is neither a simple fecundity gradient (within-run
-$\rho\approx+0.05$ between $\gamma_i$ and offspring count under F) nor
-shock-mediated ($-0.40$ without the shock vs $-0.39$ with; victims' mean
-$\gamma$ only $+0.03$ above average); it plausibly runs through lineage
-survival and energy budgets downstream of reproduction, and is left open.
+\paragraph{Not a reproductive-opportunity artifact.} Feedback adds weight
+only to non-reproductive actions, so
+$P(\mathrm{reproduce}\,|\,\gamma_i,b)=w_r/(W_0+\gamma_i g D(b))$ decreases
+in $\gamma_i$ whenever $D(b)>0$ --- and $I$ governs that penalty, so the
+correlation could be architectural. Rerunning the sweep (300 runs) with a
+reproduction-neutral variant that rescales the reproduce weight by
+$(1+\gamma_i g D/N_0)$, holding $P(\mathrm{reproduce})$ exactly at its
+no-broadcast value while leaving every other response untouched, leaves the
+decline essentially unchanged: median retention $99\%$ across declining
+cells, no cell shifting significantly, $\rho=-0.98$ persisting, and truth
+declining \emph{more} under the control. Selection on $\gamma$ is thus
+ecological, not a reproductive-opportunity cost; the remaining pathway is
+neither a fecundity gradient (within-run $\rho\approx+0.05$ between
+$\gamma_i$ and offspring count under F) nor shock-mediated ($-0.40$ without
+the shock vs $-0.39$ with), and is left open.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.42\textwidth]{fig8_trait_evolution.png}
 \caption{Evolution of attention to the self-model (harsh shock, $g=0.8$,
-30 seeds per condition): change in mean $\bar\gamma$, run start to end. The
+30 seeds per condition): change in mean $\bar\gamma$, first to final
+observer record. The
 ordering (false $<$ noise $<$ true $<$ none) emerged from the evolutionary
 dynamics alone; nothing in the rules references broadcast reliability.}
 \label{fig:trait}
@@ -633,6 +632,7 @@ Mendler-D\"unner, C., Hardt, M.: Performative prediction. In: ICML. PMLR 119 (20
 \bibitem{gois2024performative} G\'ois, A., Mofakhami, M., Santos, F.P.,
 Gidel, G., Lacoste-Julien, S.: Performative prediction on games and
 mechanism design. In: AISTATS. PMLR 258, 1855--1863 (2025)
+\bibitem{cheng2024causal} Cheng, G., Hardt, M., Mendler-D\"unner, C.: Causal inference out of control: estimating performativity without treatment randomization. In: ICML. PMLR 235, 8077--8103 (2024)
 \bibitem{hardt2025performative} Hardt, M., Mendler-D\"unner, C.:
 Performative prediction: past and future. Stat. Sci. 40, 417--436 (2025)
 \bibitem{iwase2017self} Iwase, T., Tadokoro, Y., Fukuda, D.: Self-fulfilling

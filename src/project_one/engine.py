@@ -29,7 +29,7 @@ class Simulation:
         # Dedicated stream for broadcast-signal generation (condition N).
         # Keeping signal generation off the behavioral stream guarantees that
         # constructing the noise signal never perturbs subsequent behavioral
-        # draws, so N differs from other conditions only in signal CONTENT.
+        # draws, so constructing the noise signal never advances this stream.
         # Conditions that draw nothing from this stream are bit-identical to
         # the single-stream implementation.
         self.signal_rng = random.Random(1_000_003 * seed + 12345)
@@ -181,6 +181,8 @@ class Simulation:
         }
         bc = agent.received_global
         if bc is not None:
+            base_repro = w["reproduce"]
+            base_nonrepro = sum(v for k, v in w.items() if k != "reproduce")
             g = tr["global_sensitivity"] * cfg.feedback_gain
             if cfg.response_mode == "corrective":
                 # Repair reported deficits (the default mechanism under test):
@@ -195,6 +197,14 @@ class Simulation:
                 w["prune"] += g * 0.5 * bc["fragmentation"]        # a fragmenting world licenses cutting ties
                 w["connect"] += g * max(0.0, 0.6 - bc["fragmentation"])  # a cohesive world licenses linking
                 w["harvest"] += g * bc["inequality"]               # an unequal world licenses accumulation
+            if cfg.reproduction_neutral and base_repro > 0.0:
+                # Feedback mass D_i went entirely to non-reproductive actions;
+                # rescaling reproduce by (1 + D_i/N_0) makes P(reproduce) after
+                # normalization identical to its no-broadcast value, so any
+                # remaining selection on global_sensitivity is ecological rather
+                # than a direct reproductive-opportunity cost.
+                added = sum(v for k, v in w.items() if k != "reproduce") - base_nonrepro
+                w["reproduce"] = base_repro * (1.0 + added / base_nonrepro)
         return w
 
     def _weighted_choice(self, weights: dict) -> str:

@@ -55,6 +55,16 @@ class Config:
     #   "corrective"  - repair reported deficits (default)
     #   "conformist"  - imitate the reported norm
     response_mode: str = "corrective"
+    # Robustness control for the evolutionary result. Feedback adds mass only to
+    # non-reproductive actions, so after normalization a higher-gamma agent has a
+    # mechanically LOWER probability of selecting "reproduce" whenever the
+    # broadcast carries corrective drive. With reproduction_neutral=True the
+    # reproduce weight is rescaled by (1 + D_i / N_0) -- D_i the feedback mass
+    # added, N_0 the base non-reproductive mass -- which leaves P(reproduce)
+    # exactly equal to its no-broadcast value while preserving the intended
+    # feedback effect on the other actions. Isolates ecological selection on
+    # global_sensitivity from the direct reproductive-opportunity cost.
+    reproduction_neutral: bool = False
     # Condition R: broadcast a replayed self-model trajectory (recorded from a
     # different seed's observed-but-blind run) — realistic structure, no
     # self-reference. List of per-tick broadcast dicts.
