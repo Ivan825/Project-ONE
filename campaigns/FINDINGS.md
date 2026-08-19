@@ -186,6 +186,45 @@ p = 0.46). Treat as a lead for a larger-n scale campaign, not a result. The
 paper states it in these terms rather than claiming the null holds "in any
 condition or campaign" (an earlier draft did, and that was too strong).
 
+## Multiplicity (`scripts/multiplicity_check.py`, `campaigns/multiplicity_check.json`)
+The confirmatory family is the eight numerical contrasts of the paper's
+Table 3 (the other two rows carry no p-value: B-vs-A is an exact identity,
+and the recovery row reports a bound). p-values are RECOMPUTED from the run
+records by the script, not copied from the paper, so the check cannot inherit
+a transcription error.
+
+Uncorrected: 6 of 8 significant at α = 0.05.
+Benjamini-Hochberg (FDR):   6 of 8 — every decision unchanged.
+Holm-Bonferroni (FWER):     6 of 8 — every decision unchanged.
+
+The margin is wide, not marginal: the largest surviving p is 9.5e-4 against a
+Holm threshold of 0.05/3 = 0.0167 at that rank (~17x). The two contrasts that
+fail are the two adjusted story-pull contrasts (p = 0.084 harsh, 0.63
+flagship) — already reported as null, so correction cannot change the paper's
+conclusions in either direction. Exploratory analyses (everything outside the
+four pre-specified families) are interpreted through effect size, replication
+and their labelled exploratory status rather than adjusted significance.
+
+**Enlarged (hostile) family, m = 58.** Scoping a correction to the table that
+needs it invites the objection that the family was picked to flatter the
+result, so the script also applies both corrections to a superset: every
+paired contrast reported anywhere in the paper, including all 30
+architectural-control cells and the six recovery nulls collapsed behind the
+"> 0.22" bound. **All eight Table 3 decisions are still unchanged, under both
+BH and Holm.** Headroom on the weakest survivor (fragmentation FL, p = 9.5e-4)
+runs to m ≈ 58 under Holm and m ≈ 316 under BH.
+
+Five contrasts OUTSIDE Table 3 are demoted in the enlarged family, and the
+paper does not lean on any of them:
+
+- the four 2× scale-check contrasts (p = 0.0078–0.023) — the paper states
+  n = 8 for these and treats the scale check as robustness, not as a main
+  effect; the main effects rest on the 50- and 30-pair campaigns.
+- the γ-free-pruning N@g0.8 cell (p = 0.033) — demoting it makes the control
+  CLEANER, not weaker: the single cell the paper discloses as shifting does
+  not survive correction across the 30 control cells. The paper still
+  discloses it uncorrected, which is the conservative direction.
+
 ## Paper-ready headline
 Being measured changes nothing; being told changes much — but not by pulling
 reality toward the story. Apparent self-fulfilling steering vanishes against

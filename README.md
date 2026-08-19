@@ -46,6 +46,8 @@ Full statistics and caveats: [`campaigns/FINDINGS.md`](campaigns/FINDINGS.md).
 | N — Noise feedback | on | uniform random, matched ranges | stimulation control |
 | R — Replayed self-model | on | another run's genuine S(t) | structure control |
 
+Multiplicity: over the eight point-p contrasts of the paper's Table 3, both Benjamini-Hochberg and the stricter Holm-Bonferroni correction leave every significance decision unchanged (6 of 8 either way) — and still do inside a deliberately hostile enlarged family of all 58 paired contrasts in the paper. The only demotions there are the n=8 scale-check contrasts and the one attenuating control cell, neither load-bearing — [`scripts/multiplicity_check.py`](scripts/multiplicity_check.py).
+
 Paired seeds across conditions; standardized hub-removal shocks (10 hubs mild, top 40% harsh, at t = 2000 — t = 1500 in the 2× scale check); paired Wilcoxon signed-rank as the primary analysis with tie-corrected matched-pairs rank-biserial r and bootstrap CIs (Mann–Whitney U + Cliff's δ is a *secondary* view and does not agree everywhere — all inferential claims follow the paired analysis); passive-counterfactual nulls for the story-pull statistic; a dedicated signal-RNG stream so constructing the noise signal never advances the behavioral PRNG; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
 ## Reproduce everything
@@ -88,6 +90,7 @@ PO_VARIANT=pgf python scripts/reproduction_neutral_check.py   # gamma-free-pruni
 python scripts/attention_cost.py                  # corrective-drive intensity vs evolved attention
 python scripts/reviewer_checks.py                 # source-dependence, P>0, eps-sensitivity, activation
 python scripts/config_model_null.py               # ER + degree-preserving clustering nulls
+python scripts/multiplicity_check.py              # BH + Holm over the Table 3 contrasts
 python scripts/selection_mechanism.py             # what the gamma decline is NOT (fecundity, shock)
 python scripts/sweep_figure.py campaigns/sweep_g0.2 campaigns/sweep_g0.8 campaigns/sweep_g1.6
 python scripts/paper_figures.py                   # redraw Figs. 2-3 at printed size

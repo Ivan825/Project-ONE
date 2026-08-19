@@ -1,0 +1,555 @@
+{
+ "alpha": 0.05,
+ "family": "the eight point-p contrasts of Table 3",
+ "m": 8,
+ "contrasts": [
+  {
+   "contrast": "cooperation (FL) C vs A",
+   "n_pairs": 50,
+   "p": 8.881784197001252e-15,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "dgamma (HS) F vs A",
+   "n_pairs": 30,
+   "p": 1.862645149230957e-09,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "cooperation (HS) C vs A",
+   "n_pairs": 30,
+   "p": 9.313225746154785e-09,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "dgamma (HS) N vs A",
+   "n_pairs": 30,
+   "p": 2.0489096641540527e-07,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "story pull, raw (HS) F vs N",
+   "n_pairs": 30,
+   "p": 1.6838312149047852e-06,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "fragmentation (FL) F vs A",
+   "n_pairs": 50,
+   "p": 0.0009504084140701252,
+   "sig_uncorrected": true,
+   "sig_bh": true,
+   "sig_holm": true
+  },
+  {
+   "contrast": "story pull, adj. (HS) F vs N",
+   "n_pairs": 30,
+   "p": 0.08406547829508781,
+   "sig_uncorrected": false,
+   "sig_bh": false,
+   "sig_holm": false
+  },
+  {
+   "contrast": "story pull, adj. (FL) F vs N",
+   "n_pairs": 50,
+   "p": 0.6253677971440439,
+   "sig_uncorrected": false,
+   "sig_bh": false,
+   "sig_holm": false
+  }
+ ],
+ "n_significant_uncorrected": 6,
+ "n_significant_bh": 6,
+ "n_significant_holm": 6,
+ "bh_changes_no_decision": true,
+ "holm_changes_no_decision": true,
+ "wider_family": {
+  "m": 58,
+  "description": "every paired contrast reported anywhere in the paper, incl. all 30 architectural-control cells",
+  "table3_decisions_unchanged_bh": true,
+  "table3_decisions_unchanged_holm": true,
+  "demoted_outside_table3": [
+   "cooperation (2x) C vs A",
+   "dgamma (2x) F:invert vs A",
+   "cooperation (2x) N vs A",
+   "dgamma (2x) N vs A",
+   "pgf shift N@g0.8"
+  ],
+  "contrasts": [
+   {
+    "contrast": "cooperation (FL) C vs A",
+    "n_pairs": 50,
+    "p": 8.881784197001252e-15,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "dgamma (HS) F vs A",
+    "n_pairs": 30,
+    "p": 1.862645149230957e-09,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "cooperation (HS) C vs A",
+    "n_pairs": 30,
+    "p": 9.313225746154785e-09,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "dgamma (HS) N vs A",
+    "n_pairs": 30,
+    "p": 2.0489096641540527e-07,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "dP vs passive (F)",
+    "n_pairs": 30,
+    "p": 9.98377799987793e-07,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "story pull, raw (HS) F vs N",
+    "n_pairs": 30,
+    "p": 1.6838312149047852e-06,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "dP vs passive (N)",
+    "n_pairs": 30,
+    "p": 5.144625902175903e-06,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "dP vs passive (R)",
+    "n_pairs": 30,
+    "p": 1.0609626770019531e-05,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "fragmentation (FL) F vs A",
+    "n_pairs": 50,
+    "p": 0.0009504084140701252,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "cooperation (2x) N vs A",
+    "n_pairs": 8,
+    "p": 0.0078125,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "dgamma (2x) F:invert vs A",
+    "n_pairs": 8,
+    "p": 0.0078125,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "cooperation (2x) C vs A",
+    "n_pairs": 8,
+    "p": 0.0078125,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "dgamma (2x) N vs A",
+    "n_pairs": 8,
+    "p": 0.0234375,
+    "sig_uncorrected": true,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift N@g0.8",
+    "n_pairs": 20,
+    "p": 0.03276824951171875,
+    "sig_uncorrected": true,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "dgamma (2x) C vs A",
+    "n_pairs": 8,
+    "p": 0.0546875,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (size2x) F:invert vs A",
+    "n_pairs": 8,
+    "p": 0.0625,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift C@g0.8",
+    "n_pairs": 20,
+    "p": 0.06372261047363281,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:crisis@g0.2",
+    "n_pairs": 20,
+    "p": 0.069580078125,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "cooperation (2x) F:invert vs A",
+    "n_pairs": 8,
+    "p": 0.078125,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "story pull, adj. (HS) F vs N",
+    "n_pairs": 30,
+    "p": 0.08406547829508781,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "story pull, adj. (HS) R vs F",
+    "n_pairs": 30,
+    "p": 0.09610157273709774,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift N@g0.8",
+    "n_pairs": 20,
+    "p": 0.14290618896484375,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (harsh_shock) C vs A",
+    "n_pairs": 30,
+    "p": 0.22525290636065332,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:crisis@g1.6",
+    "n_pairs": 20,
+    "p": 0.2305126190185547,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (flagship) F vs A",
+    "n_pairs": 50,
+    "p": 0.31862409075164966,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (flagship) C vs A",
+    "n_pairs": 50,
+    "p": 0.3374519789145397,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (size2x) N vs A",
+    "n_pairs": 8,
+    "p": 0.453125,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (flagship) N vs A",
+    "n_pairs": 50,
+    "p": 0.4553813983357884,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (harsh_shock) F vs A",
+    "n_pairs": 30,
+    "p": 0.460205078125,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:crisis@g0.8",
+    "n_pairs": 20,
+    "p": 0.49800872802734375,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:invert@g1.6",
+    "n_pairs": 20,
+    "p": 0.5216732025146484,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift N@g0.2",
+    "n_pairs": 20,
+    "p": 0.5458755493164062,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:crisis@g1.6",
+    "n_pairs": 20,
+    "p": 0.5705966949462891,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "story pull, adj. (FL) F vs N",
+    "n_pairs": 50,
+    "p": 0.6253677971440439,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift C@g1.6",
+    "n_pairs": 20,
+    "p": 0.6476554870605469,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift N@g0.2",
+    "n_pairs": 20,
+    "p": 0.6476554870605469,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (size2x) C vs A",
+    "n_pairs": 8,
+    "p": 0.6875,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:invert@g0.8",
+    "n_pairs": 20,
+    "p": 0.7285060882568359,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift C@g0.2",
+    "n_pairs": 20,
+    "p": 0.7561664581298828,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:invert@g0.2",
+    "n_pairs": 20,
+    "p": 0.7561664581298828,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift N@g1.6",
+    "n_pairs": 20,
+    "p": 0.7841262817382812,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:invert@g0.2",
+    "n_pairs": 20,
+    "p": 0.8123550415039062,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:crisis@g0.8",
+    "n_pairs": 20,
+    "p": 0.8694877624511719,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:crisis@g0.2",
+    "n_pairs": 20,
+    "p": 0.9272785186767578,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift N@g1.6",
+    "n_pairs": 20,
+    "p": 0.9272785186767578,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:invert@g1.6",
+    "n_pairs": 20,
+    "p": 0.9272785186767578,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "story pull, adj. (HS) R vs N",
+    "n_pairs": 30,
+    "p": 0.9515264742076397,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:invert@g0.8",
+    "n_pairs": 20,
+    "p": 0.9854354858398438,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:utopia@g0.2",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "recovery (harsh_shock) N vs A",
+    "n_pairs": 30,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:utopia@g1.6",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:utopia@g0.8",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:utopia@g0.2",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift C@g0.2",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:utopia@g0.8",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift C@g0.8",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift C@g1.6",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:utopia@g1.6",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   }
+  ]
+ }
+}

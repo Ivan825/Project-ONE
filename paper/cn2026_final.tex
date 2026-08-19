@@ -7,6 +7,10 @@
 \usetikzlibrary{positioning,arrows.meta}
 \def\UrlFont{\rmfamily}
 \setlength{\emergencystretch}{0.5em}
+% Tighten space around floats (6 floats): typographic only, no text compression.
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{6pt}
 
 \begin{document}
 \mainmatter
@@ -180,15 +184,15 @@ In the \emph{conformist} regime agents imitate the reported norm instead:
 $f_{\mathrm{share}} = b_{\mathrm{coop}}$,
 $f_{\mathrm{prune}} = 0.5\, b_{\mathrm{frag}}$,
 $f_{\mathrm{connect}} = \max(0,\, 0.6-b_{\mathrm{frag}})$, and
-$f_{\mathrm{harvest}} = b_{\mathrm{ineq}}$. Two further mechanisms act on
-\emph{target selection} rather than action choice, in both regimes: while
-reported degree concentration exceeds $0.6$, a pruning agent cuts its
-highest-degree neighbor (ties by id) with probability $\gamma_i$ ($g$
-scales action propensities only, not this probability), else a uniform
-neighbor; and new links attach to a neighbor-of-a-neighbor with probability
-$0.7$ when available (else a uniform non-neighbor), an explicit
-triadic-closure tendency behind the clustering in Sect.~3.4. All rule constants are fixed across all experiments;
-Table~\ref{tab:params} lists the model parameters.
+$f_{\mathrm{harvest}} = b_{\mathrm{ineq}}$. Two mechanisms act on \emph{target
+selection} rather than action choice, in both regimes: while reported degree
+concentration exceeds $0.6$ a pruning agent cuts its highest-degree neighbor
+(ties by id) with probability $\gamma_i$ --- $g$ scales action propensities
+only, not this probability --- else a uniform neighbor; and new links attach
+to a neighbor-of-a-neighbor with probability $0.7$ when available (else a
+uniform non-neighbor), an explicit
+triadic-closure tendency behind the clustering in Sect.~3.4. All rule
+constants are fixed across experiments (Table~\ref{tab:params}).
 
 \begin{table}[t]
 \centering\footnotesize
@@ -308,7 +312,13 @@ the three smaller checks --- $2\times$ scale ($n=8$), the mechanism probe
 differences; matched-pairs rank-biserial $r$; bootstrap 95\% CI of the median
 difference). FL = flagship (50 pairs), HS = harsh shock (30 pairs).
 ``adj.'' compares $\Delta P = P_{\mathrm{actual}} - P_{\mathrm{passive}}$
-between conditions (Sect.~\ref{sec:pull}).}
+between conditions (Sect.~\ref{sec:pull}). Multiplicity: over the eight rows
+carrying a point $p$, Benjamini--Hochberg and the stricter Holm--Bonferroni
+both leave every decision unchanged, and still do when the family is enlarged
+to all $58$ paired contrasts in the paper; the only demotions there are the
+$n\,{=}\,8$ scale-check contrasts and the one attenuating control cell,
+neither load-bearing. Exploratory analyses are read through effect size and
+replication rather than adjusted significance.}
 \label{tab:stats}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llrrr@{}}
@@ -482,7 +492,10 @@ smaller at equilibrium; unreliable high-drive broadcasts pay most. Corrective-dr
 than veracity alone, appears to organize the response. Since $I$ omits the
 per-agent factor $\gamma_i$ (the quantity under selection) and is computed
 from realized rather than independently randomized trajectories, we treat it
-as descriptive, not as causal mediation.
+as descriptive, not as causal mediation. $I$ is also compared only within
+corrective-regime sweeps, where the same $f_a$ apply to every cell --- a
+within-regime ordering, not a quantity normalized for comparison across
+regimes.
 
 \paragraph{Not an architectural artifact.} Two asymmetries in the response
 architecture could in principle manufacture this pattern. First, feedback
