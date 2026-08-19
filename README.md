@@ -10,15 +10,15 @@ Project ONE is a controlled, fully reproducible laboratory for *recursive self-m
 local actions → global condition → measurement → self-model → broadcast → changed local actions
 ```
 
-## Headline findings (927 runs, pre-specified outcome families)
+## Headline findings (927 core runs + 300 robustness-control runs = 1,227; pre-specified outcome families)
 
 **Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — Cliff's δ = 0.000 on every outcome, twice replicated. Only the *broadcast* has causal power.
 
 **Apparent "story pull" is an artifact — and that is a finding.** A natural self-fulfilling-prophecy statistic registers strong, replicated apparent attraction of the macrostate toward false and replayed self-models (raw hierarchy replay > inverted lie > noise, r up to 1.00). But a passive counterfactual — scoring untreated paired-seed trajectories against matched reference signals — fully accounts for it: untreated worlds "move toward" the references MORE than treated worlds do (passive medians 0.012/0.030/0.007 vs actual 0.008/0.024/0.001), and adjusted between-condition contrasts are null in both campaigns. There is no evidence of content-specific attraction toward broadcast content. This is a direct caution for empirical performativity claims (`scripts/passive_null_checks.py`).
 
-**What broadcasts DO change is behavior and structure — and which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert; broadcasts densify and decentralize the network. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation.
+**What broadcasts DO change is behavior and structure — and which lies come true depends on how agents respond.** Under corrective agents, an alarmist lie is self-defeating and a flattering lie is behaviorally inert; broadcasts densify the network and false/noise feedback reduce hub concentration. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation.
 
-**Attention declines under consequential broadcasts.** Attention to the broadcast is a heritable trait, and its population mean declines across generations — false (δ = −0.94) > noise > truth > silence, with a clean dose-response in feedback gain. The categorical ordering compresses into one continuous relationship: evolved attention strongly tracks the *broadcast-implied corrective-drive intensity* across the gain sweep (Spearman ρ = −0.99 over 15 cells; −0.83 at run level, n = 300). Nobody programmed that ordering; trust in the observer is not updated by any rule, it evolves. The individual-level pathway is not a simple fecundity gradient, and the intensity relationship is descriptive rather than causal mediation. The decline is **not** an artifact of the action-budget: feedback adds weight only to non-reproductive actions, so higher-γ agents face a mechanically lower P(reproduce) — but a reproduction-neutral variant that holds P(reproduce) exactly invariant reproduces the decline almost exactly (median retention 99% over 300 additional runs; `scripts/reproduction_neutral_check.py`). See FINDINGS.
+**Attention declines under consequential broadcasts.** Attention to the broadcast is a heritable trait, and its population mean declines across generations — false (δ = −0.94) > noise > truth > silence, with a clean dose-response in feedback gain. The categorical ordering compresses into one continuous relationship: evolved attention strongly tracks the *broadcast-implied corrective-drive intensity* across the gain sweep (Spearman ρ = −0.99 over 15 cells; −0.83 at run level, n = 300). Nobody programmed that ordering; trust in the observer is not updated by any rule, it evolves. The individual-level pathway is not explained by a simple negative marginal fecundity gradient, and the intensity relationship is descriptive rather than causal mediation. The decline is **not** an artifact of the action-budget: feedback adds weight only to non-reproductive actions, so higher-γ agents face a mechanically lower probability of *selecting* the reproduce action — but a reproduction-neutral variant that holds that probability exactly invariant reproduces the decline almost exactly (median retention 98% across all twelve cells with a negative baseline decline, over 300 additional runs; `scripts/reproduction_neutral_check.py`). See FINDINGS.
 
 ![Evolution of distrust](campaigns/harsh_shock/fig8_trait_evolution.png)
 
@@ -37,7 +37,12 @@ python scripts/dashboard.py runs/F_s7_n2000      # self-contained interactive da
 python scripts/campaign.py --seeds 50 --shock-fraction 0.4 --out campaigns/replication
 python scripts/analyze_campaign.py campaigns/replication
 python scripts/passive_null_checks.py            # passive-counterfactual nulls (Sect. 5.2)
-python scripts/reproduction_neutral_check.py     # reproductive-opportunity control (Sect. 5.5)
+# reproductive-opportunity control (Sect. 5.5). Either unpack rn_sweep_runs.tar.gz
+# from the release into campaigns/, or regenerate the 300 runs first:
+for G in 0.2 0.8 1.6; do python scripts/campaign.py --out campaigns/rn_g$G --seeds 20 \
+  --steps 4000 --shock-step 2000 --gain $G --shock-fraction 0.4 \
+  --conditions "C,F:invert,F:crisis,F:utopia,N" --reproduction-neutral; done
+python scripts/reproduction_neutral_check.py
 python scripts/attention_cost.py                 # corrective-drive intensity vs evolved attention
 python scripts/demo.py                           # one-command live-demo kit
 ```

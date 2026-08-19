@@ -1,13 +1,15 @@
 # Project ONE — Consolidated findings across all campaigns (Aug 2026)
 
-**Evidence base: 927 runs** (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
+**Evidence base: 927 core runs + 300 reproduction-neutral control runs = 1,227 total.** Core campaigns: (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
 3 feedback gains, harsh shock). Runs are 3000–4000 steps (the 2× scale
 campaign uses 3000 steps with shock at t=1500; all others shock at t=2000),
 deterministic, seed-replayable.
 Statistics: PAIRED Wilcoxon signed-rank on per-seed differences (primary) with
 matched-pairs rank-biserial r (tie-corrected via average ranks) and bootstrap
-CIs; Mann-Whitney U / Cliff's δ retained as robustness checks. Raw runs
+CIs; Mann-Whitney U / Cliff's δ retained as a SECONDARY robustness view — it does
+not agree everywhere (e.g. harsh F-vs-A fragmentation: paired p=0.28,
+unpaired p=0.013), and all inferential claims follow the paired analysis. Raw runs
 regenerable via `scripts/campaign.py`.
 
 **RNG note (Aug 2026 revision):** broadcast-signal generation now uses a
@@ -81,11 +83,12 @@ P(reproduce | γ_i, b) = w_r / (W_0 + γ_i·g·D(b)) is DECREASING in γ_i whene
 the drive D(b) > 0 — and I is exactly the quantity governing that penalty, so
 the correlation above could in principle be architectural rather than
 ecological. Controlled by rescaling the reproduce weight by (1 + γ_i·g·D/N_0),
-which holds P(reproduce) exactly at its no-broadcast value (verified: spread
-0.00000 across γ ∈ [0,1], vs 0.209→0.134 uncontrolled) while leaving every
-other feedback response untouched. Rerunning the full sweep (300 runs, config
-flag `reproduction_neutral=True`): median retention across declining cells
-99%; at g=0.8 invert −0.410→−0.407, crisis −0.449→−0.439, noise −0.348→−0.305,
+which holds the reproduce-ACTION SELECTION probability exactly at its
+no-broadcast value, leaving all non-reproductive feedback weights unchanged
+(verified: spread 0.00000 across γ ∈ [0,1], vs 0.209→0.134 uncontrolled).
+Rerunning the full sweep (300 runs, config flag
+`reproduction_neutral=True`): median retention 98% across all twelve cells
+with a negative baseline Δγ̄ (99% across the ten with Δγ̄ < −0.05); at g=0.8 invert −0.410→−0.407, crisis −0.449→−0.439, noise −0.348→−0.305,
 utopia +0.006 unchanged; no cell shows a significant paired shift; the
 intensity correlation persists (ρ = −0.99 → −0.98). Truth in fact declines
 MORE under the control (−0.087→−0.218 at g=0.8), the opposite of a dilution
@@ -93,8 +96,8 @@ artifact. Conclusion: selection on γ is ecological, not a direct
 reproductive-opportunity cost. (With the flag off the engine reproduces all
 stored campaign state hashes bit-for-bit.)
 
-Mechanism note: the individual-level pathway is NOT a simple fecundity
-gradient — within-run ρ(γ_i, offspring count) ≈ +0.05 under F, the decline
+Mechanism note: the remaining individual-level pathway is not explained by a
+simple NEGATIVE MARGINAL fecundity gradient — within-run ρ(γ_i, offspring count) ≈ +0.05 under F, the decline
 persists without the shock (−0.40 no-shock vs −0.39 with), and shock victims'
 mean γ is only +0.03 above the population mean. The pathway plausibly runs
 through lineage survival / energy budgets downstream of reproduction;
