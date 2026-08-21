@@ -1,5 +1,14 @@
 # Paper 2 — design plan
 
+> **Internal working document — NOT part of the Complex Networks 2026 submission.**
+> This records the follow-up study: its design, a pre-registered rule that
+> failed, a primary hypothesis that came back null, and two defects found and
+> fixed en route. Only three results from it reach the manuscript (the
+> evolvable response strength/polarity control in Sect. 5.5); everything else
+> here is future work or negative results kept for the record. Where this
+> document says a limitation is weakened, read the qualifier: the response
+> basis is still mechanistic, and empirical ecologies are unbuilt.
+
 *Working title:* **Which response rules evolve when a network is told about itself?**
 
 Status: **complete** — main campaign, gain and rule-form sweeps, and the
@@ -590,9 +599,9 @@ defaults to `fixed`, and the ecology ensemble's 16/16 validation still passes):
 
 | Paper 1 limitation | Paper 2 status |
 |---|---|
-| hand-written response rules | **removed, and the result is affirmative for Paper 1** — with the response polarity heritable (and the hand-written rule a bit-identically verified point in the searched space), the γ decline survives, attenuated 30–48% under false and noise feedback only. Selection moves the response toward indifference, never inversion |
-| single ecology / parameter family | **removed** — empirical ecologies from real temporal networks, plus the ±25% synthetic ensemble carried over |
-| synthetic shock protocol | **reduced** — observed disruptions used where the data supports it |
+| hand-written response rules | **substantially weakened, not removed** — the response *basis* f_a remains mechanistic; what is now heritable is its strength and polarity. With that freed (and the hand-written rule a bit-identically verified point in the space), the γ decline survives, attenuated 30–48% under false and noise feedback only, and selection moves the response toward indifference rather than inversion except at the highest gain |
+| single ecology / parameter family | **substantially weakened** — 24 ecologies at ±25%, all headline results replicating; this is *local* robustness. Empirical ecologies from real temporal networks remain **open work** (Sect. 3, step 7), not something done |
+| synthetic shock protocol | **open** — observed disruptions would need the empirical loaders, which are not built |
 | agents are not strategic | unchanged, and now more defensible: the policy is selected, not reasoned, and the paper says which |
 | no empirical performativity test | **unchanged, and stated as such** — see Sect. 3 |
 

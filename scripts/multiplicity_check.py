@@ -28,11 +28,13 @@ A second, deliberately hostile family is also reported. Scoping a correction
 to the table that needs it invites the objection that the family was chosen
 to make the result come out, so the same two corrections are applied to a
 superset containing every paired contrast reported anywhere in the paper --
-including all 30 architectural-control cells. Writes
+including all 30 architectural-control cells, the five conformist
+rule-form contrasts and the structural-spillover contrasts. Writes
 campaigns/multiplicity_check.json.
 
     python scripts/multiplicity_check.py
 """
+import glob
 import json
 import os
 import sys
@@ -73,6 +75,35 @@ def paired_p(campaign, key, cond, ref):
         return 1.0, len(seeds)
     nz = d[d != 0]
     return float(wilcoxon(nz, alternative="two-sided")[1]), len(seeds)
+
+
+def traj_p(campaign, cond, key, at_t=None, win=None, ref="A"):
+    """Paired Wilcoxon for an outcome read from the stored trajectories.
+
+    at_t: value at a single observer tick.  win: per-run median over [t0, t1].
+    """
+    def series(tok):
+        out = {}
+        for path in sorted(glob.glob(
+                f"{ROOT}/campaigns/{campaign}/runs/{tok}_s*.json")):
+            with open(path) as f:
+                r = json.load(f)
+            if at_t is not None:
+                g = [x for x in r["globals"] if x.get("t") == at_t]
+                if g:
+                    out[r["seed"]] = g[0][key]
+            else:
+                v = [x[key] for x in r["globals"]
+                     if win[0] <= x["t"] <= win[1] and key in x]
+                if v:
+                    out[r["seed"]] = float(np.median(v))
+        return out
+    a, b = series(ref), series(cond)
+    seeds = sorted(set(a) & set(b))
+    d = np.array([b[s] - a[s] for s in seeds], dtype=float)
+    nz = d[d != 0]
+    p = float(wilcoxon(nz)[1]) if len(nz) else 1.0
+    return p, len(seeds)
 
 
 def benjamini_hochberg(ps, alpha=ALPHA):
@@ -145,6 +176,43 @@ def wider_family():
         for cell, v in cells.items():
             extra.append((f"{variant} shift {cell}",
                           float(v["paired_shift_p"]), int(v["n"])))
+
+    # The five conformist rule-form contrasts (Sect. 5.5).
+    with open(f"{ROOT}/campaigns/rule_form_check.json") as f:
+        rf = json.load(f)["cells"]
+    for cell, v in rf.items():
+        extra.append((f"conformist dgamma {cell} vs A",
+                      float(v["wilcoxon_p"]), int(v["n"])))
+
+    # Structural spillovers (Sect. 5.2) and the F-vs-A cooperation contrast
+    # (Sect. 5.3). These are computed from the raw trajectories rather than
+    # from results.json, which is why they were missed on the first two passes.
+    extra.append(("mean degree (FL) F vs A",)
+                 + traj_p("flagship", "F", "mean_degree", at_t=2000))
+    for key in ("mean_degree", "freeman_centralization",
+                "betweenness_concentration"):
+        conds = ("C", "F", "N") if key == "mean_degree" else ("F", "N")
+        for cond in conds:
+            extra.append((f"{key} (HS) {cond} vs A",)
+                         + traj_p("harsh_shock", cond, key, win=(500, 4000)))
+    for camp in ("flagship", "harsh_shock"):
+        extra.append((f"cooperation ({camp}) F vs A",)
+                     + paired_p(camp, "cooperation_rate", "F", "A"))
+    extra.append(("fragmentation (HS) F vs A",)
+                 + paired_p("harsh_shock", "fragmentation_post", "F", "A"))
+
+    # The evolvable-response-polarity control (Sect. 5.5). ONLY the three
+    # dgamma-vs-A contrasts the manuscript actually reports enter the family --
+    # the per-channel rho tests live in the follow-up study, not this paper, so
+    # importing them would inflate the family with contrasts no reader is
+    # offered. The ecology ensemble contributes NOTHING here by design: it is
+    # reported as replication (sign consistency across 24 ecologies), not as 24
+    # further significance tests.
+    with open(f"{ROOT}/campaigns/policy_campaign/paper_rho_contrasts.json") as f:
+        rho = json.load(f)
+    for cond in ("C", "F", "N"):
+        extra.append((f"rho-control dgamma {cond} vs A",
+                      float(rho[cond]["p"]), int(rho[cond]["n"])))
     return extra
 
 

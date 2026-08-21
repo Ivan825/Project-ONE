@@ -74,22 +74,42 @@
  "bh_changes_no_decision": true,
  "holm_changes_no_decision": true,
  "wider_family": {
-  "m": 58,
+  "m": 77,
   "description": "every paired contrast reported anywhere in the paper, incl. all 30 architectural-control cells",
   "table3_decisions_unchanged_bh": true,
-  "table3_decisions_unchanged_holm": true,
+  "table3_decisions_unchanged_holm": false,
   "demoted_outside_table3": [
    "cooperation (2x) C vs A",
    "dgamma (2x) F:invert vs A",
    "cooperation (2x) N vs A",
    "dgamma (2x) N vs A",
-   "pgf shift N@g0.8"
+   "pgf shift N@g0.8",
+   "conformist dgamma F-crisis vs A",
+   "mean_degree (HS) C vs A",
+   "freeman_centralization (HS) N vs A",
+   "betweenness_concentration (HS) N vs A"
   ],
   "contrasts": [
    {
     "contrast": "cooperation (FL) C vs A",
     "n_pairs": 50,
     "p": 8.881784197001252e-15,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "rho-control dgamma N vs A",
+    "n_pairs": 100,
+    "p": 2.4523106024176965e-10,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "mean degree (FL) F vs A",
+    "n_pairs": 50,
+    "p": 7.237197507947712e-10,
     "sig_uncorrected": true,
     "sig_bh": true,
     "sig_holm": true
@@ -103,9 +123,25 @@
     "sig_holm": true
    },
    {
+    "contrast": "rho-control dgamma F vs A",
+    "n_pairs": 100,
+    "p": 6.750537934136497e-09,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
     "contrast": "cooperation (HS) C vs A",
     "n_pairs": 30,
     "p": 9.313225746154785e-09,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "cooperation (flagship) F vs A",
+    "n_pairs": 50,
+    "p": 3.623269506647375e-08,
     "sig_uncorrected": true,
     "sig_bh": true,
     "sig_holm": true
@@ -135,6 +171,14 @@
     "sig_holm": true
    },
    {
+    "contrast": "rho-control dgamma C vs A",
+    "n_pairs": 100,
+    "p": 1.9824685657133223e-06,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
     "contrast": "dP vs passive (N)",
     "n_pairs": 30,
     "p": 5.144625902175903e-06,
@@ -151,15 +195,103 @@
     "sig_holm": true
    },
    {
-    "contrast": "fragmentation (FL) F vs A",
-    "n_pairs": 50,
-    "p": 0.0009504084140701252,
+    "contrast": "cooperation (harsh_shock) F vs A",
+    "n_pairs": 30,
+    "p": 1.3966113328933716e-05,
     "sig_uncorrected": true,
     "sig_bh": true,
     "sig_holm": true
    },
    {
-    "contrast": "cooperation (2x) N vs A",
+    "contrast": "mean_degree (HS) F vs A",
+    "n_pairs": 30,
+    "p": 3.904104232788086e-05,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "conformist dgamma C vs A",
+    "n_pairs": 15,
+    "p": 6.103515625e-05,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "conformist dgamma F-utopia vs A",
+    "n_pairs": 15,
+    "p": 6.103515625e-05,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "conformist dgamma N vs A",
+    "n_pairs": 15,
+    "p": 6.103515625e-05,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "conformist dgamma F-invert vs A",
+    "n_pairs": 15,
+    "p": 0.0001220703125,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "freeman_centralization (HS) F vs A",
+    "n_pairs": 30,
+    "p": 0.00018860027194023132,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "mean_degree (HS) N vs A",
+    "n_pairs": 30,
+    "p": 0.0002562887966632843,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "betweenness_concentration (HS) F vs A",
+    "n_pairs": 30,
+    "p": 0.0008718203753232956,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": true
+   },
+   {
+    "contrast": "fragmentation (FL) F vs A",
+    "n_pairs": 50,
+    "p": 0.0009504084140701252,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "freeman_centralization (HS) N vs A",
+    "n_pairs": 30,
+    "p": 0.00466480478644371,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "betweenness_concentration (HS) N vs A",
+    "n_pairs": 30,
+    "p": 0.007111456245183945,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "cooperation (2x) C vs A",
     "n_pairs": 8,
     "p": 0.0078125,
     "sig_uncorrected": true,
@@ -175,11 +307,27 @@
     "sig_holm": false
    },
    {
-    "contrast": "cooperation (2x) C vs A",
+    "contrast": "cooperation (2x) N vs A",
     "n_pairs": 8,
     "p": 0.0078125,
     "sig_uncorrected": true,
     "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "mean_degree (HS) C vs A",
+    "n_pairs": 30,
+    "p": 0.017453668639063835,
+    "sig_uncorrected": true,
+    "sig_bh": true,
+    "sig_holm": false
+   },
+   {
+    "contrast": "conformist dgamma F-crisis vs A",
+    "n_pairs": 15,
+    "p": 0.02154541015625,
+    "sig_uncorrected": true,
+    "sig_bh": false,
     "sig_holm": false
    },
    {
@@ -274,6 +422,14 @@
     "contrast": "rn shift F:crisis@g1.6",
     "n_pairs": 20,
     "p": 0.2305126190185547,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "fragmentation (HS) F vs A",
+    "n_pairs": 30,
+    "p": 0.28008678182959557,
     "sig_uncorrected": false,
     "sig_bh": false,
     "sig_holm": false
@@ -431,14 +587,6 @@
     "sig_holm": false
    },
    {
-    "contrast": "pgf shift F:crisis@g0.2",
-    "n_pairs": 20,
-    "p": 0.9272785186767578,
-    "sig_uncorrected": false,
-    "sig_bh": false,
-    "sig_holm": false
-   },
-   {
     "contrast": "pgf shift N@g1.6",
     "n_pairs": 20,
     "p": 0.9272785186767578,
@@ -448,6 +596,14 @@
    },
    {
     "contrast": "rn shift F:invert@g1.6",
+    "n_pairs": 20,
+    "p": 0.9272785186767578,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:crisis@g0.2",
     "n_pairs": 20,
     "p": 0.9272785186767578,
     "sig_uncorrected": false,
@@ -471,7 +627,7 @@
     "sig_holm": false
    },
    {
-    "contrast": "rn shift F:utopia@g0.2",
+    "contrast": "pgf shift C@g0.8",
     "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,
@@ -479,8 +635,8 @@
     "sig_holm": false
    },
    {
-    "contrast": "recovery (harsh_shock) N vs A",
-    "n_pairs": 30,
+    "contrast": "pgf shift F:utopia@g1.6",
+    "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,
     "sig_bh": false,
@@ -488,22 +644,6 @@
    },
    {
     "contrast": "rn shift F:utopia@g1.6",
-    "n_pairs": 20,
-    "p": 1.0,
-    "sig_uncorrected": false,
-    "sig_bh": false,
-    "sig_holm": false
-   },
-   {
-    "contrast": "rn shift F:utopia@g0.8",
-    "n_pairs": 20,
-    "p": 1.0,
-    "sig_uncorrected": false,
-    "sig_bh": false,
-    "sig_holm": false
-   },
-   {
-    "contrast": "pgf shift F:utopia@g0.2",
     "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,
@@ -519,7 +659,7 @@
     "sig_holm": false
    },
    {
-    "contrast": "pgf shift F:utopia@g0.8",
+    "contrast": "pgf shift F:utopia@g0.2",
     "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,
@@ -527,7 +667,23 @@
     "sig_holm": false
    },
    {
-    "contrast": "pgf shift C@g0.8",
+    "contrast": "recovery (harsh_shock) N vs A",
+    "n_pairs": 30,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "rn shift F:utopia@g0.2",
+    "n_pairs": 20,
+    "p": 1.0,
+    "sig_uncorrected": false,
+    "sig_bh": false,
+    "sig_holm": false
+   },
+   {
+    "contrast": "pgf shift F:utopia@g0.8",
     "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,
@@ -543,7 +699,7 @@
     "sig_holm": false
    },
    {
-    "contrast": "pgf shift F:utopia@g1.6",
+    "contrast": "rn shift F:utopia@g0.8",
     "n_pairs": 20,
     "p": 1.0,
     "sig_uncorrected": false,

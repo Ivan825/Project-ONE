@@ -1,6 +1,6 @@
 # Project ONE — Consolidated findings across all campaigns (Aug 2026)
 
-**Evidence base: 927 core runs + 300 reproduction-neutral + 300 γ-free-pruning control runs = 1,527 total.** Core campaigns: (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
+**Evidence base (as reported in the manuscript): 927 core + 300 reproduction-neutral + 300 γ-free-pruning + 400 evolvable-polarity control runs + 1,200 ecology-ensemble runs = 3,127 total.** A further follow-up study (64-cell response policies, gain and rule-form sweeps, selection-timing checks) is documented separately in `docs/PAPER2_PLAN.md` and is NOT part of the manuscript's evidence base. Core campaigns: (250 flagship + 150 harsh shock + 360 sweep + 90 conformist + 32 scale check + 30 replay-control receiving runs + 15 replay-source runs). Flagship (5 conditions × 50 paired seeds, mild shock),
 harsh shock (5 × 30, 40% hub removal), sensitivity sweep (6 tokens × 20 seeds ×
 3 feedback gains, harsh shock). Runs are 3000–4000 steps (the 2× scale
 campaign uses 3000 steps with shock at t=1500; all others shock at t=2000),
@@ -168,9 +168,12 @@ the outcome sense, is a property of the lie–response pair.
 ## Finding 6 — Truthful feedback doubles costly cooperation
 0.397 vs 0.179 baseline (flagship paired Δmedian +0.200 [0.172, 0.239],
 r=1.00, p≈9e-15; replicated harsh r=0.99), monotone in gain (0.27→0.48). The
-loop implements distributed corrective feedback. Broadcasts also densify and
-flatten the network (mean degree +1.1 truth / +3.8 lie / +2.8 noise; Freeman
-centralization and betweenness concentration fall under lie and noise).
+loop implements distributed corrective feedback. **False and noise broadcasts**
+densify and flatten the network (mean degree +3.8 lie / +2.8 noise; Freeman
+centralization and betweenness concentration fall under both). The truth arm
+(+1.1, r=0.49) is reported as a within-campaign figure only: it is significant
+in just 1 of 24 ecologies and correct-signed in 16, so the general claim is
+scoped to the distortions — see the ecological-robustness section below.
 
 ## Finding 7 — Pre-specified null: no detected feedback effect on recovery time
 In BOTH main campaigns, every paired Δmedian is exactly 0 and every p > 0.22:
@@ -187,6 +190,24 @@ It does not replicate at base scale (flagship F p = 0.32, harsh-shock F
 p = 0.46). Treat as a lead for a larger-n scale campaign, not a result. The
 paper states it in these terms rather than claiming the null holds "in any
 condition or campaign" (an earlier draft did, and that was too strong).
+
+**Evolvable response strength/polarity control (`scripts/policy_campaign.py`,
+`campaigns/policy_campaign/`).** The three controls above all hold the response
+mapping f_a FIXED, so a critic can still say that lowering γ is the only route
+the architecture leaves open for disengaging from a broadcast. Controlled by
+making the polarity and strength ρ_a ∈ [−2,2] of each action-channel response
+heritable and mutated at reproduction (config `policy_mode="polarity"`):
+ρ_a = 1 reproduces the hand-written rule BIT-IDENTICALLY (verified by test for
+both the corrective and the conformist rule form), ρ_a = 0 ignores that
+channel, ρ_a < 0 reverses it. The γ̄ decline persists with this second route
+open — vs A at n=100: C −0.125 (p=2.0e-6), F −0.222 (p=6.8e-9), N −0.212
+(p=2.5e-10). On matched seeds, freeing ρ ATTENUATES the decline under false
+(+0.126, r=0.66) and noise (+0.165, r=0.65) feedback, both p≈0.001, but not
+under truth (p=0.90): populations use both routes, and only where
+disengagement pays. NOTE this is evolvable strength/polarity of a mechanistic
+response basis — NOT a learned arbitrary policy; the underlying f_a still
+exists. Only these three Δγ̄ contrasts enter the manuscript's inferential
+family (m=77); the per-channel ρ analyses belong to the follow-up study.
 
 **Rule-form control (`scripts/rule_form_check.py`,
 `campaigns/rule_form_check.json`).** The two architectural controls hold the

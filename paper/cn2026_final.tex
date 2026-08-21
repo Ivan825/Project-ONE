@@ -8,9 +8,13 @@
 \def\UrlFont{\rmfamily}
 \setlength{\emergencystretch}{0.5em}
 % Tighten space around floats (6 floats): typographic only, no text compression.
-\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
-\setlength{\intextsep}{12pt plus 2pt minus 2pt}
-\setlength{\abovecaptionskip}{6pt}
+\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 2pt minus 2pt}
+\setlength{\floatsep}{11pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\abovedisplayskip}{6pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{6pt plus 2pt minus 2pt}
 
 \begin{document}
 \mainmatter
@@ -25,7 +29,7 @@
 \maketitle
 
 \begin{abstract}
-Many networks respond to measurements of their own state: markets to indices, organizations to metrics, platforms to trending signals. We present a controlled laboratory for this reflexive loop: an evolving agent population forms an adaptive network whose macrostate is compressed into a self-model and broadcast back --- accurately, distorted, or as matched-range noise. Across 1{,}527 deterministic runs with paired-seed comparisons: measurement without broadcast is causally inert. A natural self-fulfilling-prophecy statistic registers strong apparent attraction toward false and replayed self-models --- but a passive counterfactual, scoring untreated twins against matched references, fully accounts for it: a caution for empirical claims of performativity. What broadcasts demonstrably change is behavior and structure, and which lies come true is set jointly by the lie and the response regime. Finally, heritable attention to the broadcast declines across generations, most strongly under high-drive false and noisy feedback: populations evolve to ignore consequential misleading observers.
+Networks often act on measurements of their own state, a loop in which descriptions can change what they describe. We build a controlled evolving-network model to ask when this loop causes genuine self-fulfilling effects. Across 3{,}127 deterministic runs with paired-seed comparisons, measurement without broadcast changes nothing. A seemingly strong ``pull'' toward false and replayed self-models disappears when untreated twin trajectories are scored against matched references, showing how intrinsic dynamics mimic performativity. Broadcasts do have real effects: they reshape cooperation and network structure, and whether a false self-model comes true, in the outcome sense, depends on how agents respond. Finally, attention to the broadcast is heritable and evolves downward under consequential feedback --- most steeply where that feedback carries high corrective drive --- surviving three architectural controls and an ecological ensemble. The results separate apparent performativity from genuine feedback effects and show that trust in a collective self-model can itself evolve.
 \keywords{adaptive networks, agent-based modeling, reflexivity, self-fulfilling dynamics, performative prediction, evolution of trust}
 \end{abstract}
 
@@ -58,18 +62,16 @@ observer, and a controllable broadcast channel; (2) a six-condition causal
 design --- verifying observer-side-effect invariance and isolating the effect
 of broadcasting, with matched-range noise and replayed-self-model
 controls --- plus a \emph{passive-counterfactual methodology} for reflexivity
-metrics: a natural ``story pull'' statistic registers strong apparent
-steering that untreated twin trajectories fully account for, a caution for
-empirical tests of performative prediction; (3) evidence for what broadcasts
-\emph{do} change: truthful feedback doubles costly cooperation, distorted
-broadcasts mobilize or pacify depending on the lie--response pairing
-(reversing under conformity), and broadcasts densify the network while false
-and noise feedback reduce hub concentration; and (4) receiver sensitivity as a
-continuous heritable trait, whose \emph{population distribution shifts
-systematically under feedback}, tracking the broadcast-implied
-corrective-drive intensity and surviving two architectural controls --- trust
-in the observer is not updated by any rule, it evolves.
-Figure~\ref{fig:loop} summarizes the design.
+metrics, under which a natural ``story pull'' statistic is fully accounted for
+by untreated twin trajectories; (3) evidence for what broadcasts \emph{do}
+change: truthful feedback doubles costly cooperation, distorted broadcasts
+mobilize or pacify depending on the lie--response pairing (reversing under
+conformity), and false and noise broadcasts densify the network while also
+reducing hub concentration; and (4) receiver sensitivity as a continuous
+heritable trait, whose \emph{population distribution shifts systematically
+under feedback}, tracking the broadcast-implied corrective-drive intensity and
+surviving three architectural controls and a randomized ecological ensemble ---
+trust in the observer is not updated by any rule, it evolves. Figure~\ref{fig:loop} summarizes the design.
 
 
 \begin{figure}[t]
@@ -87,19 +89,17 @@ Figure~\ref{fig:loop} summarizes the design.
 \end{tikzpicture}
 \caption{The reflexive loop and its corruption points. Local actions generate
 the network; the observer compresses it into a self-model; the broadcast
-channel returns it truthfully, distorted, replayed from another run, as
-noise, or not at all. Action-propensity responses are scaled by heritable
-sensitivity $\gamma_i$ and global gain $g$; the hub-targeted pruning
-probability is scaled by $\gamma_i$ alone.}
+channel returns it truthfully, distorted, replayed, as noise, or not at all.
+Action-propensity responses scale with heritable sensitivity $\gamma_i$ and
+gain $g$; the hub-targeted pruning probability scales with $\gamma_i$ alone.}
 \label{fig:loop}
 \end{figure}
 
 \section{Related Work}
 \textbf{Adaptive and temporal networks.} Coevolution of state and topology
-\cite{gross2008adaptive,holme2012temporal} covers our setting (births,
-deaths, rewiring by agent decisions); robustness to targeted node removal is
-classical \cite{albert2000error}, and we use hub removal as a standardized
-perturbation.
+\cite{gross2008adaptive,holme2012temporal} covers our setting; robustness to
+targeted node removal is classical \cite{albert2000error}, and we use hub
+removal as a standardized perturbation.
 \textbf{Global coupling.} A mean field fed back to units reshapes collective
 dynamics \cite{kuramoto1984chemical}; ours is multidimensional, potentially
 \emph{false}, and its units are born, die, and evolve.
@@ -111,17 +111,16 @@ false-broadcast conditions; here they are dosable and ablatable.
 \textbf{Performative prediction and endogenous signals.} Predictions that
 alter the distribution they forecast are formalized as performative
 prediction \cite{perdomo2020performative,hardt2025performative}, including
-networked settings \cite{wang2023network} and populations deciding whether
-to trust predictions of collective outcomes \cite{gois2024performative} ---
-there trust is \emph{updated} from past accuracy, whereas here attention is
-inherited and mutated with no rule referencing reliability: trust is not
-updated, it evolves; self-fulfilling signals of an endogenous network state
-arise in congestion games \cite{iwase2017self}. Causal identification of
-performative effects without randomization is an active problem
-\cite{cheng2024causal}; ours is narrower and complementary --- a concrete
-false-positive failure mode of directional-alignment metrics, diagnosed with
-paired passive twins (Sect.~\ref{sec:pull}), plus turnover and a heritable
-receiver-sensitivity trait absent from these models.
+networked settings \cite{wang2023network} and populations deciding whether to
+trust predictions of collective outcomes \cite{gois2024performative}. There
+trust is \emph{updated} from past accuracy; here attention is inherited and
+mutated with no rule referencing reliability. Self-fulfilling signals of an
+endogenous network state arise in congestion games \cite{iwase2017self}, and
+causal identification of performative effects without randomization is an
+active problem \cite{cheng2024causal}. Ours is narrower and complementary: a
+concrete false-positive failure mode of directional-alignment metrics,
+diagnosed with paired passive twins (Sect.~\ref{sec:pull}), plus turnover and
+a heritable receiver-sensitivity trait absent from these models.
 \textbf{Signaling and the evolution of trust.} In sender--receiver games
 receivers can evolve to ignore unreliable signals \cite{skyrms2010signals};
 here the signal is \emph{self-referential} and attention to it is a
@@ -132,34 +131,34 @@ generative ABM tradition \cite{epstein1996growing,bonabeau2002agent}, with an
 engine using ideas from Mesa \cite{kazil2020mesa} and NetworkX
 \cite{hagberg2008exploring}. Multi-agent RL treats global state as an
 \emph{architectural} aid \cite{foerster2016learning}; we treat it as an
-\emph{experimental variable} with controlled veracity. Language-model agent
-populations increasingly study emergent social behavior
-\cite{park2023generative}; this rule-based setting provides causally clean
-baselines for the shared-dashboard designs natural there.
+\emph{experimental variable} with controlled veracity. For language-model
+agent populations \cite{park2023generative}, this rule-based setting provides
+causally clean baselines for the shared-dashboard designs natural there.
 
 \section{The Model}
 \subsection{Agents and ecology}
 Each agent $i$ carries a heritable trait vector
 $\theta_i=(\mathrm{coop},\mathrm{expl},\mathrm{risk},\mathrm{soc},
 \mathrm{share},\gamma_i)\in[0,1]^6$, where $\gamma_i$ is its
-\emph{global sensitivity} --- how strongly broadcasts modulate its behavior.
+\emph{global sensitivity} --- how strongly broadcasts modulate its behavior ---
+and $\bar\gamma$ its population mean.
 Agents hold energy; each step they pay metabolism and choose one action ---
 harvest, share (costly transfer to a neighbor), connect, prune, reproduce, or
 idle --- with probabilities proportional to trait- and state-dependent
-propensities. The resource pool regenerates logistically; reproduction
-requires an energy threshold and copies traits with Gaussian mutation
-($\sigma=0.05$); energy exhaustion or age causes death. Founding ages are
-staggered to avoid cohort artifacts.
+propensities. The resource pool regenerates logistically; reproduction requires an energy
+threshold and copies traits with Gaussian mutation ($\sigma=0.05$); energy
+exhaustion or age causes death; founding ages are staggered to avoid cohort
+artifacts.
 
 \subsection{Observer and broadcast conditions}
 Every $\Delta t=10$ steps the observer computes the macrostate $S(t)$:
 population, fragmentation (1 minus largest-component share), degree- and
 betweenness-concentration, Freeman centralization \cite{freeman1978centrality},
-per-capita costly-helping rate, energy Gini, and turnover, plus mean traits
-(logged, never broadcast). The broadcast $b(t)$ carries five of these,
-normalized to $[0,1]$: \emph{fragmentation}, \emph{degree concentration}
-(top-5\% degree share; distinct from Freeman centralization),
-\emph{cooperation}, \emph{inequality}, and \emph{turnover}. Six conditions
+per-capita costly-helping rate, energy Gini, turnover, and mean traits (logged,
+never broadcast). The broadcast $b(t)$ carries five of these, normalized to
+$[0,1]$: \emph{fragmentation}, \emph{degree concentration} (top-5\% degree
+share, distinct from Freeman centralization), \emph{cooperation},
+\emph{inequality} and \emph{turnover}. Six conditions
 define what agents receive (Table~\ref{tab:conditions}). Distorted broadcasts come in three modes:
 \emph{invert} ($b_k = 1-s_k$ componentwise), \emph{crisis} (fixed alarming
 values: fragmentation $0.9$, degree concentration $0.9$, cooperation $0.1$,
@@ -172,8 +171,12 @@ Each step, agent $i$ selects one action $a$ with probability proportional to
 w_i(a,t) \;=\; w_a\big(\theta_i, x_i(t)\big) \;+\; \gamma_i\, g\, f_a\big(b(t)\big),
 \label{eq:response}
 \end{equation}
-where $w_a(\theta_i, x_i)$ is the trait- and local-state-dependent base
-propensity, $g$ is the global feedback gain, and $f_a$ is the response rule.
+where $x_i(t)$ is $i$'s local state, $g$ the global feedback gain, $f_a$ the
+response rule, and the
+base propensities are harvest $1+\mathbf{1}[e_i<15]$, share
+$0.6\theta_{\mathrm{coop}}\theta_{\mathrm{share}}$, connect
+$0.4\theta_{\mathrm{soc}}+0.3\theta_{\mathrm{expl}}$, prune $0.08$, reproduce
+$0.5\,\mathbf{1}[e_i\geq30]$ and idle $0.2$ ($e_i$ = energy).
 In the primary \emph{corrective} regime agents repair reported deficits:
 $f_{\mathrm{connect}} = \max(0,\, b_{\mathrm{frag}}-0.3)$,
 $f_{\mathrm{share}} = \max(0,\, 0.5-b_{\mathrm{coop}}) + 0.5\max(0,\,
@@ -189,9 +192,8 @@ selection} rather than action choice, in both regimes: while reported degree
 concentration exceeds $0.6$ a pruning agent cuts its highest-degree neighbor
 (ties by id) with probability $\gamma_i$ --- $g$ scales action propensities
 only, not this probability --- else a uniform neighbor; and new links attach
-to a neighbor-of-a-neighbor with probability $0.7$ when available (else a
-uniform non-neighbor), an explicit
-triadic-closure tendency behind the clustering in Sect.~3.4. All rule
+to a neighbor-of-a-neighbor with probability $0.7$ when available, else a
+uniform non-neighbor --- the triadic closure behind Sect.~3.4. All rule
 constants are fixed across experiments (Table~\ref{tab:params}).
 
 \begin{table}[t]
@@ -203,19 +205,19 @@ constants are fixed across experiments (Table~\ref{tab:params}).
 \toprule
 initial population & 150 & resource capacity $K$ & 6000 & observer interval $\Delta t$ & 10 steps\\
 population cap & 1200 & base regeneration & 60/step & feedback gain $g$ & 0.8 (swept 0.2--1.6)\\
-initial edges/agent & 3 (random) & regeneration rate $r$ & 0.12 & mutation $\sigma$ & 0.05\\
+initial edges/agent & 3 (random) & regeneration rate $r_{\mathrm{reg}}$ & 0.12 & mutation $\sigma$ & 0.05\\
 initial energy & 20 & harvest cap & 2.5/step & initial traits & mean 0.5, s.d.\ 0.15\\
 metabolism & 0.8/step & connect cost / share & 0.25 / 3.0 & reprod.\ threshold / cost & 30 / 16\\
 run length & 3000--4000 steps & min.\ reproduction age & 15 steps & lifespan (mean $\pm$ s.d.) & $400 \pm 80$ steps\\
 shock time $t_{\mathrm{shock}}$ & \multicolumn{5}{l}{2000 (1500 in the $2\times$ scale check)}\\
 \bottomrule
 \end{tabular}}
+
 \end{table}
 
 \begin{table}[t]
 \centering\footnotesize
-\caption{Experimental conditions. All start from matched parameter
-distributions with paired random seeds.}
+\caption{Experimental conditions; all start from matched parameter distributions with paired seeds.}
 \label{tab:conditions}
 \setlength{\tabcolsep}{4pt}
 \resizebox{\textwidth}{!}{%
@@ -235,7 +237,7 @@ R --- Replayed self-model & on & another run's genuine $S(t)$ & structure contro
 
 \subsection{Emergent network structure}
 The emergent networks are dense, clustered, and heterogeneous: at
-$t=2{,}000$ the giant component (six graphs: A and C $\times$ 3 seeds) has
+$t=2{,}000$ the giant component (six graphs: A and C $\times$ 3 seeds) has mean path length
 $L\approx1.8$--$2.5$, clustering
 $1.8$--$2.9\times$ a matched Erd\H{o}s--R\'enyi null, and degree coefficient
 of variation $0.6$--$0.74$; against the stricter degree-preserving
@@ -284,25 +286,25 @@ yield the same raw F-vs-N ordering. No pre-specified outcome was dropped, and
 all other reported measures --- including the evolved trait change --- are
 exploratory.
 
-\paragraph{Passive counterfactual.} Crucially, $P$ can also be evaluated on
-trajectories that never received the reference: for each treated run we
-compute $P$ on the paired-seed \emph{untreated} trajectory (A/B) scored
-against a matched reference of the same type, defining the
+\paragraph{Passive counterfactual.} $P$ can also be evaluated on trajectories
+that never received the reference: for each treated run we compute $P$ on the
+paired-seed \emph{untreated} trajectory (A/B) scored against a matched
+reference of the same type, defining the
 \emph{counterfactual performativity gap} $\Delta P = P_{\mathrm{actual}} -
 P_{\mathrm{passive}}$ (Sect.~\ref{sec:pull}). Campaigns: a \emph{flagship} run (conditions
 A/B/C/F$_{\mathrm{invert}}$/N $\times$ 50 paired seeds, mild shock), a
 \emph{harsh-shock} replication (40\% hub removal, $\times$30 seeds),
 a \emph{sensitivity sweep} (feedback gain $g\in\{0.2,0.8,1.6\}$ $\times$
 \{A, C, F$_{\mathrm{invert}}$, F$_{\mathrm{crisis}}$, F$_{\mathrm{utopia}}$,
-N\} $\times$ 20 seeds), a $2\times$ \emph{scale check} (doubled population and resources), a conformist \emph{response-regime campaign} (15 seeds per cell), and a \emph{replay control} (30 receiving runs on the harsh-shock seed list plus 15 auxiliary source runs): the core campaigns comprise $250+150+360+90+32+30+15 = 927$ runs of 3{,}000--4{,}000 steps; the two architectural controls (Sect.~5.5) add 300 each, for 1{,}527 in total. Because conditions share seed lists the design is paired; the primary
+N\} $\times$ 20 seeds), a $2\times$ \emph{scale check} (doubled population and resources), a conformist \emph{response-regime campaign} (15 seeds per cell), and a \emph{replay control} (30 receiving runs on the harsh-shock seed list plus 15 auxiliary source runs): the core campaigns comprise $250+150+360+32+90+30+15 = 927$ runs of 3{,}000--4{,}000 steps; the three architectural controls (Sect.~5.5) add $300+300+400$ and the ecological ensemble (Sect.~5.7) 1{,}200, for 3{,}127 in total. Because conditions share seed lists the design is paired; the primary
 analysis is a Wilcoxon signed-rank test on per-seed differences with
 matched-pairs rank-biserial $r$ and a bootstrap 95\% CI on the median
 difference. Unpaired Mann--Whitney $U$ with Cliff's $\delta$ is a secondary
 robustness view; all inferential claims follow the paired analysis, and
 other logged measures are exploratory. Per-run distributions for every
 reported outcome ship with the released data; cells carry 15--50 paired seeds;
-the three smaller checks --- $2\times$ scale ($n=8$), the mechanism probe
-($n=5$), the structural nulls (six graphs) --- are flagged where they appear.
+the two smaller checks --- $2\times$ scale ($n=8$) and the structural nulls
+(six graphs) --- are flagged where they appear.
 
 \section{Results}
 
@@ -314,11 +316,10 @@ difference). FL = flagship (50 pairs), HS = harsh shock (30 pairs).
 ``adj.'' compares $\Delta P = P_{\mathrm{actual}} - P_{\mathrm{passive}}$
 between conditions (Sect.~\ref{sec:pull}). Multiplicity: over the eight rows
 carrying a point $p$, Benjamini--Hochberg and the stricter Holm--Bonferroni
-both leave every decision unchanged, and still do when the family is enlarged
-to all $58$ paired contrasts in the paper; the only demotions there are the
-$n\,{=}\,8$ scale-check contrasts and the one attenuating control cell,
-neither load-bearing. Exploratory analyses are read through effect size and
-replication rather than adjusted significance.}
+both leave every decision unchanged. Enlarging the family to all $77$ paired contrasts in the paper, BH still
+leaves every decision here unchanged; the stricter Holm demotes one, the
+weakest ($p=9.5\times10^{-4}$). Other demotions fall in exploratory checks. Exploratory analyses are read through effect size
+and replication rather than adjusted significance.}
 \label{tab:stats}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llrrr@{}}
@@ -348,45 +349,49 @@ instrument acquires causal power only when it broadcasts.
 
 \subsection{Apparent story pull is explained by a passive counterfactual}
 \label{sec:pull}
-Except where stated, results concern the corrective regime;
-Sect.~\ref{sec:regime} shows how they change under conformity.
-
+Except where stated, results concern the corrective regime; Sect.~\ref{sec:regime} shows how they change under conformity.
 Evaluated naively, the story-pull statistic appears to show strong
-self-fulfilling steering. Raw $P$ (harsh shock; medians, bootstrap 95\% CIs)
-is positive in all three non-truth conditions --- F $0.0078$ $[0.0066,
-0.0100]$, N $0.0014$ $[0.0001, 0.0023]$ --- and largest for a sibling world's
-replayed genuine self-model (condition R; 30 receivers on the harsh-shock
-seed list, one of 15 sources each): $0.0241$ $[0.0197, 0.0265]$. The hierarchy
-R $>$ F $>$ N is reliable (F vs N $r=0.89$,
-$p\!\approx\!1.7\times10^{-6}$; robust to one receiver per source, $n=15$,
-$r\geq0.98$, and to a source-clustered bootstrap).
+self-fulfilling steering. Raw $P$ (harsh shock; medians with bootstrap
+95\% CIs) is positive in all three non-truth conditions: F $0.0078$
+$[0.0066, 0.0100]$ and N $0.0014$ $[0.0001, 0.0023]$. It is largest for a sibling
+world's replayed genuine self-model, condition R, at $0.0241$ $[0.0197,
+0.0265]$ --- 30 receivers on the harsh-shock seed list, one of 15 sources
+each. The hierarchy R $>$ F $>$ N is reliable: F vs N gives $r=0.89$,
+$p\!\approx\!1.7\times10^{-6}$, and it survives both one receiver per source
+($n=15$, $r\geq0.98$) and a source-clustered bootstrap.
 
 A short observation shows why raw $P$ can mislead. Under the inverted
-reference $b_t=1-s_t$, $\mathrm{sign}(b_t-s_t)=\mathrm{sign}(\tfrac12-s_t)$;
-if an untreated component simply mean-reverts toward mid-range,
+reference $b_t=1-s_t$ we have
+$\mathrm{sign}(b_t-s_t)=\mathrm{sign}(\tfrac12-s_t)$. Suppose an untreated
+component simply mean-reverts toward mid-range:
 $s_{t+1}-s_t=-\kappa(s_t-\tfrac12)+\eta_t$ with $\kappa>0$ and
-$\mathbb{E}[\eta_t\,|\,s_t]=0$, then
+$\mathbb{E}[\eta_t\,|\,s_t]=0$. Then
 $\mathbb{E}[\mathrm{sign}(b_t-s_t)(s_{t+1}-s_t)\,|\,s_t]
 =\kappa\,|s_t-\tfrac12|>0$: ordinary mean reversion masquerades as
-attraction toward the mirror, with zero causal feedback; post-shock
+attraction toward the mirror, with zero causal feedback. Post-shock
 relaxation plays the same role for the replayed reference, which tracks where
 recovering trajectories go anyway. The remedy is the \emph{counterfactual
-performativity gap} $\Delta P$: score the paired-seed \emph{untreated}
+performativity gap} $\Delta P$. Score the paired-seed \emph{untreated}
 trajectory (A, or the identical B) post hoc against a matched reference of the
-same type. Untreated worlds ``move toward'' these references \emph{more} than
-treated worlds move toward their actual broadcasts (passive medians $0.0119$,
-$0.0300$, $0.0073$), giving uniformly negative
-$\Delta P$: $-0.0036$ (F), $-0.0058$ (R), $-0.0055$ (N), each
-$p\!<\!2\times10^{-5}$. Between-condition contrasts of $\Delta P$ are not
-significant in either campaign (F vs N: harsh $p=0.084$; flagship $p=0.63$;
-R vs N: $p=0.95$). Raw $P$ is thus dominated by the intrinsic dynamics above,
-which align best with realistic references and worst with noise (excluding
-the shock transition shifts every median by $<\!0.0004$ absolute and changes
-no conclusion). Response activation confirms the reading: R is mostly quiescent
-($\langle|b_k-s_k|\rangle$ $0.10$, against $0.64$ F and $0.36$ N) yet shows
-the largest raw pull, which activation therefore cannot explain. Under the primary corrective regime Eq.~\ref{eq:pull} thus provides \emph{no
-evidence of aggregate content-specific attraction beyond intrinsic dynamics};
-the small negative $\Delta P$, similar across signal types, is consistent with
+same type. References are matched, not resampled: for N and R the twin gets
+the \emph{same realized} sequence its treated partner received, index-aligned
+on the observer grid; for invert, $b^\ast_t=1-s_t$ on the twin itself.
+Untreated worlds ``move toward'' these references \emph{more} than
+treated worlds move toward their actual broadcasts: passive medians $0.0119$,
+$0.0300$, $0.0073$. Every $\Delta P$ is therefore negative: $-0.0036$ (F), $-0.0058$ (R),
+$-0.0055$ (N), each $p\!<\!2\times10^{-5}$. Between-condition contrasts of
+$\Delta P$ are significant in neither campaign (F vs N: harsh $p=0.084$,
+flagship $p=0.63$; R vs N: $p=0.95$). Raw $P$ is thus dominated by the
+intrinsic dynamics above, which align best with realistic references and worst
+with noise (excluding the shock transition shifts every median by
+$<\!0.0004$).
+Response activation cannot explain the hierarchy either: R is the most
+quiescent of the three ($\langle|b_k-s_k|\rangle$ $0.10$, against $0.64$ F
+and $0.36$ N) yet has the largest raw pull.
+
+Under the primary corrective regime Eq.~\ref{eq:pull} thus provides \emph{no
+evidence of aggregate content-specific attraction beyond intrinsic dynamics}.
+The small negative $\Delta P$, similar across signal types, is consistent with
 broadcasts mildly dampening that drift. This is the paper's methodological
 result: a statistic natural in empirical performativity studies registers
 large, internally consistent, entirely artifactual ``steering'' unless checked
@@ -394,18 +399,18 @@ against passive twins. We offer $\Delta P$ as a paired diagnostic estimator
 for designs with an untreated twin, not a general identification theorem.
 
 \paragraph{Structural spillovers, by contrast, are real.} Agents persistently
-told the network is fragmenting over-connect it (mean degree $19.8$ vs $12.3$
-in matched flagship runs at $t=2000$; paired $\Delta$median $+7.2$,
-$p\!\approx\!7\times10^{-10}$), reducing post-shock fragmentation (flagship
-paired $\Delta$median $-0.017$, $r=-0.52$, $p\!\approx\!10^{-3}$;
-directionally consistent, ns, under harsh shock).
-Broadcasts densify and flatten the network: relative to A (paired, harsh
-shock, per-run medians over $t\geq500$), mean degree rises $+1.1$ under truth
-($r=0.49$), $+3.8$ under the inverted lie ($r=0.80$), $+2.8$ under noise
-($r=0.73$), while Freeman centralization (F: $-0.026$, $r=-0.74$; N:
-$-0.010$) and betweenness concentration (F: $-0.007$, $r=-0.67$; N:
-$-0.008$) fall: the fed-back network is denser and less hub-dominated than
-the silent one.
+told the network is fragmenting over-connect it: mean degree $19.8$ vs $12.3$
+in matched flagship runs at $t=2000$ (paired $\Delta$median $+7.2$,
+$p\!\approx\!7\times10^{-10}$). Post-shock fragmentation falls with it
+(flagship paired $\Delta$median $-0.017$, $r=-0.52$,
+$p\!\approx\!10^{-3}$; directionally consistent but ns under harsh shock).
+False and noise broadcasts densify the network, and also flatten it.
+Relative to A (paired, harsh shock, per-run medians over $t\geq500$), mean
+degree rises $+1.1$ under truth ($r=0.49$), $+3.8$ under the inverted lie
+($r=0.80$) and $+2.8$ under noise ($r=0.72$). On the same runs and window,
+Freeman centralization falls under both distortions (F: $-0.026$, $r=-0.74$;
+N: $-0.010$), as does betweenness concentration (F: $-0.007$, $r=-0.67$;
+N: $-0.008$).
 
 \begin{figure}[t]
 \centering
@@ -422,38 +427,35 @@ over grey). Middle: under corrective responses the alarmist (crisis) lie does
 \subsection{The type of lie sets what changes}
 The three distortion modes produce qualitatively different \emph{outcome}
 regimes (Fig.~\ref{fig:sweep}). The \emph{inverted} self-model, always
-reporting the mirror of reality, keeps most corrective responses
-persistently active (four of five on $\geq 90\%$ of ticks): it mobilizes
-costly helping ($+0.106$ over baseline, flagship $r=0.82$) and drives the
-over-connection above. The \emph{crisis} self-model is self-defeating for
-structure --- corrections push fragmentation away from the alarmist report
---- yet its permanent cooperation-deficit signal mobilizes the highest
-costly-helping rates of any lie under correction ($0.35$--$0.45$ across
-gains; only truthful feedback at $g=1.6$ exceeds them, $0.48$). The \emph{utopia} self-model is behaviorally inert: because
-responses fire only on reported deficits, a flattering broadcast triggers
-nothing and is indistinguishable from disconnecting the channel, at every
-gain: under purely corrective rules, flattery equals silence. Caveat: these
+reporting the mirror of reality, keeps four of five corrective responses
+active on $\geq 90\%$ of ticks: it mobilizes costly helping ($+0.106$ over
+baseline, flagship $r=0.82$) and drives the over-connection above. The \emph{crisis} self-model is self-defeating for
+structure: corrections push fragmentation away from the alarmist report. Yet
+its permanent cooperation-deficit signal mobilizes the highest costly-helping
+rates of any lie under correction ($0.35$--$0.45$ across gains; only truthful
+feedback at $g=1.6$ exceeds them, $0.48$). The \emph{utopia} self-model is behaviorally inert: responses fire only on
+reported deficits, so a flattering broadcast triggers nothing and is
+indistinguishable from disconnecting the channel at every gain. Under purely
+corrective rules, flattery equals silence. Caveat: these
 response \emph{directions} follow from Eq.~\ref{eq:response} by construction;
-the magnitude asymmetry across distortion types, the spillovers, and the
-evolutionary consequences below do not.
+the magnitudes, spillovers and evolutionary consequences below do not.
 
 \subsection{The response regime decides which lies come true}
 \label{sec:regime}
 Conformist agents reverse the taxonomy exactly as the mechanism predicts
-(Table~\ref{tab:regime}). The
-\emph{crisis} lie, self-defeating under correction, becomes strongly
-self-fulfilling under conformity: told the world is fragmenting, imitators cut
-ties and fragmentation rises an order of magnitude above baseline ($0.400$ vs
-$0.038$). The \emph{utopia} lie flips from behaviorally inert to benevolently
+(Table~\ref{tab:regime}). The \emph{crisis} lie, self-defeating under
+correction, becomes strongly self-fulfilling under conformity: told the world
+is fragmenting, imitators cut ties and fragmentation rises an order of
+magnitude above baseline ($0.400$ vs $0.038$). The \emph{utopia} lie flips from behaviorally inert to benevolently
 self-fulfilling: ``everyone cooperates'' becomes true by imitation
 (cooperation $0.428$). Even noise mobilizes: imitating randomly reported
 cooperation levels raises costly helping to $0.445$, as high as any lie,
 since imitation amplifies whatever is reported. Which false self-models come
 true --- in the outcome sense --- is therefore a property of the
 lie--response pair, not of the lie alone. Compactly: with macrostate update
-$S_{t+1}=\Phi\big(S_t, R(B(S_t))\big)$ for broadcast map $B$ and response
-rule $R$, self-fulfillment is a property of the composition $R\circ B$, not
-of $B$ alone.
+$S_{t+1}=\Phi\big(S_t, \mathcal{R}(\mathcal{B}(S_t))\big)$ for broadcast map
+$\mathcal{B}$ and response rule $\mathcal{R}$, self-fulfillment is a property
+of the composition $\mathcal{R}\circ\mathcal{B}$, not of $\mathcal{B}$ alone.
 
 \begin{table}[t]
 \centering\footnotesize
@@ -476,74 +478,78 @@ Utopia & $0.183$ (inert) & $0.038$ (inert) & $\mathbf{0.428}$ & $0.025$\\
 \subsection{Attention declines under consequential broadcasts}
 Mean heritable global sensitivity $\bar\gamma$ changes over $\sim$20
 generations of lineage depth as an emergent, unprogrammed function of
-broadcast quality (Fig.~\ref{fig:trait}). At $g=0.8$ (harsh shock): no
+broadcast quality. At $g=0.8$ (harsh shock): no
 broadcast $-0.03$ (neutral drift), truth $-0.10$, noise $-0.34$ ($r=-0.94$,
 $p\!\approx\!2\times10^{-7}$), false $-0.42$ ($\Delta$median $-0.336$
 $[-0.456,-0.281]$, $r=-1.00$, $p\!\approx\!1.9\times10^{-9}$). The sweep is
 dose-ordered: the decline under the inverted broadcast deepens from $-0.12$
 ($g=0.2$) to $-0.45$ ($g=1.6$), and at the highest gain even \emph{accurate}
 feedback declines markedly ($-0.24$). The categorical ordering compresses
-into one continuous relationship: with broadcast-implied corrective-drive
-intensity $I = g\,\langle\textstyle\sum_a f_a(b(t))\rangle$ (computable from
-the broadcast alone), evolved attention tracks $I$ across the 15 sweep cells
-almost perfectly (Spearman $\rho=-0.99$; run level $\rho=-0.83$, $n=300$).
-Utopia ($I=0$) is untouched; truth declines less where its corrective drive is
-smaller at equilibrium; unreliable high-drive broadcasts pay most. Corrective-drive intensity, rather
-than veracity alone, appears to organize the response. Since $I$ omits the
-per-agent factor $\gamma_i$ (the quantity under selection) and is computed
-from realized rather than independently randomized trajectories, we treat it
-as descriptive, not as causal mediation. $I$ is also compared only within
-corrective-regime sweeps, where the same $f_a$ apply to every cell --- a
-within-regime ordering, not a quantity normalized for comparison across
-regimes.
+into one continuous relationship. Define the broadcast-implied
+corrective-drive intensity $I = g\,\langle\textstyle\sum_a f_a(b(t))\rangle$,
+computable from the broadcast alone. Evolved attention tracks $I$ across the
+15 sweep cells almost perfectly: Spearman $\rho=-0.99$, and $\rho=-0.83$ at
+run level ($n=300$). Utopia ($I=0$) is untouched, truth declines less where its corrective drive is
+smaller at equilibrium, and high-drive broadcasts pay most: corrective-drive
+intensity, rather than veracity alone, appears to organize the response.
+
+Two caveats. $I$ omits the per-agent factor $\gamma_i$, the quantity under
+selection, and comes from realized rather than independently randomized
+trajectories; we treat it as descriptive, not causal mediation. And it is
+compared only within corrective-regime sweeps, where the same $f_a$ apply ---
+a within-regime ordering, not one normalized across regimes.
 
 \paragraph{Not an architectural artifact.} Two asymmetries in the response
 architecture could in principle manufacture this pattern. First, feedback
-adds weight only to non-reproductive actions, so
-$P(\text{select reproduce}\,|\,\gamma_i,b)=w_r/(W_0+\gamma_i g D(b))$ falls
-with $\gamma_i$ whenever $D(b)>0$ --- and $I$ governs exactly that penalty.
+adds weight only to non-reproductive actions. Write $D(b)=\sum_a f_a(b)$ for
+that added mass, whose gain-scaled mean is $I$, and let $W_0$ be the base
+total weight. Then
+$P(\text{reproduce}\,|\,\gamma_i,b)=w_r/(W_0+\gamma_i g D(b))$ falls with
+$\gamma_i$ whenever $D(b)>0$.
 Second, hub-targeted pruning fires with probability $\gamma_i$ rather than
 $\gamma_i g$, a second, differently scaled channel. We reran all five
-broadcast conditions against each (300 runs apiece): a reproduction-neutral
-variant rescaling the reproduce weight by $(1+\gamma_i g D/N_0)$, holding that
-probability at its no-broadcast value while leaving other feedback weights
-unchanged; and a variant fixing hub-pruning probability at $0.5$ for every
-agent. The pattern survives
-both: median retention across all cells with a negative baseline
-$\Delta\bar\gamma$ is $98\%$ and $100\%$ respectively, the intensity
-correlation persists ($\rho=-0.98$, $-1.00$), and at $g\geq0.8$ truth in fact
-declines \emph{more} under the reproduction control. One of the fifteen
-$\gamma$-free-pruning cells shifts significantly --- noise at $g=0.8$
-attenuates to $77\%$ of its baseline decline ($p=0.033$), while the intensity
-ordering itself tightens rather than loosens. Selection on $\gamma$ is
-ecological rather than an artifact of either channel. A 5-seed side
-experiment rules out the two simplest remaining pathways: there is no
-negative marginal fecundity gradient (within-run
-$\rho(\gamma_i,\text{offspring})=+0.09$ under F, against $-0.05$ with no
-broadcast), and disabling the shock leaves the decline at $-0.40$ against
-$-0.39$. What the pathway \emph{is} remains open.
+broadcast conditions against each, 300 runs apiece. The reproduction-neutral
+variant rescales $w_r$ by $(1+\gamma_i g D/N_0)$ ($N_0$ the base
+non-reproductive mass), holding the selection probability at its no-broadcast
+value with other feedback weights unchanged; the second fixes hub-pruning
+probability at $0.5$ for every agent.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.50\textwidth]{paper_fig_trait.png}
-\caption{Attention to the self-model (harsh shock, $g=0.8$, 30 seeds per
-condition): change in mean $\bar\gamma$, first to final observer record.
-\emph{none} and \emph{blind} are identical by construction; the ordering
-emerged from the evolutionary dynamics alone, with no rule referencing
-broadcast reliability.}
-\label{fig:trait}
-\end{figure}
+The pattern survives both controls. Taken over the cells with a negative
+baseline $\Delta\bar\gamma$, median retention is $98\%$ under the
+reproduction-neutral control and $100\%$ under the $\gamma$-free-pruning one. The intensity
+correlation is almost unchanged ($\rho=-0.98$ and $-1.00$). Under the
+reproduction control, truth in fact declines \emph{more} at $g\geq0.8$. One of the fifteen
+$\gamma$-free-pruning cells shows an uncorrected shift: noise at $g=0.8$
+attenuates to $77\%$ of its baseline decline (paired $p=0.033$). The intensity
+ordering itself tightens rather than loosens. Selection on $\gamma$ is
+ecological rather than an artifact of either channel, and the decline is not
+specific to the corrective rule form: under the conformist mapping $\bar\gamma$ still falls in every
+broadcast condition (paired $\Delta$median $-0.14$ to $-0.57$, all
+$p\leq0.022$), though neither that ordering nor $I$ carries over
+($\rho=+0.10$, $n=5$), as the scope above implies.
+
+\paragraph{Evolvable response strength.} With $f_a$ fixed, lowering $\gamma$ is
+the population's only route to disengagement. Making the polarity and strength
+$\rho_a\in[-2,2]$ of each action channel heritable --- $\rho_a=1$ reproduces the
+corrective rule bit-identically, $0$ ignores that channel, ${<}0$ reverses
+it --- opens a second route, and $\bar\gamma$ still declines (vs.\ A, $n=100$:
+C $-0.125$, F $-0.222$, N $-0.212$; all raw $p<10^{-4}$). On matched seeds
+this attenuates the decline under false and noise feedback ($+0.126$,
+$r=0.66$; $+0.165$, $r=0.65$; both $p\approx0.001$) but not under truth
+($p=0.90$): populations use both routes exactly where disengagement pays. The
+evolutionary result is therefore not an artifact of making $\gamma$ the sole
+adjustable response; the individual-level pathway remains open.
 
 \subsection{Truthful feedback doubles cooperation; main-campaign recovery is unchanged}
 True feedback roughly doubles costly helping (flagship: $0.397$ vs $0.179$;
 paired $\Delta$median $+0.200$ $[0.172,0.239]$, $r=1.00$,
 $p\!\approx\!9\times10^{-15}$; replicated under harsh shock, $r=0.99$),
-rising monotonically with gain ($0.27\!\to\!0.48$). The loop
-implements distributed corrective feedback: deficits reported at the
+rising monotonically with gain ($0.27\!\to\!0.48$). The loop implements distributed corrective feedback: deficits reported at the
 population level are repaired by uncoordinated individual action. By
-contrast --- a pre-specified null --- recovery time showed no feedback effect
-in either main campaign, in any condition, even with 40\% of hubs removed
-(medians $10$ and $40$ steps; all paired $\Delta$median $=0$, $p>0.22$). One
+contrast, a pre-specified null: recovery time showed no feedback effect in
+either main campaign, in any condition, even with 40\% of hubs removed. Every
+paired $\Delta$median is $0$ and every $p>0.22$ (baseline medians $10$ and
+$40$ steps). One
 lead runs the other way: at $2\times$ scale the inverted lie delayed recovery
 in every non-tied pair ($+10$ steps, $r=1.00$), though with only five
 non-tied pairs $0.0625$ is the smallest $p$ attainable and it does not
@@ -551,66 +557,68 @@ replicate at base scale.
 Under this recovery criterion, resilience appears predominantly demographic
 rather than informational.
 
-\subsection{Robustness to system scale}
+\subsection{Robustness to system scale and to the baseline ecology}
 Re-running the core conditions (A, C, F$_{\mathrm{invert}}$, N) at doubled
 population and resources (steady-state $\approx 110$--$130$ vs $\approx 60$;
-$n=8$ pairs) preserves the main effects: cooperation under truth $0.391$ vs
+$n=8$) preserves the main effects: cooperation under truth $0.391$ vs
 $0.173$ ($\Delta$median $+0.151$ $[0.119, 0.247]$, $r=1.00$, $p=0.008$) and
 the attention ordering (F vs A $-0.299$ $[-0.388, -0.212]$, $r=-1.00$,
 $p=0.008$; N vs A $-0.219$, $r=-0.89$, $p=0.023$).
 
+\paragraph{Ecological robustness.} Perturbing six ecological parameters by
+$\pm25\%$ gives $24$ alternative ecologies, all passing viability criteria that
+were fixed and evaluated on the \emph{no-broadcast} condition before any
+treatment ran. Across A/B/C/F/N $\times$ 10 paired seeds each ($1{,}200$ runs):
+cooperation rose under truth in $24/24$, evolved attention fell under the
+inverted lie and under noise in $24/24$, measurement without broadcast stayed
+exactly inert in every paired run, and F$\leq$N$\leq$C$\leq$A held exactly in
+$21/24$. The recovery null persisted; truthful densification did not ($16/24$
+correct-signed), motivating the narrower claim in Sect.~5.2. Read as
+replication, this is \emph{local} ecological robustness, not
+arbitrary-ecology generality.
+
 \section{Discussion and Limitations}
-As noted alongside the results, first-order response directions are encoded
-in the rules; the findings live one level up. First, the methodological
-lesson: a statistic that looked like compelling evidence of self-fulfilling
+First-order response directions are encoded in the rules; the findings live
+one level up. First, the methodological lesson: a statistic that looked like compelling evidence of self-fulfilling
 dynamics --- positive, replicated, largest for realistic signals --- was fully
-explained by intrinsic dynamics on passive twin trajectories. Empirical tests
-face this identification problem \cite{cheng2024causal}, typically without
-the untreated twin our platform provides. Second, the substantive findings:
+explained by intrinsic dynamics on passive twins. Empirical tests face this
+identification problem \cite{cheng2024causal}, typically without the
+untreated twin our platform provides. Second, the substantive findings:
 broadcasts change behavior and structure with a regime-dependent taxonomy of
-lies, and above all the evolutionary layer, in which the credibility of a
-collective self-model becomes an evolving property of the population.
+lies, and above all the evolutionary layer, where the credibility of a
+collective self-model becomes an evolving property.
 The response mappings are controlled mechanism probes, not calibrated
 behavioral models: they isolate how alternative receiver transformations turn
-identical broadcasts into different outcomes; whether learned policies
-preserve the taxonomy is open. Further limitations: a single ecology and
-parameter family (though effects persist across an $8\times$ gain range and a
-$2\times$ scale change), and one network per run rather than interacting
-populations.
+identical broadcasts into different outcomes, and although their strength and
+polarity are now evolvable (Sect.~5.5) the underlying basis stays mechanistic;
+whether fully learned policies preserve the taxonomy is open. Further
+limitations: local rather than arbitrary-ecology generality (Sect.~5.7), and
+one network per run rather than interacting populations.
 
-The results have a practical reading. Metric-driven infrastructure
-(autoscalers, observability pipelines, trending algorithms) is exactly this
-loop: the false-broadcast conditions model telemetry corruption, and under
+Metric-driven infrastructure --- autoscalers, observability pipelines,
+ranking systems \cite{espeland2007rankings} --- is this loop, and under
 deficit-driven responses \emph{flattering telemetry can be operationally
-equivalent to no telemetry} while raising no alarms. Reactive-measurement
-episodes such as institutional ranking reactivity \cite{espeland2007rankings}
-are natural empirical targets --- provided an explicit passive baseline,
-exact or modelled, is argued before any alignment statistic is read as
-steering. For multi-agent AI, where language-model agent
-populations \cite{park2023generative} make shared collective-state dashboards
-natural, the evolution-of-distrust result suggests persistent misreporting
-does not merely misdirect a population --- it degrades the control channel
-itself.
+equivalent to no telemetry} while raising no alarms; agent populations sharing
+dashboards \cite{park2023generative} are a natural empirical target, given an
+explicit passive baseline before any alignment statistic is read as steering.
 
 \section{Conclusion}
 We introduced a reproducible causal laboratory for reflexive self-modeling in
 adaptive networks and showed that (i) the measurement-only control is
 trajectory-identical to baseline, while broadcasting changes behavior,
-structure, and evolution; (ii) apparent ``story pull'' --- strong, replicated,
-largest for realistic signals --- vanishes against a passive counterfactual, a
-caution for empirical performativity claims;
-(iii) which lies come true, in the outcome sense, is set by the
-lie--response pair, not the lie alone; and (iv) heritable attention to the
-collective self-model declines across generations, tracking the
-broadcast-implied corrective-drive intensity --- a population's trust in its
-own self-model is an evolving quantity that high-drive misleading feedback
-spends down. Future work: learned response policies and language-model agents.
+structure, and evolution; (ii) apparent ``story pull'' vanishes against a
+passive counterfactual, a caution for empirical performativity claims;
+(iii) which lies come true, in the outcome sense, is set by the lie--response
+pair, not the lie alone; and (iv) heritable attention to the collective
+self-model declines across generations, tracking broadcast-implied corrective
+drive within the corrective regime --- trust in a self-model is an evolving quantity that high-drive
+feedback spends down. Future work: learned response policies and
+language-model agents.
 
 \smallskip
 \noindent\textbf{Reproducibility.} Code, configurations, analysis scripts,
 pinned dependencies, and deterministic regeneration of every run:
-\texttt{github.com/Ivan825/Project-ONE}, tag \texttt{cn2026-submission};
-stored run records and replay trajectories ship as release assets there.
+\texttt{github.com/Ivan825/Project-ONE}, tag \texttt{cn2026-submission}.
 
 
 \begingroup\small
