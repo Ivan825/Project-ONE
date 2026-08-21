@@ -1,20 +1,55 @@
-# Paper 2 — design plan
+# Paper 2 — plan
 
-> **Internal working document — NOT part of the Complex Networks 2026 submission.**
-> This records the follow-up study: its design, a pre-registered rule that
+> **Internal working document — NOT part of the Complex Networks 2026
+> submission.** Paper 1 is frozen. This is the plan for the follow-up study,
+> plus the record of the work already done for it: a pre-registered rule that
 > failed, a primary hypothesis that came back null, and two defects found and
-> fixed en route. Only three results from it reach the manuscript (the
-> evolvable response strength/polarity control in Sect. 5.5); everything else
-> here is future work or negative results kept for the record. Where this
-> document says a limitation is weakened, read the qualifier: the response
-> basis is still mechanistic, and empirical ecologies are unbuilt.
+> fixed en route. Sects. 1–2 are the design as written before running,
+> Sect. 2.2a–2.2c the pilot, Sect. 3 the empirical protocol (**not yet built**),
+> Sect. 3a the completed simulation results.
 
-*Working title:* **Which response rules evolve when a network is told about itself?**
+## 0. The one sentence the paper has to earn
 
-Status: **complete** — main campaign, gain and rule-form sweeps, and the
-H7/H8 reconciliation (**1,210 runs**; 2,573 across both papers this round).
-Sects. 1–2 are the design as written before running; Sect. 2.2a–2.2c record the pilot, including
-a pre-registered rule that failed; Sect. **3a** holds the results.
+> **When responses to a collective self-model themselves evolve, populations
+> disengage from costly feedback before reversing it, while inherited attention
+> declines through a complementary route — and these dynamics persist across
+> empirically grounded network ecologies.**
+
+Everything in the paper serves that sentence, and anything that does not is
+cut. The mapping is deliberate and each piece has exactly one job:
+
+| element | job in the paper |
+|---|---|
+| 64-cell policy null | **methodological motivation** for the reduced representation — not a headline |
+| evolvable `ρ` strength/polarity | **the main mechanism** |
+| `γ` decline survives | **the bridge from Paper 1** |
+| gain sweep | **dose-response** |
+| conformist rule form | **rule-form robustness** |
+| empirical network ecologies | **ecological generalization** |
+
+The failure mode to guard against is a kitchen-sink paper. There are eight
+moving parts (γ, ρ, response costs, two rule forms, the selection differential,
+gain, empirical ecologies, possibly shocks) and Paper 1's strength was that it
+had *one* memorable question. If a result does not sit in the table above, it
+belongs in the repository, not the manuscript.
+
+### Structure
+
+**Layer 1 — why fixed responses are not enough.** Paper 1 fixes `R` and evolves
+`γ`; the question is whether evolution would retain that `R` at all. A fully
+free 60/64-dimensional policy turns out not to be detectably learnable in a
+population of this size — reported transparently, used as the reason for the
+reduced representation, and given no more space than that.
+
+**Layer 2 — let strength and polarity evolve.** `w_a ← w_a + γ_i · g · ρ_{i,a} ·
+f_a(b)` with `ρ=1` the original response, `ρ=0` indifference, `ρ<0` inversion.
+Costly responses are suppressed; indifference generally arrives before
+inversion; the `γ` effect survives anyway. This is what makes Paper 2
+conceptually distinct from Paper 1 rather than more robustness checks.
+
+**Layer 3 — does it hold in ecologies we did not invent?** Sect. 3.
+
+---
 
 ---
 
@@ -256,57 +291,178 @@ by hand would come out as a consequence.
 
 ---
 
-## 3. The ecology question, and what real data can honestly do
+## 3. Empirical network ecologies — the protocol
 
-The request is to remove the single-ecology limitation using real datasets.
-The mechanism has to be stated precisely, because the obvious framing does not
-survive contact with what the data contains.
+### 3.1 The claim we are allowed to make, and the one we are not
 
-**What real temporal networks cannot do here.** They cannot validate a
-performativity claim. The claim is counterfactual — *what would this network
-have done had it been told something false about itself* — and that
-counterfactual is unobserved in every dataset that exists. Running the model
-on a real contact network and reporting agreement would be a similarity
-argument dressed as a test. This project has already retracted one headline
-result (story pull) for exactly this class of error, after the passive
-counterfactual showed the effect was intrinsic dynamics. Repeating the error
-in Paper 2 would be worse, not better, for having been warned.
+A real temporal network records what happened. It does not record **what the
+same population would have done had someone broadcast a false self-model to
+them**. That counterfactual is unobserved in every dataset that exists, so
+agreement between simulator and data is a similarity argument, not evidence of
+performativity. This project has already retracted one headline for exactly
+that class of error (story pull, killed by the passive counterfactual);
+repeating it here would be worse for having been warned.
 
-**What they can do, and it is enough.** Three uses, in descending strength:
+The sentence the paper commits to:
 
-1. **Empirical ecologies (the real answer to the limitation).** Initialize the
-   network from real temporal networks — degree distribution, clustering,
-   component structure, tie turnover rate — and run the ensemble across
-   *empirical* initial conditions rather than perturbed synthetic ones. This
-   is strictly stronger than the ±25% parameter ensemble now running for Paper
-   1: those 24 ecologies are drawn from a family we designed, these are drawn
-   from families nobody designed. "One ecology" is then answered by "seven
-   ecologies from human contact, communication, and collaboration data."
-2. **Calibrating the observer.** Compute the macrostate summary `S(t)` on real
-   temporal networks and check its behaviour is not an artifact of synthetic
-   topology — that fragmentation, centralization and turnover on real data
-   vary on comparable scales and timescales to the synthetic runs. This
-   justifies the compression, which is currently justified only by
-   construction.
-3. **Anchoring the shock.** Real networks contain real disruptions (term
-   breaks, holidays, organizational change). Using an observed disruption
-   instead of a synthetic hub-removal makes the recovery null — Paper 1's most
-   robust pre-specified result — a statement about a realistic perturbation.
+> *Real temporal networks provide ecological constraints and out-of-family
+> environments for the controlled counterfactual experiments; they do not
+> themselves provide the unobserved false-broadcast counterfactual.*
 
-Candidate sources, all open and citable:
+"No empirical performativity test" therefore stays in the limitations, stated
+plainly, in a paper that uses empirical data throughout. That combination is
+the honest one.
 
-| dataset | domain | why |
+### 3.2 Calibrate, freeze, then intervene
+
+The weak version of this section — *"we initialized from five real graphs and
+got similar results"* — is worth less than Paper 1 and a reviewer will say so:
+after a few hundred steps the synthetic dynamics have overwritten the empirical
+initialization anyway. The protocol has to bind the **ecology**, not the
+initial condition.
+
+```
+real temporal network
+      │
+      ├─ (a) early window ──► measure target statistics
+      │                            │
+      │                     (b) fit ecological parameters   ← condition A ONLY
+      │                            │
+      │                     (c) FREEZE
+      │                            │
+      │        (d) later held-out window ──► validate baseline macro-statistics
+      │                            │
+      └────────────────────────────┴──► (e) run {A, C, F, N} × evolvable ρ
+```
+
+The ordering is the whole point, and it is the same discipline that made the
+ecology ensemble credible: **the fit never sees a broadcast condition**, so no
+empirical ecology can be tuned until it produces the desired feedback result.
+
+**(a) Target statistics.** Degree distribution, clustering, component
+structure, edge turnover, interaction/activity rate, centralization, and
+activity persistence — the same quantities the observer already computes, so
+the fit targets and the self-model share a vocabulary.
+
+**(b) The fit.** Six ecological parameters against ~7 targets. Method to
+pre-register *before* running: Latin-hypercube sample over the parameter box,
+score each candidate by a normalized distance (each target z-scored by its own
+across-candidate spread, so no single statistic dominates), keep the best
+accepted set. Cheap, transparent, and no gradient through a stochastic
+simulator. Fix the distance function, the box, and the acceptance threshold in
+the script, in the way `VIABILITY` was fixed for the ensemble.
+
+**(c–d) Held-out validation.** Split each dataset temporally. Fit on the early
+window; check on a later window that the frozen baseline still reproduces the
+macro-statistics. **Pre-register the failure rule**: a dataset that no
+parameter setting brings within threshold on the held-out window is reported
+as *not calibratable* and dropped — a decision made before any intervention
+runs, and reported as part of the result rather than quietly omitted.
+
+**(e) Intervention.** Only then A/C/F/N with evolvable `ρ`, paired seeds.
+
+### 3.3 The methodological problem this protocol has to solve first
+
+Stated here because it is the part most likely to be attacked, and it is not
+yet solved.
+
+**The model's demography and a contact network's demography are different
+objects.** Agents here are born, harvest energy, reproduce, and die, and the
+population size is an *emergent* property of the energy economy. A SocioPatterns
+school network has a fixed roster over a few days: nobody is born and nobody
+dies. Fitting "an ecology" to it is therefore not well posed without an
+explicit mapping. Three candidate resolutions, to be chosen and justified
+before any fitting:
+
+1. **Calibrate structure, let demography float.** Fit only the
+   network-structural targets and treat birth/death rates as free ecology
+   parameters constrained solely by viability. Cleanest, but concedes that the
+   *demographic* half of the ecology is still ours.
+2. **Restrict to datasets with genuine turnover.** CollegeMsg and EU email have
+   real joiners and leavers over their spans; contact networks largely do not.
+   Honest, but costs the most heterogeneous datasets — which are the ones that
+   make the "one hand-picked network" objection hardest to sustain.
+3. **Reinterpret the agent as an active participant.** Map birth/death onto
+   *activity onset and cessation* rather than literal demography, and calibrate
+   activity turnover. Keeps every dataset, at the cost of a semantic shift that
+   must be argued explicitly rather than slipped in.
+
+**(1) plus an explicit statement of what remains ours is the current
+preference**, with (3) as a fallback for the contact networks if the activity
+mapping can be defended. This needs deciding on paper before code.
+
+A second, smaller issue: with six parameters and seven targets, identifiability
+is not guaranteed. The pilot should report how tightly the accepted set
+constrains each parameter, so the paper can say which parts of the ecology the
+data actually pins down and which it does not.
+
+### 3.4 Datasets
+
+Four to five done properly, not seven done shallowly. The point is *different
+network-generating contexts*, which is what makes "you invented a convenient
+network" hard to sustain:
+
+| dataset | context | why it earns a slot |
 |---|---|---|
-| SNAP `CollegeMsg` | online messaging, 1.9k users | directed, timestamped, clean turnover |
-| SNAP `email-Eu-core-temporal` | institutional email | departmental ground truth |
-| SocioPatterns (school, hospital, conference) | face-to-face proximity | high resolution, several distinct ecologies |
-| Copenhagen Networks Study | multi-channel (proximity, calls, SMS) | lets the *same* population appear as several ecologies |
-| TGB temporal benchmarks | mixed | standardized loaders, aids reproducibility |
+| SNAP `CollegeMsg` | online messaging, ~1.9k users | directed, timestamped, genuine node turnover |
+| SNAP `email-Eu-core-temporal` | institutional email | workplace structure, departmental ground truth |
+| SocioPatterns **school** | face-to-face, children | strong scheduled periodicity, dense contact |
+| SocioPatterns **hospital** | face-to-face, staff/patients | role-structured, very different mixing |
+| Copenhagen Networks Study | proximity + calls + SMS | the *same* population as several ecologies — a within-population control no other source gives |
 
-**Framing to hold to.** Real data enters as *initial conditions and ecological
-priors*, and the paper says so in the abstract. It is not validation of the
-mechanism, and no sentence should be constructible from the paper that reads
-as if it were.
+Communication, workplace, school contact, hospital contact, and multi-channel
+social interaction is a genuinely broad spread.
+
+### 3.5 A figure that costs no simulation
+
+Run the existing observer directly over each real temporal network and plot the
+resulting `S(t)` trajectories. That answers, empirically:
+
+* Are fragmentation, centralization, cooperation-analogue, inequality and
+  turnover actually *variable* in real networks?
+* Are their ranges comparable to the simulator's?
+* On what timescale do they move?
+* Are fragmentation and centralization correlated in real systems as they are
+  here?
+
+This is worth doing early and independently of everything else: it is cheap, it
+is a real empirical contribution, and it stops the five-dimensional self-model
+from looking like a vector chosen only because it was convenient to simulate.
+If the real ranges turn out very different from the synthetic ones, that is
+itself a finding and it changes the calibration targets.
+
+### 3.6 Shocks: optional, and only where documented
+
+Ground the shock in a real disruption **only where the dataset documents one** —
+SocioPatterns has defensible day/overnight and schedule boundaries. Do not
+retrofit a "real shock" onto CollegeMsg because a centrality curve moved; that
+is exactly the reasoning the passive-counterfactual result warns against.
+Paper 2 does not need the recovery result to succeed.
+
+### 3.7 Pre-registered empirical hypotheses
+
+Four primary claims, fixed before the intervention runs. The per-channel and
+per-cell comparisons from the simulation study do **not** get carried into
+every dataset.
+
+| # | hypothesis |
+|---|---|
+| **H1** | `γ` remains selected downward under misleading and noisy consequential feedback |
+| **H2** | Allowing `ρ` to evolve attenuates but does not eliminate the `γ` decline |
+| **H3** | Costly response channels move preferentially toward `ρ = 0` relative to costless or energy-yielding channels |
+| **H4** | Increasing gain strengthens disengagement; inversion, where it occurs at all, appears only in stronger feedback regimes |
+
+**Reporting rule, also pre-registered.** Four hypotheses across five datasets is
+twenty tests, and turning that into twenty p-values would repeat the mistake the
+ecology ensemble avoided. Report instead: per-dataset **direction and effect
+size**, a **pooled estimate** across datasets, and heterogeneity stated plainly.
+The target sentence is of the form
+
+> *direction replicated in 4/5 empirical ecologies; pooled effect negative; one
+> contact network showed negligible selection*
+
+and **not** every dataset reaching `p < 0.05`. A uniform result across five
+very different ecologies would be more suspicious than a heterogeneous one.
 
 ---
 
@@ -600,7 +756,7 @@ defaults to `fixed`, and the ecology ensemble's 16/16 validation still passes):
 | Paper 1 limitation | Paper 2 status |
 |---|---|
 | hand-written response rules | **substantially weakened, not removed** — the response *basis* f_a remains mechanistic; what is now heritable is its strength and polarity. With that freed (and the hand-written rule a bit-identically verified point in the space), the γ decline survives, attenuated 30–48% under false and noise feedback only, and selection moves the response toward indifference rather than inversion except at the highest gain |
-| single ecology / parameter family | **substantially weakened** — 24 ecologies at ±25%, all headline results replicating; this is *local* robustness. Empirical ecologies from real temporal networks remain **open work** (Sect. 3, step 7), not something done |
+| single ecology / parameter family | **substantially weakened** — 24 ecologies at ±25%, all headline results replicating; this is *local* robustness. Empirical ecologies remain **open work** (Sect. 3, steps 7–12), not something done |
 | synthetic shock protocol | **open** — observed disruptions would need the empirical loaders, which are not built |
 | agents are not strategic | unchanged, and now more defensible: the policy is selected, not reasoned, and the paper says which |
 | no empirical performativity test | **unchanged, and stated as such** — see Sect. 3 |
@@ -632,13 +788,41 @@ is a stronger paper than three claimed and one over-reached.
 6c. **Open.** The `prune`-under-truth cell disagrees in sign between the two
    measurements (both non-significant). Nothing else is outstanding in the
    simulation half.
-7. **Then: empirical ecologies.** Loaders, then the campaign re-run per
-   dataset. Unlike steps 1–6 this depends on external data, and on the honest
-   framing of Sect. 3.
-8. Write.
+7. **Decide the demography mapping** (Sect. 3.3). On paper, before any code.
+   This is the load-bearing methodological choice of the empirical half and it
+   has no obvious right answer; getting it wrong invalidates every calibration
+   that follows.
+8. **Observer-over-real-data figure** (Sect. 3.5). Cheap, independent of
+   everything else, and worth having early — it either supports the
+   five-dimensional self-model as an empirically reasonable compression or
+   tells us the ranges are wrong before we build anything on them.
+9. **Loaders + target statistics** for the chosen datasets, with the temporal
+   early/held-out split fixed in the loader rather than at analysis time.
+10. **Calibration pilot on ONE dataset**, end to end: Latin-hypercube fit on
+    condition A only, freeze, validate on the held-out window. Report how
+    tightly the accepted set constrains each parameter. Do not proceed to five
+    datasets until this works on one — and if it fails on the first, that is
+    information about the protocol, not a reason to loosen the threshold.
+11. **Calibrate the remaining datasets**, dropping any that fail the held-out
+    check, and reporting the drops.
+12. **Intervention campaign** across the calibrated ecologies: A/C/F/N with
+    evolvable `ρ`, paired seeds, testing H1–H4 only.
+13. Write.
 
-Steps 1–6 are self-contained and depend on no dataset. A paper containing
-1–6 is complete on its own: it answers the hand-written-rules criticism —
-the one every reviewer has raised — and answers it in Paper 1's favour while
-adding a finding Paper 1 could not reach, that populations disengage from a
-false self-model rather than inverting their response to it.
+**Compute.** The intervention campaign is the cheap part — on the current
+2-core cloud box a 4,000-step run is ~9 s, so 5 datasets × 4 conditions × 30
+paired seeds ≈ 600 runs ≈ 45 min, and the user's 4-core machine roughly halves
+that. **Calibration is the expensive part**: a Latin-hypercube of ~200
+candidates × 3 seeds × 5 datasets is ~3,000 baseline runs, several hours, and
+it must all finish before a single treatment condition runs. Budget for the fit,
+not for the experiment.
+
+**What is already publishable.** Steps 1–6 are complete and depend on no
+dataset. A paper containing only them answers the hand-written-rules criticism
+in Paper 1's favour and adds a finding Paper 1 could not reach — populations
+disengage from a false self-model before inverting their response to it. The
+empirical half raises the ceiling; it is not required for the floor. If the
+demography mapping in Sect. 3.3 cannot be resolved defensibly, **ship the
+simulation paper** rather than force a weak empirical section, because
+"we initialized from five real graphs and got similar results" would be worth
+less than what is already in hand.

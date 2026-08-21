@@ -201,18 +201,22 @@ def wider_family():
     extra.append(("fragmentation (HS) F vs A",)
                  + paired_p("harsh_shock", "fragmentation_post", "F", "A"))
 
-    # The evolvable-response-polarity control (Sect. 5.5). ONLY the three
-    # dgamma-vs-A contrasts the manuscript actually reports enter the family --
-    # the per-channel rho tests live in the follow-up study, not this paper, so
-    # importing them would inflate the family with contrasts no reader is
-    # offered. The ecology ensemble contributes NOTHING here by design: it is
-    # reported as replication (sign consistency across 24 ecologies), not as 24
-    # further significance tests.
+    # The evolvable-response-polarity control (Sect. 5.5). EVERY p-value the
+    # manuscript prints for it enters the family, and only those: the three
+    # dgamma-vs-A contrasts AND the three matched-seed attenuation contrasts
+    # ("both p~0.001 ... but not under truth"). The per-channel rho tests live
+    # in the follow-up study, not this paper, so importing them would inflate
+    # the family with contrasts no reader is offered. The ecology ensemble
+    # contributes NOTHING here by design: it is reported as replication (sign
+    # consistency across 24 ecologies), not as 24 further significance tests.
     with open(f"{ROOT}/campaigns/policy_campaign/paper_rho_contrasts.json") as f:
         rho = json.load(f)
     for cond in ("C", "F", "N"):
         extra.append((f"rho-control dgamma {cond} vs A",
                       float(rho[cond]["p"]), int(rho[cond]["n"])))
+        k = f"attenuation_{cond}"
+        extra.append((f"rho attenuation {cond} (polarity vs fixed)",
+                      float(rho[k]["p"]), int(rho[k]["n"])))
     return extra
 
 
