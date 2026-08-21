@@ -1,0 +1,937 @@
+{
+ "criteria": {
+  "min_final_population": 20,
+  "max_population_fraction": 0.8,
+  "min_mean_degree": 2.0,
+  "min_max_generation": 8
+ },
+ "sample_seed": 20260820,
+ "perturbation": 0.25,
+ "params_perturbed": [
+  "resource_base_regen",
+  "resource_capacity",
+  "reproduce_cost",
+  "metabolism",
+  "action_cost",
+  "max_lifespan_mean"
+ ],
+ "n_candidates": 24,
+ "screen_seeds": 3,
+ "viable_ids": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23
+ ],
+ "verdicts": {
+  "0": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 48.72998747955694,
+    "resource_capacity": 5956.415667210617,
+    "reproduce_cost": 15.086774870831334,
+    "metabolism": 0.8388180350699899,
+    "action_cost": 0.2995795296882614,
+    "max_lifespan_mean": 352.0187271204528
+   },
+   "screen": [
+    {
+     "seed": 2,
+     "final_population": 48,
+     "mean_degree_at_shock": 7.083333333333333,
+     "max_generation": 20
+    },
+    {
+     "seed": 1,
+     "final_population": 48,
+     "mean_degree_at_shock": 12.0,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 47,
+     "mean_degree_at_shock": 7.560975609756097,
+     "max_generation": 22
+    }
+   ]
+  },
+  "1": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 56.05853550896078,
+    "resource_capacity": 4924.880719202692,
+    "reproduce_cost": 13.95141045472443,
+    "metabolism": 0.6298561103299902,
+    "action_cost": 0.2372714256688927,
+    "max_lifespan_mean": 370.17035142880974
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 70,
+     "mean_degree_at_shock": 9.2,
+     "max_generation": 20
+    },
+    {
+     "seed": 2,
+     "final_population": 66,
+     "mean_degree_at_shock": 10.161290322580646,
+     "max_generation": 19
+    },
+    {
+     "seed": 3,
+     "final_population": 73,
+     "mean_degree_at_shock": 9.666666666666666,
+     "max_generation": 20
+    }
+   ]
+  },
+  "2": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 48.65538493136022,
+    "resource_capacity": 6521.537172396492,
+    "reproduce_cost": 18.569615713116164,
+    "metabolism": 0.6316493196468255,
+    "action_cost": 0.2000242829606572,
+    "max_lifespan_mean": 447.2885340045363
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 66,
+     "mean_degree_at_shock": 9.587301587301587,
+     "max_generation": 17
+    },
+    {
+     "seed": 3,
+     "final_population": 57,
+     "mean_degree_at_shock": 12.610169491525424,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 67,
+     "mean_degree_at_shock": 9.806451612903226,
+     "max_generation": 17
+    }
+   ]
+  },
+  "3": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 73.91771351553972,
+    "resource_capacity": 4670.864426941228,
+    "reproduce_cost": 12.552027692754628,
+    "metabolism": 0.9457429162722442,
+    "action_cost": 0.24959369096876452,
+    "max_lifespan_mean": 424.74437706178065
+   },
+   "screen": [
+    {
+     "seed": 2,
+     "final_population": 68,
+     "mean_degree_at_shock": 12.615384615384615,
+     "max_generation": 19
+    },
+    {
+     "seed": 1,
+     "final_population": 65,
+     "mean_degree_at_shock": 19.28125,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 70,
+     "mean_degree_at_shock": 9.333333333333334,
+     "max_generation": 22
+    }
+   ]
+  },
+  "4": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 55.16812747493648,
+    "resource_capacity": 6476.7372980312075,
+    "reproduce_cost": 15.963836664779123,
+    "metabolism": 0.8068084344468288,
+    "action_cost": 0.19222172226851794,
+    "max_lifespan_mean": 317.6578097952091
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 55,
+     "mean_degree_at_shock": 9.407407407407407,
+     "max_generation": 22
+    },
+    {
+     "seed": 3,
+     "final_population": 59,
+     "mean_degree_at_shock": 8.30188679245283,
+     "max_generation": 20
+    },
+    {
+     "seed": 2,
+     "final_population": 53,
+     "mean_degree_at_shock": 6.230769230769231,
+     "max_generation": 24
+    }
+   ]
+  },
+  "5": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 50.27517699798489,
+    "resource_capacity": 5576.439157800624,
+    "reproduce_cost": 17.316678808441775,
+    "metabolism": 0.9483520581138362,
+    "action_cost": 0.2609198090793315,
+    "max_lifespan_mean": 451.53372963265105
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 41,
+     "mean_degree_at_shock": 14.73913043478261,
+     "max_generation": 20
+    },
+    {
+     "seed": 2,
+     "final_population": 50,
+     "mean_degree_at_shock": 12.340425531914894,
+     "max_generation": 16
+    },
+    {
+     "seed": 3,
+     "final_population": 40,
+     "mean_degree_at_shock": 13.227272727272727,
+     "max_generation": 17
+    }
+   ]
+  },
+  "6": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 53.18468258157992,
+    "resource_capacity": 7007.711134159223,
+    "reproduce_cost": 17.13793347045378,
+    "metabolism": 0.8094788000788715,
+    "action_cost": 0.20237623096645985,
+    "max_lifespan_mean": 473.49295889542447
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 53,
+     "mean_degree_at_shock": 13.019607843137255,
+     "max_generation": 16
+    },
+    {
+     "seed": 2,
+     "final_population": 53,
+     "mean_degree_at_shock": 11.358490566037736,
+     "max_generation": 16
+    },
+    {
+     "seed": 3,
+     "final_population": 52,
+     "mean_degree_at_shock": 7.214285714285714,
+     "max_generation": 18
+    }
+   ]
+  },
+  "7": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 58.243562364051826,
+    "resource_capacity": 5384.193910896313,
+    "reproduce_cost": 17.82644982257991,
+    "metabolism": 0.8239399600939527,
+    "action_cost": 0.2448671577332496,
+    "max_lifespan_mean": 354.31541686993637
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 56,
+     "mean_degree_at_shock": 7.694915254237288,
+     "max_generation": 22
+    },
+    {
+     "seed": 2,
+     "final_population": 62,
+     "mean_degree_at_shock": 8.74074074074074,
+     "max_generation": 20
+    },
+    {
+     "seed": 3,
+     "final_population": 55,
+     "mean_degree_at_shock": 10.137931034482758,
+     "max_generation": 21
+    }
+   ]
+  },
+  "8": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 61.48572614541532,
+    "resource_capacity": 5613.321489845966,
+    "reproduce_cost": 15.719082430099299,
+    "metabolism": 0.927955036183808,
+    "action_cost": 0.21518194896978676,
+    "max_lifespan_mean": 454.7113098503596
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 58,
+     "mean_degree_at_shock": 17.74074074074074,
+     "max_generation": 17
+    },
+    {
+     "seed": 3,
+     "final_population": 50,
+     "mean_degree_at_shock": 9.88888888888889,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 60,
+     "mean_degree_at_shock": 15.020408163265307,
+     "max_generation": 15
+    }
+   ]
+  },
+  "9": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 60.88885921582594,
+    "resource_capacity": 5853.578663104892,
+    "reproduce_cost": 14.020752851470926,
+    "metabolism": 0.7933534665619333,
+    "action_cost": 0.20710652844491334,
+    "max_lifespan_mean": 454.3722487197894
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 59,
+     "mean_degree_at_shock": 14.30188679245283,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 76,
+     "mean_degree_at_shock": 8.656716417910447,
+     "max_generation": 19
+    },
+    {
+     "seed": 3,
+     "final_population": 67,
+     "mean_degree_at_shock": 10.280701754385966,
+     "max_generation": 19
+    }
+   ]
+  },
+  "10": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 49.95608944640488,
+    "resource_capacity": 6720.733623772875,
+    "reproduce_cost": 12.449663675224983,
+    "metabolism": 0.9907071073972674,
+    "action_cost": 0.2057594947849537,
+    "max_lifespan_mean": 472.15536732627487
+   },
+   "screen": [
+    {
+     "seed": 2,
+     "final_population": 47,
+     "mean_degree_at_shock": 11.090909090909092,
+     "max_generation": 16
+    },
+    {
+     "seed": 1,
+     "final_population": 43,
+     "mean_degree_at_shock": 25.526315789473685,
+     "max_generation": 19
+    },
+    {
+     "seed": 3,
+     "final_population": 46,
+     "mean_degree_at_shock": 14.619047619047619,
+     "max_generation": 18
+    }
+   ]
+  },
+  "11": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 64.6669845838939,
+    "resource_capacity": 6201.709915300001,
+    "reproduce_cost": 19.404229415197257,
+    "metabolism": 0.7457405061220425,
+    "action_cost": 0.28261399596213727,
+    "max_lifespan_mean": 477.74161657398946
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 67,
+     "mean_degree_at_shock": 10.75,
+     "max_generation": 18
+    },
+    {
+     "seed": 2,
+     "final_population": 65,
+     "mean_degree_at_shock": 7.36231884057971,
+     "max_generation": 17
+    },
+    {
+     "seed": 3,
+     "final_population": 70,
+     "mean_degree_at_shock": 8.28169014084507,
+     "max_generation": 18
+    }
+   ]
+  },
+  "12": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 67.58699046014056,
+    "resource_capacity": 7044.884076488685,
+    "reproduce_cost": 12.522921252231908,
+    "metabolism": 0.717098446167458,
+    "action_cost": 0.24335410583395328,
+    "max_lifespan_mean": 497.22066214104996
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 76,
+     "mean_degree_at_shock": 14.0,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 76,
+     "mean_degree_at_shock": 9.81578947368421,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 70,
+     "mean_degree_at_shock": 11.413333333333334,
+     "max_generation": 15
+    }
+   ]
+  },
+  "13": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 57.40771270614674,
+    "resource_capacity": 6154.742971605827,
+    "reproduce_cost": 19.408326090569002,
+    "metabolism": 0.9255219431948762,
+    "action_cost": 0.2634791975446159,
+    "max_lifespan_mean": 446.90253300476155
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 54,
+     "mean_degree_at_shock": 14.037037037037036,
+     "max_generation": 18
+    },
+    {
+     "seed": 2,
+     "final_population": 56,
+     "mean_degree_at_shock": 6.56,
+     "max_generation": 17
+    },
+    {
+     "seed": 3,
+     "final_population": 57,
+     "mean_degree_at_shock": 9.217391304347826,
+     "max_generation": 16
+    }
+   ]
+  },
+  "14": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 67.81434947942077,
+    "resource_capacity": 6757.257668458481,
+    "reproduce_cost": 15.758722781389341,
+    "metabolism": 0.7772017968074973,
+    "action_cost": 0.1933623310379708,
+    "max_lifespan_mean": 471.85317645323704
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 72,
+     "mean_degree_at_shock": 6.2631578947368425,
+     "max_generation": 19
+    },
+    {
+     "seed": 2,
+     "final_population": 63,
+     "mean_degree_at_shock": 10.96774193548387,
+     "max_generation": 19
+    },
+    {
+     "seed": 3,
+     "final_population": 70,
+     "mean_degree_at_shock": 12.8,
+     "max_generation": 15
+    }
+   ]
+  },
+  "15": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 58.15033087739779,
+    "resource_capacity": 7296.843893378271,
+    "reproduce_cost": 12.807941730109599,
+    "metabolism": 0.9132262480399551,
+    "action_cost": 0.24026255205043362,
+    "max_lifespan_mean": 481.1304261631566
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 56,
+     "mean_degree_at_shock": 18.69090909090909,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 50,
+     "mean_degree_at_shock": 7.814814814814815,
+     "max_generation": 16
+    },
+    {
+     "seed": 3,
+     "final_population": 55,
+     "mean_degree_at_shock": 8.254545454545454,
+     "max_generation": 17
+    }
+   ]
+  },
+  "16": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 65.02041042946298,
+    "resource_capacity": 7218.123266543794,
+    "reproduce_cost": 12.448156317224985,
+    "metabolism": 0.7379704190665026,
+    "action_cost": 0.2624495916486774,
+    "max_lifespan_mean": 359.4948078301747
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 73,
+     "mean_degree_at_shock": 10.742857142857142,
+     "max_generation": 22
+    },
+    {
+     "seed": 2,
+     "final_population": 63,
+     "mean_degree_at_shock": 15.64864864864865,
+     "max_generation": 20
+    },
+    {
+     "seed": 3,
+     "final_population": 73,
+     "mean_degree_at_shock": 13.432835820895523,
+     "max_generation": 20
+    }
+   ]
+  },
+  "17": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 58.563864628622305,
+    "resource_capacity": 6950.225342105612,
+    "reproduce_cost": 14.921350520321456,
+    "metabolism": 0.845528519903801,
+    "action_cost": 0.2654578182231811,
+    "max_lifespan_mean": 306.2789965246533
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 58,
+     "mean_degree_at_shock": 8.625,
+     "max_generation": 23
+    },
+    {
+     "seed": 3,
+     "final_population": 57,
+     "mean_degree_at_shock": 2.4761904761904763,
+     "max_generation": 23
+    },
+    {
+     "seed": 2,
+     "final_population": 60,
+     "mean_degree_at_shock": 18.081632653061224,
+     "max_generation": 25
+    }
+   ]
+  },
+  "18": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 72.66939020334657,
+    "resource_capacity": 4912.118534792563,
+    "reproduce_cost": 13.518321865328357,
+    "metabolism": 0.7626499952538208,
+    "action_cost": 0.20016757576223876,
+    "max_lifespan_mean": 333.08493449535905
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 67,
+     "mean_degree_at_shock": 13.703703703703704,
+     "max_generation": 22
+    },
+    {
+     "seed": 2,
+     "final_population": 78,
+     "mean_degree_at_shock": 9.924050632911392,
+     "max_generation": 24
+    },
+    {
+     "seed": 3,
+     "final_population": 76,
+     "mean_degree_at_shock": 10.13888888888889,
+     "max_generation": 23
+    }
+   ]
+  },
+  "19": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 59.64152149853078,
+    "resource_capacity": 5540.0528918491555,
+    "reproduce_cost": 13.261687728846594,
+    "metabolism": 0.738544115666941,
+    "action_cost": 0.2906778860365754,
+    "max_lifespan_mean": 481.90102833384884
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 69,
+     "mean_degree_at_shock": 16.158730158730158,
+     "max_generation": 19
+    },
+    {
+     "seed": 2,
+     "final_population": 69,
+     "mean_degree_at_shock": 9.419354838709678,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 60,
+     "mean_degree_at_shock": 9.746031746031745,
+     "max_generation": 17
+    }
+   ]
+  },
+  "20": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 45.946523214520084,
+    "resource_capacity": 4605.649843876172,
+    "reproduce_cost": 13.007325746184815,
+    "metabolism": 0.8166280116693987,
+    "action_cost": 0.25855143370676,
+    "max_lifespan_mean": 471.32790013441814
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 54,
+     "mean_degree_at_shock": 14.333333333333334,
+     "max_generation": 17
+    },
+    {
+     "seed": 2,
+     "final_population": 50,
+     "mean_degree_at_shock": 7.906976744186046,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 43,
+     "mean_degree_at_shock": 6.791666666666667,
+     "max_generation": 17
+    }
+   ]
+  },
+  "21": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 72.21620197184576,
+    "resource_capacity": 6412.7643186221185,
+    "reproduce_cost": 17.528278954673876,
+    "metabolism": 0.7004476489972687,
+    "action_cost": 0.23471532962497116,
+    "max_lifespan_mean": 495.83916682972784
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 74,
+     "mean_degree_at_shock": 13.304347826086957,
+     "max_generation": 15
+    },
+    {
+     "seed": 2,
+     "final_population": 88,
+     "mean_degree_at_shock": 9.118279569892474,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 79,
+     "mean_degree_at_shock": 4.794871794871795,
+     "max_generation": 19
+    }
+   ]
+  },
+  "22": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 57.93688465046564,
+    "resource_capacity": 5958.562764117939,
+    "reproduce_cost": 17.487758805073362,
+    "metabolism": 0.6582347930704312,
+    "action_cost": 0.29052025084189353,
+    "max_lifespan_mean": 390.8688057518652
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 67,
+     "mean_degree_at_shock": 11.896103896103897,
+     "max_generation": 19
+    },
+    {
+     "seed": 2,
+     "final_population": 71,
+     "mean_degree_at_shock": 13.787878787878787,
+     "max_generation": 18
+    },
+    {
+     "seed": 3,
+     "final_population": 76,
+     "mean_degree_at_shock": 11.183098591549296,
+     "max_generation": 22
+    }
+   ]
+  },
+  "23": {
+   "viable": true,
+   "checks": {
+    "min_final_population": true,
+    "max_population_fraction": true,
+    "min_mean_degree": true,
+    "min_max_generation": true
+   },
+   "params": {
+    "resource_base_regen": 71.28757283231676,
+    "resource_capacity": 5805.465073361415,
+    "reproduce_cost": 19.54995606197582,
+    "metabolism": 0.8426303505376117,
+    "action_cost": 0.18809592077049977,
+    "max_lifespan_mean": 404.1332708898282
+   },
+   "screen": [
+    {
+     "seed": 1,
+     "final_population": 73,
+     "mean_degree_at_shock": 22.636363636363637,
+     "max_generation": 20
+    },
+    {
+     "seed": 2,
+     "final_population": 71,
+     "mean_degree_at_shock": 18.63888888888889,
+     "max_generation": 19
+    },
+    {
+     "seed": 3,
+     "final_population": 75,
+     "mean_degree_at_shock": 16.875,
+     "max_generation": 22
+    }
+   ]
+  }
+ },
+ "note": "Frozen before any treatment condition was run."
+}

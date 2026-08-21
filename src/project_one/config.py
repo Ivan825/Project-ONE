@@ -55,6 +55,27 @@ class Config:
     #   "corrective"  - repair reported deficits (default)
     #   "conformist"  - imitate the reported norm
     response_mode: str = "corrective"
+    # v2 (docs/PAPER2_PLAN.md). "fixed" reproduces the paper exactly: every
+    # agent shares the hand-written response_mode map above. "evolved" replaces
+    # that map with a heritable per-agent weight matrix W over a fixed
+    # piecewise-linear basis (see agents.POLICY_KEYS), initialized N(0,
+    # policy_init_sd), mutated at reproduction, clamped to [-1, 1] so that
+    # inverting a response is as reachable as amplifying it. The two
+    # hand-written rules then become two points in a space the population
+    # searches, rather than the architecture's answer to its own question.
+    # Inert and RNG-free unless switched on, so every v1 state hash is
+    # preserved bit-for-bit.
+    #   "polarity"  - four heritable scalars scaling the hand-written rule per
+    #                  action channel; rho=1 IS the hand-written rule (exactly),
+    #                  rho=0 ignores the broadcast there, rho<0 inverts it.
+    policy_mode: str = "fixed"
+    policy_init_sd: float = 0.3
+    policy_mutation_sd: float = 0.05
+    # The full 64-cell mean policy is bulky; store it this often (steps).
+    # policy_norm and lineage_effective_n are logged every observer tick.
+    policy_log_interval: int = 500
+    polarity_init_sd: float = 0.5      # spread around rho = 1 at founding
+    polarity_mutation_sd: float = 0.08
     # Robustness control for the evolutionary result. Feedback adds mass only to
     # non-reproductive actions, so after normalization a higher-gamma agent has a
     # mechanically LOWER probability of selecting "reproduce" whenever the

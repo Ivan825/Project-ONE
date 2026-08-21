@@ -14,13 +14,13 @@ Each agent carries a heritable *global sensitivity* trait γ that scales how str
 
 ## Headline findings
 
-Evidence base: **927 core runs + 600 architectural-control runs = 1,527**, all deterministic and paired by seed. Four outcome families were pre-specified before the first campaign; everything else is labelled exploratory.
+Evidence base: **927 core runs + 600 architectural-control runs + 1,272 ecology-ensemble runs = 2,799**, all deterministic and paired by seed. Four outcome families were pre-specified before the first campaign; everything else is labelled exploratory.
 
 **Measurement alone is causally inert.** The observed-but-blind condition is trajectory-identical to no-observer under paired seeds — every per-seed difference exactly zero, on every outcome, twice replicated. Only the *broadcast* has causal power. (The engine computes S(t) under the no-feedback baseline too, for logging, so this doubles as a strict observer-side-effect invariance check.)
 
 **Apparent "story pull" is an artifact — and that is the methodological finding.** A natural self-fulfilling-prophecy statistic registers strong, replicated apparent attraction of the macrostate toward false and replayed self-models (raw hierarchy: replay > inverted lie > noise). But a passive counterfactual — scoring *untreated* paired-seed twins against matched reference signals — fully accounts for it. Untreated worlds "move toward" the references **more** than treated worlds do (passive medians 0.012 / 0.030 / 0.007 vs actual 0.008 / 0.024 / 0.001), the per-condition gap ΔP = P_actual − P_passive is uniformly negative, and adjusted between-condition contrasts are null in both campaigns (F vs N: p = 0.084 harsh, p = 0.63 flagship). There is no evidence of content-specific attraction toward broadcast content. A three-line mean-reversion argument shows why this class of directional metric can read positive with zero causal feedback. Direct caution for empirical performativity claims — [`scripts/passive_null_checks.py`](scripts/passive_null_checks.py).
 
-**What broadcasts do change is behavior and structure, and the lie–response pair decides which lies come true.** Under corrective agents an alarmist lie is self-defeating and a flattering lie is behaviorally inert; broadcasts densify the network, and false/noise feedback reduce hub concentration. Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation. Formally, self-fulfillment is a property of the composition R∘B (response rule ∘ broadcast map), not of the message alone. First-order response *directions* follow from the rules by construction and are not claimed as discoveries.
+**What broadcasts do change is behavior and structure, and the lie–response pair decides which lies come true.** Under corrective agents an alarmist lie is self-defeating and a flattering lie is behaviorally inert; false and noise broadcasts densify the network and reduce hub concentration (the densification arm under *truthful* feedback is the one claim the ecology ensemble does not sustain — see below). Under conformist agents the taxonomy flips: the alarmist lie becomes catastrophically self-fulfilling (fragmentation ×10), the flattering lie becomes benevolently self-fulfilling, and even noise mobilizes cooperation. Formally, self-fulfillment is a property of the composition R∘B (response rule ∘ broadcast map), not of the message alone. First-order response *directions* follow from the rules by construction and are not claimed as discoveries.
 
 **Truthful feedback doubles costly cooperation** — 0.397 vs 0.179 baseline (paired Δmedian +0.200, r = 1.00), monotone in gain, replicated under harsh shock and at 2× scale. And one pre-specified null, twice replicated: no feedback effect on post-shock recovery time in either main campaign, in any condition, even at 40% hub removal (every paired Δmedian exactly 0, all p > 0.22). One contrary lead is reported rather than buried — at 2× scale the inverted lie delayed recovery in every non-tied pair (+10 steps, r = 1.00), but with n = 8 that is the smallest p the test can return (0.0625) and it does not replicate at base scale.
 
@@ -31,7 +31,7 @@ Evidence base: **927 core runs + 600 architectural-control runs = 1,527**, all d
 Two follow-ups keep that result honest:
 
 - *What organizes it.* Veracity alone does not — the utopia lie is false yet produces no decline, while truthful feedback declines at high gain. The categorical ordering compresses into one relationship with the **broadcast-implied corrective-drive intensity** I = g·⟨Σ f_a(b)⟩ (Spearman ρ = −0.99 across 15 sweep cells, −0.83 at run level). This is **descriptive, not causal mediation**: I omits the per-agent factor γ and is computed from already-feedback-affected trajectories — [`scripts/attention_cost.py`](scripts/attention_cost.py).
-- *What it is not.* Two asymmetries in the architecture could in principle manufacture the pattern, and each was rerun as its own 300-run sweep — [`scripts/reproduction_neutral_check.py`](scripts/reproduction_neutral_check.py). **(a) Reproductive opportunity.** Feedback adds weight only to non-reproductive actions, so after normalization a higher-γ agent mechanically has a lower probability of *selecting* reproduce — and I is exactly the quantity governing that penalty. A reproduction-neutral variant holding that selection probability exactly invariant (verified spread 0.00000 across γ) reproduces the decline almost perfectly: **median retention 98%**, no cell shifting significantly, ρ = −0.98 persisting, and truth declining *more* under the control. **(b) γ-in-pruning.** Hub-targeted pruning fires with probability γ_i rather than γ_i·g — a second, differently scaled channel acting straight on structure. Fixing it at 0.5 for every agent: **median retention 100%**, and the intensity correlation *strengthens* (ρ = −0.993 → −1.000); one cell of fifteen shifts significantly (N@g0.8, p = 0.033), an attenuation that still retains 77%. Selection on γ is ecological, not an artifact of either channel.
+- *What it is not.* Two asymmetries in the architecture could in principle manufacture the pattern, and each was rerun as its own 300-run sweep — [`scripts/reproduction_neutral_check.py`](scripts/reproduction_neutral_check.py). **(a) Reproductive opportunity.** Feedback adds weight only to non-reproductive actions, so after normalization a higher-γ agent mechanically has a lower probability of *selecting* reproduce — and I is exactly the quantity governing that penalty. A reproduction-neutral variant holding that selection probability exactly invariant (verified spread 0.00000 across γ) reproduces the decline almost perfectly: **median retention 98%**, no cell shifting significantly, ρ = −0.98 persisting, and truth declining *more* under the control. **(b) γ-in-pruning.** Hub-targeted pruning fires with probability γ_i rather than γ_i·g — a second, differently scaled channel acting straight on structure. Fixing it at 0.5 for every agent: **median retention 100%**, and the intensity correlation *strengthens* (ρ = −0.993 → −1.000); one cell of fifteen shifts significantly (N@g0.8, p = 0.033), an attenuation that still retains 77%. Selection on γ is ecological, not an artifact of either channel. **(c) The rule form itself.** Swapping the entire response function for the structurally unrelated conformist mapping, γ̄ still falls in every broadcast condition (paired Δmedian −0.14 to −0.57, all p ≤ 0.022) — so the *phenomenon* is not an artifact of the corrective rule form, the single most-repeated criticism of this work. Reported with its negative half: the *ordering*, and the I that summarises it, do not transfer across regimes (ρ = +0.10, p = 0.87) — [`scripts/rule_form_check.py`](scripts/rule_form_check.py).
 
 Full statistics and caveats: [`campaigns/FINDINGS.md`](campaigns/FINDINGS.md).
 
@@ -46,7 +46,31 @@ Full statistics and caveats: [`campaigns/FINDINGS.md`](campaigns/FINDINGS.md).
 | N — Noise feedback | on | uniform random, matched ranges | stimulation control |
 | R — Replayed self-model | on | another run's genuine S(t) | structure control |
 
-Multiplicity: over the eight point-p contrasts of the paper's Table 3, both Benjamini-Hochberg and the stricter Holm-Bonferroni correction leave every significance decision unchanged (6 of 8 either way) — and still do inside a deliberately hostile enlarged family of all 58 paired contrasts in the paper. The only demotions there are the n=8 scale-check contrasts and the one attenuating control cell, neither load-bearing — [`scripts/multiplicity_check.py`](scripts/multiplicity_check.py).
+**Ecological robustness — 1,200 further runs.** The standing objection to this
+work is that it lives in one ecology. Answered with a pre-registered randomized
+ensemble: 24 ecologies drawn by perturbing six ecological parameters ±25%
+(resource inflow, capacity, reproduction cost, metabolism, link cost,
+mortality), screened for viability using **only the no-broadcast baseline and
+criteria frozen before any broadcast condition ran** — so no ecology could be
+admitted or dropped for showing the desired result. All 24 passed, with room to
+spare. Then A/B/C/F/N × 10 paired seeds in each.
+
+The three central results replicate in **every ecology**: cooperation up under
+truth (24/24, median +0.184), attention falling under the lie (24/24, −0.396)
+and under noise (24/24, −0.258), and the observed-but-blind identity (24/24,
+every per-seed difference exactly zero). The pre-specified recovery null holds
+in 24/24 for F and N and 22/24 for C. The dose-ordering **F ≤ N ≤ C ≤ A** holds
+exactly in **21/24**, median rank correlation +1.00.
+
+One claim does not survive, and is reported rather than dropped: **densification
+under *truthful* feedback** is significant in 1 of 24 and correct-signed in 16,
+against 24/24 on sign for both distortions — so the claim is *false and noise
+broadcasts densify the network*, not *broadcasts densify the network*. Scope
+stated plainly: ±25% gives per-ecology spreads of 2.5× in mean degree, 2.2× in
+cooperation, 1.9× in population — evidence of *local* ecological robustness, not
+of arbitrary-ecology generality — [`scripts/ecology_ensemble.py`](scripts/ecology_ensemble.py).
+
+Multiplicity: over the eight point-p contrasts of the paper's Table 3, both Benjamini-Hochberg and the stricter Holm-Bonferroni correction leave every significance decision unchanged (6 of 8 either way). Enlarged to a deliberately hostile family of all **74** paired contrasts the paper reports, BH still leaves all eight unchanged; Holm demotes exactly one — fragmentation (flagship) F vs A, the weakest at p = 9.5e-4. Reported rather than scoped away — [`scripts/multiplicity_check.py`](scripts/multiplicity_check.py).
 
 Paired seeds across conditions; standardized hub-removal shocks (10 hubs mild, top 40% harsh, at t = 2000 — t = 1500 in the 2× scale check); paired Wilcoxon signed-rank as the primary analysis with tie-corrected matched-pairs rank-biserial r and bootstrap CIs (Mann–Whitney U + Cliff's δ is a *secondary* view and does not agree everywhere — all inferential claims follow the paired analysis); passive-counterfactual nulls for the story-pull statistic; a dedicated signal-RNG stream so constructing the noise signal never advances the behavioral PRNG; robustness across feedback gains (0.2–1.6), two shock severities, 2× system scale, and two response regimes (corrective / conformist).
 
@@ -91,10 +115,26 @@ python scripts/attention_cost.py                  # corrective-drive intensity v
 python scripts/reviewer_checks.py                 # source-dependence, P>0, eps-sensitivity, activation
 python scripts/config_model_null.py               # ER + degree-preserving clustering nulls
 python scripts/multiplicity_check.py              # BH + Holm over the Table 3 contrasts
+python scripts/rule_form_check.py                 # does the decline survive swapping the rule set?
 python scripts/selection_mechanism.py             # what the gamma decline is NOT (fecundity, shock)
 python scripts/sweep_figure.py campaigns/sweep_g0.2 campaigns/sweep_g0.8 campaigns/sweep_g1.6
 python scripts/paper_figures.py                   # redraw Figs. 2-3 at printed size
+
+# ecological robustness: 24 ecologies, viability frozen before any treatment ran
+python scripts/ecology_ensemble.py --validate     # reproduces harsh_shock 16/16 to 1e-10
+python scripts/ecology_ensemble.py --screen       # stage 1: baseline only, then STOP and read
+python scripts/ecology_ensemble.py --run          # stage 2: treatments in the frozen viable set
+python scripts/ecology_ensemble.py --merge        # fold multi-machine checkpoints, cross-check hashes
+python scripts/ecology_ensemble.py --analyze      # stage 3: claims counted across ecologies
 ```
+
+`--run` is resumable and splits across machines: each writes its own
+checkpoint (`--checkpoint`) and reads every checkpoint present, so two
+machines never repeat each other's work. Any run computed twice becomes a free
+cross-platform check — `--merge` compares state hashes and refuses to merge on
+disagreement. The reported 1,200-run ensemble was produced this way across
+x86_64/Python 3.11/networkx 3.6.1 and aarch64/Python 3.10/networkx 3.4.2, with
+31 overlapping runs agreeing bit-for-bit.
 
 Every run is deterministic given (config, seed); state hashes verify replay across machines and operating systems. One PRNG drives all behavioral choices and a separate stream generates stochastic broadcast signals, so constructing the noise signal never advances the behavioral PRNG — with both control flags off the engine reproduces every stored campaign hash bit-for-bit.
 

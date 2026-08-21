@@ -16,3 +16,11 @@ runs/
 campaigns/*/runs/
 demo/
 data_release/
+
+# offline wheel cache used to run compute on a second machine
+.wheels/
+# per-machine ensemble checkpoints; the merged runs.json is the artifact
+campaigns/ecology_ensemble/runs*.jsonl
+# per-machine policy-campaign checkpoints; runs.json is the artifact
+campaigns/policy_campaign/runs*.jsonl
+campaigns/policy_campaign/_pre*/

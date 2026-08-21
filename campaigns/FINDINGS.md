@@ -110,10 +110,12 @@ retention **100%** across all twelve cells with a negative baseline Δγ̄ (100%
 across the ten with Δγ̄ < −0.05); at g=0.8 invert −0.410→−0.374,
 crisis −0.449→−0.443, noise −0.348→−0.270, truth −0.087 unchanged,
 utopia +0.006 unchanged; the intensity correlation STRENGTHENS
-(ρ = −0.993 → −1.000, 15 cells). One of fifteen cells shows a significant
+(ρ = −0.993 → −1.000, 15 cells). One of fifteen cells shows an uncorrected significant
 paired shift (N@g0.8, p = 0.033) — at α = 0.05 across 15 cells this is what
 chance produces, and it is a partial ATTENUATION of a decline that still
-retains 77% of its magnitude, not a reversal. The paper discloses this cell
+retains 77% of its magnitude, not a reversal. It is also one of the nine
+contrasts demoted in the m = 74 multiplicity family below, so the paper
+calls it an *uncorrected* shift rather than a significant one. The paper discloses this cell
 explicitly rather than summarising the controls as "neither changes the
 result"; the intensity ordering tightens under the control (ρ vs I:
 −0.993 → −1.000), so the disclosed cell does not disturb it. Conclusion: the γ-in-pruning
@@ -186,6 +188,127 @@ p = 0.46). Treat as a lead for a larger-n scale campaign, not a result. The
 paper states it in these terms rather than claiming the null holds "in any
 condition or campaign" (an earlier draft did, and that was too strong).
 
+**Rule-form control (`scripts/rule_form_check.py`,
+`campaigns/rule_form_check.json`).** The two architectural controls hold the
+response ARCHITECTURE fixed and remove a channel. This one holds the
+architecture fixed and swaps the entire response function for a second,
+structurally unrelated mapping designed independently for another purpose —
+the conformist regime (raw levels, not deficit-gated). Two answers, pointing
+opposite ways, and BOTH are reported in the paper:
+
+1. The decline SURVIVES the rule swap. Under conformist rules γ̄ still falls
+   in every broadcast condition relative to A on the shared seed list:
+   C −0.559 (r=−1.00), F:utopia −0.568 (r=−1.00), N −0.535 (r=−1.00),
+   F:invert −0.482 (r=−0.98), F:crisis −0.138 (r=−0.67); worst p = 0.022.
+   So the PHENOMENON is not an artifact of the corrective rule form — the
+   single most-repeated criticism of this work.
+2. The intensity predictor does NOT transfer. Recomputing I with the
+   conformist f_a gives ρ(I, Δγ̄) = +0.10, p = 0.87 over the 5 cells — a null,
+   and the wrong sign. The ORDERING, and the I that summarises it, are
+   rule-specific.
+
+This is exactly what the paper's scope sentence claims ("a within-regime
+ordering, not a quantity normalized for comparison across regimes"), so (2) is
+a confirmation of that caveat rather than a surprise. Reporting (1) without
+(2) would overstate the result; the script prints both and the paper states
+both.
+
+## Ecological robustness — do the headline claims depend on the baseline ecology?
+(`scripts/ecology_ensemble.py`, `campaigns/ecology_ensemble/`)
+
+Every review of this work raises "a single ecology and one parameter family".
+The answer here is a randomized ensemble rather than a parameter sweep, run in
+three stages with the anti-cherry-picking discipline built into the ordering.
+
+**Design.** 24 candidate ecologies, each an independent uniform draw of ±25%
+on six ecological parameters (`resource_base_regen`, `resource_capacity`,
+`reproduce_cost`, `metabolism`, `action_cost`, `max_lifespan_mean`) from a
+fixed `RandomState(20260820)`. Stage 1 ran ONLY the no-broadcast baseline
+(condition A, 3 seeds each, 72 runs) and applied four viability criteria
+**already frozen in the script before any broadcast condition was run**:
+final population ≥ 20, ≤ 80% of the population cap, mean degree ≥ 2 at the
+shock, and ≥ 8 generations of lineage depth. Stage 2 ran A/B/C/F/N × 10 paired
+seeds on the frozen set (1,200 runs, harsh-shock protocol: 4,000 steps, 40%
+hub removal at t=2000, gain 0.8). Because Stage 1 cannot see any treatment
+outcome, no ecology could be admitted or dropped on the basis of whether it
+produced the result we wanted.
+
+**The screen did not bind.** All 24 candidates passed, and not narrowly — the
+worst final population was 40 against a floor of 20, the worst mean degree
+2.48 against 2.0, the worst lineage depth 15 generations against 8, and no
+ecology exceeded 7.3% of the population cap. This is reported as what it is: a
+pre-registered commitment that happened not to filter anything, which is a
+stronger position against cherry-picking than a screen that rejected some
+(there was no selection at all), but which also means the criteria were never
+stress-tested.
+
+**Metric fidelity.** The ensemble's outcome definitions are lifted from
+`scripts/analyze_campaign.py`, and this is verified rather than asserted: at
+UNPERTURBED parameters the ensemble reproduces `campaigns/harsh_shock/`
+run-for-run — 16/16 outcomes to 1e-10 across A and C, seeds 1–2
+(`--validate`). The same check doubles as proof that the v2 evolved-policy
+machinery left the published code path untouched.
+
+**Results — per-ecology paired Wilcoxon (n=10 seeds), counted across the 24.**
+
+| claim | outcome | cond | significant | correct sign | median effect |
+|---|---|---|---|---|---|
+| cooperation up under truth | `cooperation_rate` | C | **24/24** | 24/24 | +0.184 |
+| attention falls under the lie | `trait_gs_delta` | F | **24/24** | 24/24 | −0.396 |
+| attention falls under noise | `trait_gs_delta` | N | **24/24** | 24/24 | −0.258 |
+| attention falls under truth | `trait_gs_delta` | C | 13/24 | 22/24 | −0.169 |
+| densifies under the lie | `mean_degree` | F | 18/24 | **24/24** | +5.82 |
+| densifies under noise | `mean_degree` | N | 10/24 | **24/24** | +3.30 |
+| densifies under truth | `mean_degree` | C | **1/24** | 16/24 | +0.60 |
+| betweenness flattens | `betweenness_concentration` | F | 17/24 | **24/24** | −0.012 |
+| betweenness flattens | `betweenness_concentration` | N | 8/24 | 22/24 | −0.008 |
+| hubs flatten | `freeman_centralization` | F | 9/24 | 23/24 | −0.025 |
+| hubs flatten | `freeman_centralization` | N | 7/24 | 22/24 | −0.017 |
+| recovery unaffected | `recovery_time_90` | C/F/N | 22/24, 24/24, 24/24 | 24/24 | 0 |
+| measurement inert | all outcomes | B | **24/24** | — | every per-seed difference exactly 0 |
+
+The inertness row is stronger than the outcome-level statement suggests. Every
+one of the **240** paired (ecology, seed) A-and-B runs has an identical SHA-256
+state hash — bit-identical complete final state, not merely equal summary
+outcomes — while A shares a hash with C, F and N in **0/240** cases. Running
+the observer changes nothing; only broadcasting does.
+
+Ordering **F ≤ N ≤ C ≤ A** in evolved attention holds exactly in **21/24**
+ecologies; median rank correlation **+1.00**.
+
+**What this establishes.** The three central results — the cooperation
+doubling, the attention decline under consequential broadcasts, and the
+observed-but-blind identity — replicate in every ecology tested, as does the
+pre-specified recovery null. The dose-ordering, the most distinctive claim,
+holds exactly in 21 of 24.
+
+**What it does not.** *Densification under truthful feedback does not survive.*
+Significant in 1 of 24 and correct-signed in only 16, against 24/24 on sign
+for both distortions. This is the weakest of the three numbers in Sect. 5.2 to
+begin with (+1.1, r=0.49 under C, against +3.8, r=0.80 under F and +2.8,
+r=0.72 under N), and the ensemble reproduces the two distortion arms closely
+(+5.8, +3.3) while the truth arm goes null. The claim should read *false and
+noise broadcasts densify the network*, not *broadcasts densify the network*.
+
+A confirmation in the same table: under C, Freeman centralization and
+betweenness concentration come out 12/24 and 11/24 on sign — a coin flip.
+That is precisely what the paper's rescoped flattening sentence predicts,
+truth having been removed from that claim after direct checking.
+
+**Limitation, stated rather than implied.** ±25% on six parameters produces
+recognizably different worlds — per-ecology spreads of 2.5× in mean degree at
+the shock (1.7× sustained), 2.2× in cooperation, 1.9× in population — but not
+qualitatively different regimes. This is evidence of *local* ecological
+robustness. It is not evidence that the results hold in an arbitrary ecology,
+and the paper should not be read as claiming so.
+
+**Cross-platform verification (incidental).** The 1,200 runs were split across
+two machines and 31 runs were computed on both. Every state hash agreed, across
+x86_64/Python 3.11.15/networkx 3.6.1 and aarch64/Python 3.10.12/networkx 3.4.2
+— different CPU architecture, Python minor, and networkx minor, bit-identical
+output. `--merge` performs this check automatically and refuses to merge on any
+disagreement.
+
 ## Multiplicity (`scripts/multiplicity_check.py`, `campaigns/multiplicity_check.json`)
 The confirmatory family is the eight numerical contrasts of the paper's
 Table 3 (the other two rows carry no p-value: B-vs-A is an exact identity,
@@ -205,25 +328,36 @@ conclusions in either direction. Exploratory analyses (everything outside the
 four pre-specified families) are interpreted through effect size, replication
 and their labelled exploratory status rather than adjusted significance.
 
-**Enlarged (hostile) family, m = 58.** Scoping a correction to the table that
+**Enlarged (hostile) family, m = 74.** Scoping a correction to the table that
 needs it invites the objection that the family was picked to flatter the
 result, so the script also applies both corrections to a superset: every
-paired contrast reported anywhere in the paper, including all 30
-architectural-control cells and the six recovery nulls collapsed behind the
-"> 0.22" bound. **All eight Table 3 decisions are still unchanged, under both
-BH and Holm.** Headroom on the weakest survivor (fragmentation FL, p = 9.5e-4)
-runs to m ≈ 58 under Holm and m ≈ 316 under BH.
+paired contrast reported anywhere in the paper. The family reached its final
+size only on the third pass — 58, then 63 when the conformist rule-form check
+was added, then 74 when an audit found the ten structural-spillover contrasts
+of Sect. 5.2/5.3 were still missing (they are computed from raw trajectories
+rather than results.json, which is why two earlier passes missed them). The
+script now derives all of them, so it cannot go stale silently again.
 
-Five contrasts OUTSIDE Table 3 are demoted in the enlarged family, and the
-paper does not lean on any of them:
+At m = 74 the result is SPLIT, and the paper says so:
 
-- the four 2× scale-check contrasts (p = 0.0078–0.023) — the paper states
-  n = 8 for these and treats the scale check as robustness, not as a main
-  effect; the main effects rest on the 50- and 30-pair campaigns.
-- the γ-free-pruning N@g0.8 cell (p = 0.033) — demoting it makes the control
-  CLEANER, not weaker: the single cell the paper discloses as shifting does
-  not survive correction across the 30 control cells. The paper still
-  discloses it uncorrected, which is the conservative direction.
+- **Benjamini-Hochberg (FDR): all eight Table 3 decisions unchanged.** This is
+  the appropriate correction for a family of this size.
+- **Holm-Bonferroni (FWER): one demotion.** Fragmentation (FL) F vs A, the
+  weakest of the eight at p = 9.5e-4, sits just under the Holm threshold
+  (rank 13/74 → 0.05/62 = 8.06e-4). It survived at m = 58 and m = 63; the
+  family growing past ~70 is what demotes it.
+
+Reporting only the m = 8 or m = 63 result would have been the convenient
+choice. The honest statement is that the confirmatory decisions are robust to
+FDR control over every test in the paper, and all but the weakest are robust
+to FWER control as well.
+
+Nine contrasts OUTSIDE Table 3 are demoted at m = 74, none load-bearing: the
+four 2x scale-check contrasts (stated as n = 8), the gamma-free-pruning
+N@g0.8 cell, the conformist F:crisis rule-form contrast, and three
+structural-spillover contrasts (mean degree HS C vs A, Freeman HS N vs A,
+betweenness HS N vs A) that the paper reports as effect sizes rather than as
+significance claims.
 
 ## Paper-ready headline
 Being measured changes nothing; being told changes much — but not by pulling

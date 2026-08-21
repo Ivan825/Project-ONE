@@ -15,7 +15,9 @@ import random
 
 import networkx as nx
 
-from .agents import Agent, spawn_initial, spawn_child
+from .agents import (POLARITY_KEYS, POLICY_ACTIONS, POLICY_FEATURES,
+                     POLICY_KEYS, Agent, policy_features, spawn_child,
+                     spawn_initial)
 from .config import Config
 from .feedback import make_broadcast
 from .observer import compute_self_model
@@ -33,6 +35,13 @@ class Simulation:
         # Conditions that draw nothing from this stream are bit-identical to
         # the single-stream implementation.
         self.signal_rng = random.Random(1_000_003 * seed + 12345)
+        # Third dedicated stream, for the heritable response policy (v2).
+        # Drawing 64 weights per birth from the behavioral stream would shift
+        # every subsequent behavioral draw, so policy_mode='evolved' would
+        # differ from 'fixed' even under condition A, where the policy cannot
+        # affect anything because no broadcast exists. Same reasoning, and the
+        # same fix, as signal_rng above.
+        self.policy_rng = random.Random(7_777_777 * seed + 54321)
         self.t = 0
         self.next_id = 0
         self.agents: dict[int, Agent] = {}   # full ledger, dead included (lineage)
@@ -47,7 +56,8 @@ class Simulation:
         self.current_broadcast: dict | None = None
 
         for _ in range(cfg.initial_population):
-            self._add_agent(spawn_initial(self.rng, cfg, self._new_id(), 0))
+            self._add_agent(spawn_initial(self.rng, cfg, self._new_id(), 0,
+                                          prng=self.policy_rng))
         ids = sorted(self.agents)
         for aid in ids:
             for _ in range(cfg.initial_edges_per_agent):
@@ -75,7 +85,8 @@ class Simulation:
         self._process_deaths()
 
         if cfg.condition != "A" and self.t % cfg.observer_interval == 0:
-            s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events)
+            s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events,
+                                     policy_full=self._log_policy_now())
             self.global_memory.append(s_t)
             if cfg.condition == "R":
                 idx = min(len(self.broadcast_memory),
@@ -92,7 +103,8 @@ class Simulation:
         elif cfg.condition == "A" and self.t % cfg.observer_interval == 0:
             # Condition A still logs the macrostate for analysis (post-hoc only,
             # computed identically) so all conditions share one analysis pipeline.
-            s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events)
+            s_t = compute_self_model(self.t, self.graph, self.agents, self.window_events,
+                                     policy_full=self._log_policy_now())
             self.global_memory.append(s_t)
             self.broadcast_memory.append(None)
             self.window_events = []
@@ -102,6 +114,10 @@ class Simulation:
 
         if cfg.shock_step > 0 and self.t == cfg.shock_step:
             self._apply_shock()
+
+    def _log_policy_now(self) -> bool:
+        iv = getattr(self.cfg, "policy_log_interval", 0)
+        return bool(iv) and (self.t % iv == 0 or self.t == self.cfg.steps)
 
     # ---------------- agent behaviour ----------------
 
@@ -129,9 +145,14 @@ class Simulation:
                 self._log("share", agent=agent.id, target=target)
                 agent.remember(("shared_with", target))
         elif action == "connect":
-            candidates = sorted(a for a in self.agents
-                                if self.agents[a].alive and a != agent.id
-                                and not self.graph.has_edge(agent.id, a))
+            # live_ids is maintained in lockstep with Agent.alive (see
+            # _add_agent / _process_deaths), so this is the identical set in
+            # the identical order as scanning the full ledger -- but it scans
+            # the living population instead of every agent ever born, which
+            # otherwise dominates the run as the ledger grows.
+            candidates = [a for a in sorted(self.live_ids)
+                          if a != agent.id
+                          and not self.graph.has_edge(agent.id, a)]
             if candidates:
                 # Prefer neighbors-of-neighbors (local view), fall back to random.
                 nn = sorted({m for n in self.graph.neighbors(agent.id)
@@ -161,7 +182,8 @@ class Simulation:
                     and agent.age >= cfg.min_reproduce_age
                     and len(self.live_ids) < cfg.max_population):
                 agent.energy -= cfg.reproduce_cost
-                child = spawn_child(self.rng, cfg, self._new_id(), agent, self.t)
+                child = spawn_child(self.rng, cfg, self._new_id(), agent,
+                                    self.t, prng=self.policy_rng)
                 self._add_agent(child)
                 self.graph.add_edge(agent.id, child.id)
                 agent.offspring_count += 1
@@ -186,7 +208,39 @@ class Simulation:
             base_repro = w["reproduce"]
             base_nonrepro = sum(v for k, v in w.items() if k != "reproduce")
             g = tr["global_sensitivity"] * cfg.feedback_gain
-            if cfg.response_mode == "corrective":
+            if getattr(cfg, "policy_mode", "fixed") == "evolved" and agent.policy:
+                # v2: the map from self-model to action is heritable, not
+                # written here. Pure arithmetic — consumes no RNG. Weights may
+                # be negative, so the added mass is floored per action to keep
+                # propensities non-negative; the floor is the only thing this
+                # branch decides, and it decides it symmetrically.
+                phi = policy_features(bc)
+                for a in POLICY_ACTIONS:
+                    delta = sum(agent.policy[f"{a}~{f}"] * phi[f] for f in
+                                POLICY_FEATURES)
+                    w[a] = max(0.0, w[a] + g * delta)
+            elif getattr(cfg, "policy_mode", "fixed") == "polarity" and agent.policy:
+                # v2, low-dimensional: the hand-written rule's own terms,
+                # scaled per action channel by a heritable polarity. Written
+                # term-by-term rather than factored so that at rho == 1.0 the
+                # arithmetic is bit-identical to the branch below -- 1.0*x is
+                # exact and the summation order is unchanged.
+                rho = agent.policy
+                if cfg.response_mode == "corrective":
+                    w["connect"] += rho["connect"] * g * max(0.0, bc["fragmentation"] - 0.3)
+                    w["share"] += rho["share"] * g * max(0.0, 0.5 - bc["cooperation"])
+                    w["share"] += rho["share"] * g * 0.5 * max(0.0, bc["inequality"] - 0.5)
+                    w["harvest"] += rho["harvest"] * g * max(0.0, bc["turnover"] - 0.5)
+                    w["prune"] += rho["prune"] * g * 0.3 * max(0.0, bc["centralization"] - 0.6)
+                else:
+                    w["share"] += rho["share"] * g * bc["cooperation"]
+                    w["prune"] += rho["prune"] * g * 0.5 * bc["fragmentation"]
+                    w["connect"] += rho["connect"] * g * max(0.0, 0.6 - bc["fragmentation"])
+                    w["harvest"] += rho["harvest"] * g * bc["inequality"]
+                for a in POLARITY_KEYS:
+                    if w[a] < 0.0:
+                        w[a] = 0.0
+            elif cfg.response_mode == "corrective":
                 # Repair reported deficits (the default mechanism under test):
                 w["connect"] += g * max(0.0, bc["fragmentation"] - 0.3)        # reconnect when told world is fragmenting
                 w["share"] += g * max(0.0, 0.5 - bc["cooperation"])            # repair reported cooperation deficit
@@ -290,8 +344,13 @@ class Simulation:
     def state_hash(self) -> str:
         """Digest of the complete live state — used by the seed-replay check."""
         living = {
-            aid: [a.generation, round(a.energy, 6), a.age,
-                  [round(a.traits[k], 6) for k in sorted(a.traits)]]
+            aid: ([a.generation, round(a.energy, 6), a.age,
+                   [round(a.traits[k], 6) for k in sorted(a.traits)]]
+                  # The heritable policy is appended only when it exists, so
+                  # every v1 hash is unchanged while v2 replay checks still
+                  # cover the quantity v2 is about.
+                  + ([[round(a.policy[k], 6) for k in sorted(a.policy)]]
+                     if a.policy else []))
             for aid, a in sorted(self.agents.items()) if a.alive
         }
         edges = sorted(tuple(sorted(e)) for e in self.graph.edges())
