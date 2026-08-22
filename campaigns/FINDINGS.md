@@ -49,6 +49,33 @@ mostly quiescent (mean |b−s|: 0.64 F / 0.36 N / 0.10 R) yet shows the largest
 raw pull; excluding the shock transition shifts every median by <0.0004 absolute
 (relative: −1.5% R, −2.6% F, −10% N) and changes no conclusion.
 
+**Threshold and cadence sensitivity (`scripts/eps_sensitivity_deltap.py`,
+`scripts/dt_sensitivity_deltap.py`).** Two measurement choices could in
+principle drive the passive-counterfactual result. (a) The movement threshold:
+recomputing ΔP under ε ∈ {0.01, 0.02, 0.05} leaves every gap negative (all
+p < 2e-5) and the adjusted F-vs-N contrast non-significant at every threshold
+(p = 0.088 / 0.084 / 0.052) — the conclusion does not depend on ε. (b) The
+observer interval Δt is NOT a comparable robustness axis: retiming the
+observer retimes the feedback dose itself, so Δt ∈ {5, 10, 20} is a sweep over
+treatments, not measurements. Run anyway (270 runs, A/F/N × 30 paired seeds
+per cadence), and reported in full because the naive "stability" framing would
+be false:
+
+| Δt | raw P (F) | passive (F) | ΔP (F) | raw P (N) | passive (N) | ΔP (N) |
+|---|---|---|---|---|---|---|
+| 5 | 0.0007 | 0.0005 | +0.0001 | −0.0016 | 0.0031 | −0.0049 |
+| 10 (paper) | 0.0078 | 0.0119 | −0.0036 | 0.0014 | 0.0073 | −0.0055 |
+| 20 | 0.0091 | 0.0074 | +0.0010 (ns) | 0.0125 | 0.0087 | +0.0036 (p=.017) |
+
+The paper's conclusion — raw P is dominated by intrinsic passive dynamics —
+replicates at every cadence: the passive twin is the same order as raw P
+throughout (~75–80% of it at Δt=20), and at Δt=5 the raw pull nearly vanishes
+altogether. What varies is the small residual, |ΔP| ≤ 0.005, which flips sign
+with cadence (slightly positive at slow re-dosing, N at Δt=20: +0.0036,
+uncorrected p=0.017). Exploratory, uncorrected, and outside the paper's
+pre-registered design; the manuscript therefore treats Δt as a treatment
+parameter and points here rather than claiming stability it does not have.
+
 ## Finding 3 — Attention declines under consequential broadcasts (dose-ordered)
 Global-sensitivity (heritable attention to the broadcast) declines across
 generations. Δ mean trait, end−start (harsh shock, g=0.8): no feedback −0.03

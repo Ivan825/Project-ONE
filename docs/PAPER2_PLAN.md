@@ -8,48 +8,108 @@
 > Sect. 2.2a–2.2c the pilot, Sect. 3 the empirical protocol (**not yet built**),
 > Sect. 3a the completed simulation results.
 
-## 0. The one sentence the paper has to earn
+## 0. The question, the answer, and what the paper may not become
 
-> **When responses to a collective self-model themselves evolve, populations
-> disengage from costly feedback before reversing it, while inherited attention
-> declines through a complementary route — and these dynamics persist across
-> empirically grounded network ecologies.**
+**The central question — the organising device for the whole manuscript:**
 
-Everything in the paper serves that sentence, and anything that does not is
-cut. The mapping is deliberate and each piece has exactly one job:
+> **Do adaptive agents evolve away from costly self-model feedback, and does
+> that depend on the ecological environment?**
+
+**The answer, which is what makes this more than a robustness extension:**
+
+> When a collective self-model becomes consequential, selection acts on **two**
+> quantities rather than one. Not only does inherited *attention* (`γ`) fall —
+> so does *responsiveness to the information itself* (`ρ`). Populations listen
+> less **and** act less on what they hear. The acting-less is **cost-ordered**,
+> and reaches indifference before inversion.
+
+The cost-ordering is the part to lead with, because it is what makes the
+mechanism legible rather than one more correlation: `share` (a direct energy
+transfer) is crushed hardest, `connect` (which costs an action) follows only
+where the signal misleads, `prune` (free) does not move, and `harvest` (which
+*yields* energy) is amplified. Under an inverted broadcast a high-`ρ_share`
+agent gives away energy relentlessly and starves — so *a false self-model makes
+the corrective response lethal, and selection removes it*. That is a mechanism
+a reader can hold in their head, and it is the sentence the paper should be
+remembered for.
+
+Everything else serves it, and anything that does not is cut. Each piece has
+exactly one job:
 
 | element | job in the paper |
 |---|---|
 | 64-cell policy null | **methodological motivation** for the reduced representation — not a headline |
 | evolvable `ρ` strength/polarity | **the main mechanism** |
+| cost gradient across channels | **why the mechanism is legible** |
 | `γ` decline survives | **the bridge from Paper 1** |
 | gain sweep | **dose-response** |
 | conformist rule form | **rule-form robustness** |
 | empirical network ecologies | **ecological generalization** |
 
-The failure mode to guard against is a kitchen-sink paper. There are eight
-moving parts (γ, ρ, response costs, two rule forms, the selection differential,
-gain, empirical ecologies, possibly shocks) and Paper 1's strength was that it
-had *one* memorable question. If a result does not sit in the table above, it
-belongs in the repository, not the manuscript.
+**The failure mode.** Paper 2 gets *weaker*, not stronger, if it becomes more
+experiments, more parameters, more datasets, more controls — and less story.
+There are eight moving parts here (γ, ρ, response costs, two rule forms, the
+selection differential, gain, empirical ecologies, possibly shocks) against
+Paper 1's single memorable question. "We tested fifty variants" is a worse
+paper than "evolution abandons costly responses to an unreliable self-model,
+and here is the cost gradient that shows why." If a result does not sit in the
+table above, it belongs in the repository.
 
 ### Structure
 
-**Layer 1 — why fixed responses are not enough.** Paper 1 fixes `R` and evolves
-`γ`; the question is whether evolution would retain that `R` at all. A fully
-free 60/64-dimensional policy turns out not to be detectably learnable in a
-population of this size — reported transparently, used as the reason for the
-reduced representation, and given no more space than that.
+**1 — Fixed-response baseline.** Paper 1's mechanism, restated: `R` fixed, `γ`
+evolving. Establishes what is being generalized. (It also replicates exactly —
+the `fixed` arm reproduces the stored campaign 600/600 to 1e-9.)
 
-**Layer 2 — let strength and polarity evolve.** `w_a ← w_a + γ_i · g · ρ_{i,a} ·
-f_a(b)` with `ρ=1` the original response, `ρ=0` indifference, `ρ<0` inversion.
-Costly responses are suppressed; indifference generally arrives before
-inversion; the `γ` effect survives anyway. This is what makes Paper 2
-conceptually distinct from Paper 1 rather than more robustness checks.
+**2 — Evolvable response.** `w_a ← w_a + γ_i · g · ρ_{i,a} · f_a(b)`, where an
+agent may follow the feedback (`ρ=1`), ignore it (`ρ=0`) or reverse it
+(`ρ<0`). The 64-dimensional attempt goes here too, as the reason the
+representation is reduced — reported transparently and given no more space
+than that.
 
-**Layer 3 — does it hold in ecologies we did not invent?** Sect. 3.
+**3 — Result.** Selection reduces `γ`, reduces costly responsiveness, and
+reaches inversion only under extreme conditions (one channel, at the highest
+gain).
 
----
+**4 — Real temporal networks.** *Not* as validation — as the test of whether
+the mechanism survives outside a hand-built ecology. Sect. 3.
+
+### What decides whether this beats Paper 1
+
+The honest version, because the ceiling and the floor here are far apart.
+
+**Paper 2 lands above Paper 1** only if the empirical section is genuinely
+rigorous: real data → baseline calibration on condition A → freeze → held-out
+validation → controlled intervention, with dataset heterogeneity reported
+plainly and the non-claim about the counterfactual stated in the manuscript.
+Then a reviewer sees *this mechanism is not an artifact of one simulation*,
+which attacks the largest remaining criticism directly.
+
+**Paper 2 lands below Paper 1** if the empirical section reduces to *"we
+initialized our simulation with five real graphs and got similar results."*
+That is less focused than Paper 1 and buys nothing, because the initialization
+is overwritten by the synthetic dynamics within a few hundred steps.
+
+**The pivot is Sect. 3.3** — the demography mapping. The model's population
+size is emergent from an energy economy; a contact network's roster is fixed.
+Until that mapping is chosen and justified, "calibrate the ecology" is not a
+well-posed operation, and every downstream calibration inherits the problem.
+This is the single load-bearing unsolved question in the plan, and it is a
+paper-design question, not a coding one.
+
+**Concrete go/no-go.** Step 10 calibrates *one* dataset end to end. If it
+cannot pass held-out validation without loosening the threshold, that is the
+signal to ship the simulation-only paper (steps 1–6, already complete) rather
+than force a weak empirical section. Decide that in advance, so the decision is
+not made under deadline pressure with sunk cost already spent.
+
+**On acceptance-probability estimates.** The venue publishes no acceptance
+rate — neither the conference site nor the usual aggregators report one — so
+any percentage attached to either paper is a judgement about the manuscript,
+not a venue statistic. The useful content in such estimates is the *ordering
+and the spread*: Paper 1 is the safer, more self-contained bet; Paper 2 has the
+higher ceiling and materially more execution risk, concentrated almost entirely
+in the empirical section. Plan against the spread, not the point estimate.
 
 ---
 
@@ -361,40 +421,96 @@ runs, and reported as part of the result rather than quietly omitted.
 
 **(e) Intervention.** Only then A/C/F/N with evolvable `ρ`, paired seeds.
 
-### 3.3 The methodological problem this protocol has to solve first
+### 3.3 RESOLVED — what "calibrate the ecology" means
 
-Stated here because it is the part most likely to be attacked, and it is not
-yet solved.
+This was the load-bearing unsolved question. It is now settled, and the
+resolution is cleaner than any of the three options originally listed.
 
-**The model's demography and a contact network's demography are different
-objects.** Agents here are born, harvest energy, reproduce, and die, and the
-population size is an *emergent* property of the energy economy. A SocioPatterns
-school network has a fixed roster over a few days: nobody is born and nobody
-dies. Fitting "an ecology" to it is therefore not well posed without an
-explicit mapping. Three candidate resolutions, to be chosen and justified
-before any fitting:
+**The principle.** What must be empirically grounded is *what the observer
+measures*, because that is what gets broadcast and that is what the entire
+mechanism runs on. Demography matters only through its effect on those five
+components. So the mapping is made at the level of the observer, not the agent.
 
-1. **Calibrate structure, let demography float.** Fit only the
-   network-structural targets and treat birth/death rates as free ecology
-   parameters constrained solely by viability. Cleanest, but concedes that the
-   *demographic* half of the ecology is still ours.
-2. **Restrict to datasets with genuine turnover.** CollegeMsg and EU email have
-   real joiners and leavers over their spans; contact networks largely do not.
-   Honest, but costs the most heterogeneous datasets — which are the ones that
-   make the "one hand-picked network" objection hardest to sustain.
-3. **Reinterpret the agent as an active participant.** Map birth/death onto
-   *activity onset and cessation* rather than literal demography, and calibrate
-   activity turnover. Keeps every dataset, at the cost of a semantic shift that
-   must be argued explicitly rather than slipped in.
+**The mapping.** A node is **alive between its first and last observed
+interaction**. Three of the five components are defined over agent internals a
+temporal network does not contain, and each gets an explicit counterpart:
 
-**(1) plus an explicit statement of what remains ours is the current
-preference**, with (3) as a fallback for the contact networks if the activity
-mapping can be defended. This needs deciding on paper before code.
+| component | model | empirical counterpart |
+|---|---|---|
+| fragmentation | `1 - largest_cc / n` | identical, on the windowed contact graph |
+| centralization | top-5% degree share | identical |
+| cooperation | costly-help events per capita | directed interactions per active node |
+| inequality | Gini over energy | Gini over interaction count |
+| turnover | (births + deaths) / n | (activity onsets + cessations) / n |
 
-A second, smaller issue: with six parameters and seven targets, identifiability
-is not guaranteed. The pilot should report how tightly the accepted set
-constrains each parameter, so the paper can say which parts of the ecology the
-data actually pins down and which it does not.
+**Why this dissolves the fixed-roster problem.** A three-day school contact
+network is not a special case needing separate treatment — it is simply *an
+ecology with near-zero turnover*, which the model represents with long
+lifespans. The calibration will push the school toward long-lived agents and
+CollegeMsg toward shorter-lived ones, and that difference is exactly the
+ecological variation the ensemble is meant to capture. Demography is therefore
+**fit, not floated**: turnover is one of the targets.
+
+**The caveat that must appear in the paper.** The model's deaths are energetic;
+the data's are observational. The observer sees the same quantity either way,
+but they are not the same event, and the paper says so.
+
+**Implementation consequence, already built.** `scripts/temporal_observer.py`
+feeds the real edge stream to `project_one.observer.compute_self_model` — the
+*same function the simulator uses* — via shim objects satisfying its interface.
+Fragmentation, centralization, Freeman centralization, betweenness
+concentration, mean degree and the Gini are therefore computed by identical
+code on both sides. Comparability is a property of the implementation rather
+than an argument in the text. Verified against hand-computable cases
+(`--selftest`): disjoint triangles, a star, and a pair persisting across two
+windows.
+
+### 3.3a Two calibration hazards, found before any dataset was downloaded
+
+Both were found by running the finished adapter over a *simulated* interaction
+stream, which is why step 8 is sequenced before everything else. Either would
+have quietly wrecked the empirical section.
+
+**Hazard 1 — the observer's caps are poison as calibration targets.** The
+observer clips `cooperation` and `turnover` at 1.0, because a broadcast
+component must lie in [0,1]. On the simulated stream at the model's own
+observer interval, cooperation ran at **1.47** uncapped and therefore reported
+as a flat **1.000** in 100% of windows. A target pinned at its ceiling on both
+sides looks like a *perfect fit* while carrying no information whatsoever. The
+adapter now also emits `cooperation_raw` and `turnover_raw`, and **the fit must
+use the uncapped values**; the cap applies only when a value is actually
+broadcast.
+
+**Hazard 2 — the observation window is the most dangerous free parameter in
+the protocol, and it was not previously on the pre-registration list.** Sweeping
+it over the simulated stream:
+
+| window | fragmentation | centralization | coop (raw) | inequality | turnover (raw) | saturated |
+|---|---|---|---|---|---|---|
+| 1 | 0.800 | 0.107 | 0.556 | 0.089 | 0.125 | 0% |
+| 2 | 0.800 | 0.077 | 0.645 | 0.171 | 0.154 | 0% |
+| 5 | 0.302 | 0.096 | 0.940 | 0.266 | 0.236 | 33% |
+| 10 | 0.000 | 0.098 | 1.472 | 0.292 | 0.378 | 100% |
+| 20 | 0.000 | 0.094 | 2.467 | 0.312 | 0.627 | 100% |
+| 50 | 0.000 | 0.120 | 4.087 | 0.427 | 1.060 | 100% |
+
+**Fragmentation traverses its entire range — 0.80 to 0.00 — on the same data,
+purely as a function of the window.** A window chosen after seeing fit quality
+could manufacture almost any fragmentation value wanted. Note also that
+**centralization is nearly window-invariant** (0.077–0.120 across a 50× range),
+which makes it the most trustworthy target, while fragmentation is the most
+fragile.
+
+**Pre-registered window rule**, fixed here before any dataset is loaded, and
+chosen so the decision is blind to every model output:
+
+> Choose the **largest window with zero saturation** (`cooperation_raw` and
+> `turnover_raw` both ≤ 1 in every observation window), computed **from the
+> dataset alone**. Apply that same window to the simulator. Report the full
+> window sweep for each dataset in the supplement.
+
+This is the observation-side analogue of "fit on condition A only": the choice
+is made from data the treatment has never touched.
 
 ### 3.4 Datasets
 

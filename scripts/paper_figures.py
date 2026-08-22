@@ -72,9 +72,9 @@ def fig_sweep(dest):
     panels = [("trait_gs_delta", "Evolved attention",
                r"$\Delta$ mean $\gamma$"),
               ("fragmentation_post", "Fragmentation",
-               "post-shock mean"),
+               "post-shock\nmean"),
               ("cooperation_rate", "Cooperation",
-               "costly helping p.c.")]
+               "costly\nhelping p.c.")]
     series = {key: {c: [] for c in SWEEP_ORDER} for key, _, _ in panels}
     for d in SWEEP:
         for key, _, _ in panels:
@@ -82,7 +82,7 @@ def fig_sweep(dest):
             for c in SWEEP_ORDER:
                 series[key][c].append(med.get(c))
 
-    fig, axes = plt.subplots(1, 3, figsize=(4.45, 1.46), dpi=400)
+    fig, axes = plt.subplots(1, 3, figsize=(4.45, 0.90), dpi=400)
     for ax, (key, title, ylab) in zip(axes, panels):
         # A and F:utopia coincide exactly (utopia triggers no corrective
         # response), so draw A wide underneath and utopia dashed on top --
@@ -110,10 +110,10 @@ def fig_sweep(dest):
     # of the data (every panel is full).
     h, _ = axes[0].get_legend_handles_labels()
     fig.legend(h, [SHORT_SWEEP[c] for c in SWEEP_ORDER], ncol=6,
-               loc="upper center", bbox_to_anchor=(0.5, 1.045),
+               loc="upper center", bbox_to_anchor=(0.5, 1.13),
                fontsize=LEG_FS, frameon=False, handlelength=1.3,
                columnspacing=1.1, handletextpad=0.4)
-    fig.tight_layout(pad=0.35, w_pad=0.9, rect=(0, 0, 1, 0.93))
+    fig.tight_layout(pad=0.35, w_pad=0.9, rect=(0, 0, 1, 0.86))
     fig.savefig(dest, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
     print(f"wrote {dest}")
