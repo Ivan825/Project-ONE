@@ -76,6 +76,30 @@ uncorrected p=0.017). Exploratory, uncorrected, and outside the paper's
 pre-registered design; the manuscript therefore treats Δt as a treatment
 parameter and points here rather than claiming stability it does not have.
 
+### The conformist mirror image (post-review, stored-run analysis)
+
+`scripts/review_response_checks.py` → `campaigns/review_response_checks.json`
+scores the CONFORMIST campaign (15 paired seeds, harsh shock) with the
+identical passive-twin machinery (imported, not reimplemented). Result: the
+passive twin absorbs roughly half of the raw pull (P_F 0.028 vs passive
+0.013), and the surviving residual is **positive** — ΔP_F = +0.020 and
+ΔP_N = +0.023, Wilcoxon p = 6.1e-5 each, rank-biserial 1.0 (every seed),
+F-vs-N ns (p = 0.52, content-independent). Under conformist responses
+broadcasts genuinely steer the macrostate toward the story; under corrective
+responses the same statistic is negative. The sign of the performativity gap
+is set by the response rule — and the statistic's ability to detect steering
+where steering exists is what licenses reading the corrective regime's
+negative ΔP as a finding rather than an artifact of the measure. Post-hoc
+analysis of stored runs, outside the pre-registered family; not in the paper.
+
+The same file holds two further stored-run answers to review questions:
+alternative resilience metrics (population AUC at ceiling everywhere,
+0.990–0.992, F-vs-A/N ns — condition effects live in cooperative
+organization, not demographic bounce-back) and the lineage evidence for the
+realized γ shift (S(γ) significantly negative only in F and N, exactly where
+Δγ is large; evolved-mode populations coalesce to a median of 1.1–1.4
+effective founder lines by t=4000). See docs/REVIEW_QA.md for the framing.
+
 ## Finding 3 — Attention declines under consequential broadcasts (dose-ordered)
 Global-sensitivity (heritable attention to the broadcast) declines across
 generations. Δ mean trait, end−start (harsh shock, g=0.8): no feedback −0.03

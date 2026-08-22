@@ -1,0 +1,211 @@
+{
+ "q1_conformist_deltap": {
+  "design": "conformist response_mode, harsh shock, 15 paired seeds; passive twins constructed exactly as in passive_null_checks.py (same imported code)",
+  "P_F_median": 0.027623851236021513,
+  "P_F_passive_median": 0.012884453236454865,
+  "F_minus_passive": {
+   "n": 15,
+   "median_diff": 0.020047726186561705,
+   "mean_diff": 0.022575397229499403,
+   "wilcoxon_p": 6.103515625e-05,
+   "rank_biserial": 1.0,
+   "boot_ci_median": [
+    0.010566082611368289,
+    0.030163521391342624
+   ]
+  },
+  "P_N_median": 0.029745879382604125,
+  "P_N_passive_median": 0.007215901634050324,
+  "N_minus_passive": {
+   "n": 15,
+   "median_diff": 0.023484309953620768,
+   "mean_diff": 0.025103221937095972,
+   "wilcoxon_p": 6.103515625e-05,
+   "rank_biserial": 1.0,
+   "boot_ci_median": [
+    0.01888399029245263,
+    0.030656382973450427
+   ]
+  },
+  "delta_F_median": 0.020047726186561705,
+  "delta_N_median": 0.023484309953620768,
+  "diff_in_diff_F_vs_N": {
+   "n": 15,
+   "median_diff": -0.004337836573020247,
+   "mean_diff": -0.002527824707596571,
+   "wilcoxon_p": 0.52447509765625,
+   "rank_biserial": -0.2,
+   "boot_ci_median": [
+    -0.013744558475240934,
+    0.007179037168042593
+   ]
+  }
+ },
+ "q5_alternative_resilience": {
+  "design": "corrective harsh-shock campaign, 30 paired seeds; exploratory alternatives to the pre-specified recovery-time-to-90% metric; p-values raw/uncorrected",
+  "medians": {
+   "A": {
+    "auc_recovery": 0.99238601411951,
+    "frag_recovery_time": 0.0,
+    "coop_post_mean": 0.11605053149432781,
+    "coop_post_sd": 0.05476922581272925
+   },
+   "B": {
+    "auc_recovery": 0.99238601411951,
+    "frag_recovery_time": 0.0,
+    "coop_post_mean": 0.11605053149432781,
+    "coop_post_sd": 0.05476922581272925
+   },
+   "C": {
+    "auc_recovery": 0.9905866776098315,
+    "frag_recovery_time": 0.0,
+    "coop_post_mean": 0.36048343968241653,
+    "coop_post_sd": 0.23791328072957607
+   },
+   "F": {
+    "auc_recovery": 0.9916569514313298,
+    "frag_recovery_time": 0.0,
+    "coop_post_mean": 0.1574141807132934,
+    "coop_post_sd": 0.07402770113726681
+   },
+   "N": {
+    "auc_recovery": 0.9917401098157866,
+    "frag_recovery_time": 0.0,
+    "coop_post_mean": 0.22219970154573426,
+    "coop_post_sd": 0.13683970221648573
+   }
+  },
+  "contrasts": {
+   "auc_recovery:F_vs_A": {
+    "median_diff": -0.0008198687843057884,
+    "wilcoxon_p": 0.46454504504799843,
+    "n_nonzero": 30
+   },
+   "auc_recovery:F_vs_N": {
+    "median_diff": 0.0003764942755304368,
+    "wilcoxon_p": 0.7000329215079546,
+    "n_nonzero": 30
+   },
+   "frag_recovery_time:F_vs_A": {
+    "n_nonzero": 1,
+    "note": "too few nonzero"
+   },
+   "frag_recovery_time:F_vs_N": {
+    "n_nonzero": 1,
+    "note": "too few nonzero"
+   },
+   "coop_post_mean:F_vs_A": {
+    "median_diff": 0.0535828430968687,
+    "wilcoxon_p": 0.0021877754479646683,
+    "n_nonzero": 30
+   },
+   "coop_post_mean:F_vs_N": {
+    "median_diff": -0.08062697225828414,
+    "wilcoxon_p": 0.00013739429414272308,
+    "n_nonzero": 30
+   },
+   "coop_post_sd:F_vs_A": {
+    "median_diff": 0.018146955627985337,
+    "wilcoxon_p": 0.00046010687947273254,
+    "n_nonzero": 30
+   },
+   "coop_post_sd:F_vs_N": {
+    "median_diff": -0.06373216364315129,
+    "wilcoxon_p": 6.146728992462158e-08,
+    "n_nonzero": 30
+   }
+  }
+ },
+ "q3_selection_differentials": {
+  "design": "S(gamma)=cov(gamma,n)/n-bar over completed lifetimes (Robertson/Price) from the 150 fixed-mode runs (30 paired seeds x A/B/C/F/N, the manuscript's regime); lineage_effective_n (inverse Simpson over founder lines, final observer tick) from the 150 evolved-mode runs, where the field was recorded",
+  "S_gamma_fixed_mode": {
+   "A": {
+    "n": 30,
+    "S_gamma_median": -0.001145132712566904,
+    "S_gamma_iqr": [
+     -0.003995059860240786,
+     0.0018131208539352124
+    ],
+    "S_gamma_frac_negative": 0.6,
+    "S_gamma_wilcoxon_p_vs_0": 0.1641840822994709,
+    "realized_dgamma_median": -0.029386395403455057
+   },
+   "B": {
+    "n": 30,
+    "S_gamma_median": -0.001145132712566904,
+    "S_gamma_iqr": [
+     -0.003995059860240786,
+     0.0018131208539352124
+    ],
+    "S_gamma_frac_negative": 0.6,
+    "S_gamma_wilcoxon_p_vs_0": 0.1641840822994709,
+    "realized_dgamma_median": -0.029386395403455057
+   },
+   "C": {
+    "n": 30,
+    "S_gamma_median": -0.00030623367989763276,
+    "S_gamma_iqr": [
+     -0.004497397558504193,
+     0.0037688739675828128
+    ],
+    "S_gamma_frac_negative": 0.5333333333333333,
+    "S_gamma_wilcoxon_p_vs_0": 0.6263462882488966,
+    "realized_dgamma_median": -0.10263433831081539
+   },
+   "F": {
+    "n": 30,
+    "S_gamma_median": -0.005459561453132962,
+    "S_gamma_iqr": [
+     -0.010957035732320241,
+     -0.0018086466838224365
+    ],
+    "S_gamma_frac_negative": 0.8333333333333334,
+    "S_gamma_wilcoxon_p_vs_0": 0.00018860027194023132,
+    "realized_dgamma_median": -0.41635285167123504
+   },
+   "N": {
+    "n": 30,
+    "S_gamma_median": -0.0033193158510971287,
+    "S_gamma_iqr": [
+     -0.00817438985955462,
+     -0.00021843857200258042
+    ],
+    "S_gamma_frac_negative": 0.7333333333333333,
+    "S_gamma_wilcoxon_p_vs_0": 0.0029870010912418365,
+    "realized_dgamma_median": -0.339837308515428
+   }
+  },
+  "lineage_evolved_mode": {
+   "A": {
+    "n": 30,
+    "lineage_effective_n_median": 1.364051691137829,
+    "frac_coalesced_to_single_line": 0.23333333333333334,
+    "frac_at_most_two_lines": 0.9333333333333333
+   },
+   "B": {
+    "n": 30,
+    "lineage_effective_n_median": 1.364051691137829,
+    "frac_coalesced_to_single_line": 0.23333333333333334,
+    "frac_at_most_two_lines": 0.9333333333333333
+   },
+   "C": {
+    "n": 30,
+    "lineage_effective_n_median": 1.204719630650775,
+    "frac_coalesced_to_single_line": 0.3,
+    "frac_at_most_two_lines": 0.8333333333333334
+   },
+   "F": {
+    "n": 30,
+    "lineage_effective_n_median": 1.1403012898286866,
+    "frac_coalesced_to_single_line": 0.26666666666666666,
+    "frac_at_most_two_lines": 0.8666666666666667
+   },
+   "N": {
+    "n": 30,
+    "lineage_effective_n_median": 1.4461582065790557,
+    "frac_coalesced_to_single_line": 0.23333333333333334,
+    "frac_at_most_two_lines": 0.7666666666666667
+   }
+  }
+ }
+}
